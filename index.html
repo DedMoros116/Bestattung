@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanft & Lowrider – Bestattungen mit Hydraulik</title>
+<meta name="description" content="Das letzte Hüpfen soll das schönste sein: Plüschsärge mit Hydraulik, Weltraumbestattung und mehr.">
+<style>
+  :root{
+    --plum:#3b1d4a; --plum2:#5a2d72; --pink:#ff5fa2; --gold:#ffd24a; --mint:#7ef0c8;
+    --cream:#fff7ec; --ink:#2a1533; --card:#ffffff; --shadow:0 10px 30px rgba(59,29,74,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --cream:#1c0f24; --ink:#fbeff6; --card:#2b1739; --shadow:0 10px 30px rgba(0,0,0,.5); }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .5em}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+  .kicker{display:inline-block;background:var(--gold);color:#3b1d4a;font-weight:700;padding:4px 12px;border-radius:99px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-2deg)}
+  h2{font-size:clamp(1.8rem,4vw,2.8rem)}
+  .lead{font-size:1.1rem;max-width:62ch;opacity:.9}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;background:var(--plum);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;flex-wrap:wrap}
+  .logo{font-family:Georgia,serif;font-weight:700;font-size:1.2rem;text-decoration:none}
+  nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  nav a{text-decoration:none;font-size:.95rem}
+  nav ul a:hover{color:var(--gold)}
+
+  /* Hero */
+  .hero{background:radial-gradient(circle at 80% 20%,var(--plum2),var(--plum) 60%);color:#fff;padding:80px 0 100px;position:relative;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(2.2rem,6vw,4.2rem)}
+  .hero h1 em{color:var(--pink);font-style:normal}
+  .btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:700;padding:14px 26px;border-radius:99px;background:var(--pink);color:#fff;text-decoration:none;box-shadow:0 6px 0 #b83a74;transition:transform .1s,box-shadow .1s}
+  .btn:hover{transform:translateY(2px);box-shadow:0 4px 0 #b83a74}
+  .btn.alt{background:var(--gold);color:var(--plum);box-shadow:0 6px 0 #c49a1e}
+  .btn.alt:hover{box-shadow:0 4px 0 #c49a1e}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+  .bubbles span{position:absolute;bottom:-40px;font-size:2rem;animation:rise 9s linear infinite;opacity:.5}
+  @keyframes rise{to{transform:translateY(-120vh) rotate(40deg)}}
+
+  /* Image placeholders */
+  .ph{position:relative;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    min-height:200px;color:#fff;padding:16px;background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.08) 0 14px,transparent 14px 28px),linear-gradient(135deg,var(--c1,#8e44ad),var(--c2,#ff5fa2));box-shadow:var(--shadow)}
+  .ph .big{font-size:4rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
+  .ph small{background:rgba(0,0,0,.35);padding:2px 10px;border-radius:99px;margin-top:6px;font-size:.75rem}
+  .ph.tall{min-height:340px}
+
+  /* Cards */
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:32px}
+  .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .2s}
+  .card:hover{transform:translateY(-6px) rotate(-.6deg)}
+  .card .ph{border-radius:0;box-shadow:none;min-height:160px}
+  .card .body{padding:18px;flex:1;display:flex;flex-direction:column;gap:8px}
+  .card h3{margin:0;font-size:1.25rem}
+  .tag{display:inline-block;background:var(--mint);color:#06402c;border-radius:6px;padding:1px 8px;font-size:.75rem;font-weight:700;margin-right:4px}
+  .price{margin-top:auto;font-weight:700;color:var(--pink)}
+
+  /* Konfigurator */
+  #konfi{background:linear-gradient(180deg,var(--cream),#f5dff0 50%,var(--cream))}
+  @media (prefers-color-scheme: dark){#konfi{background:linear-gradient(180deg,var(--cream),#2a1238 50%,var(--cream))}}
+  .konfi{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:32px}
+  .stage{background:var(--card);border-radius:22px;padding:20px;box-shadow:var(--shadow);position:sticky;top:70px;align-self:start;overflow:hidden}
+  .stage svg{width:100%;height:auto;display:block}
+  .road{height:10px;background:repeating-linear-gradient(90deg,#555 0 30px,#777 30px 60px);border-radius:5px}
+  .panel{background:var(--card);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:700;margin-bottom:6px}
+  select,input[type=range]{width:100%;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--plum2);background:var(--card);color:var(--ink)}
+  input[type=range]{padding:0;accent-color:var(--pink)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips label{font-weight:400;display:flex;align-items:center;gap:6px;background:rgba(255,95,162,.12);padding:6px 12px;border-radius:99px;cursor:pointer;margin:0}
+  .swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .swatches button{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+  .swatches button[aria-pressed=true]{border-color:var(--ink);transform:scale(1.15)}
+  .total{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;padding-top:16px;border-top:3px dashed var(--plum2)}
+  .total strong{font-size:1.8rem;color:var(--pink)}
+  .hop{animation:hop .9s ease-in-out infinite}
+  @keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(calc(var(--h,20px) * -1))}50%{transform:translateY(0)}65%{transform:translateY(calc(var(--h,20px) * -.4))}}
+  .piston{transition:all .3s}
+  #stats{font-family:monospace;font-size:.85rem;background:var(--plum);color:var(--mint);padding:10px 14px;border-radius:10px;margin-top:12px}
+
+  /* Tabellen */
+  .tablewrap{overflow-x:auto;margin-top:28px;border-radius:16px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;background:var(--card);min-width:640px}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid rgba(90,45,114,.2)}
+  th{background:var(--plum);color:#fff;font-family:Georgia,serif}
+  tr:hover td{background:rgba(255,210,74,.15)}
+
+  /* Ablauf */
+  .steps{counter-reset:s;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:30px}
+  .step{background:var(--card);padding:22px;border-radius:18px;box-shadow:var(--shadow);position:relative;padding-top:38px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:18px;width:42px;height:42px;border-radius:50%;background:var(--pink);color:#fff;font-weight:700;display:grid;place-items:center;font-size:1.3rem;box-shadow:0 4px 0 #b83a74}
+
+  /* Stimmen */
+  .quote{background:var(--plum);color:#fff;border-radius:18px;padding:22px;position:relative}
+  .quote::before{content:"“";font-size:4rem;position:absolute;top:-6px;left:14px;color:var(--gold);font-family:Georgia}
+  .quote p{margin-top:22px}
+  .quote cite{color:var(--mint)}
+
+  /* FAQ */
+  details{background:var(--card);border-radius:14px;padding:14px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+  summary{cursor:pointer;font-weight:700}
+
+  footer{background:var(--plum);color:#fff;padding:48px 0 28px;text-align:center}
+  footer small{opacity:.7;display:block;margin-top:18px}
+  .rip-cursor{cursor:pointer}
+
+  @media (max-width:820px){
+    .hero .wrap,.konfi{grid-template-columns:1fr}
+    .stage{position:static}
+    nav ul{gap:12px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">⚰️ Sanft &amp; Lowrider</a>
+    <ul>
+      <li><a href="#saerge">Särge</a></li>
+      <li><a href="#konfi">Konfigurator</a></li>
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#arten">Bestattungsarten</a></li>
+      <li><a href="#ablauf">Ablauf</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bubbles" aria-hidden="true"><span style="left:8%;animation-delay:0s">🫧</span><span style="left:30%;animation-delay:2s">✨</span><span style="left:55%;animation-delay:4s">🫧</span><span style="left:78%;animation-delay:1s">💜</span><span style="left:92%;animation-delay:5s">✨</span></div>
+  <div class="wrap">
+    <div>
+      <span class="kicker">Seit 1889 · Familienbetrieb · 4. Generation</span>
+      <h1 style="margin-top:16px">Das letzte Hüpfen soll <em>das schönste</em> sein.</h1>
+      <p class="lead">Wir bestatten mit Herz, Hirn, Hochachtung – und <strong>Hydraulik</strong>. Plüschige Särge, die sanft wippen, tiefer gehen und im Zweifel mit 3 Zoll Bodenfreiheit über die Friedhofsallee gleiten. Weil Abschied auch Stil haben darf.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#konfi">Sarg konfigurieren</a>
+        <a class="btn alt" href="#arten">Verrückte Bestattungen</a>
+      </div>
+    </div>
+    <div class="ph tall" style="--c1:#6a2c91;--c2:#ff5fa2">
+      <div class="big">🛋️⚰️✨</div>
+      <strong>Bild: Der „Samtpfote Deluxe“ im Sonnenuntergang</strong>
+      <small>Platzhalter · 900×1200 px</small>
+    </div>
+  </div>
+</header>
+
+<section id="werte">
+  <div class="wrap">
+    <span class="kicker">Unser Versprechen</span>
+    <h2>Würde, Wärme &amp; Wumms</h2>
+    <p class="lead">Trauer ist ernst. Das Leben davor war es selten. Wir nehmen Ihren Abschied sehr ernst – und uns selbst überhaupt nicht. 24/7 erreichbar, diskret, mit Taschentuchvorrat für ein mittleres Fußballstadion.</p>
+    <div class="grid">
+      <div class="card"><div class="ph" style="--c1:#2d9cdb;--c2:#7ef0c8"><div class="big">🤝</div><small>Foto: Beratungsgespräch</small></div><div class="body"><h3>Persönliche Beratung</h3><p>Bei Tee, Keksen und ehrlichem Zuhören. Kein Verkaufsdruck, nur Plüsch-Druck (siehe Sitzprobe).</p></div></div>
+      <div class="card"><div class="ph" style="--c1:#f2994a;--c2:#ffd24a"><div class="big">🌙</div><small>Foto: Nachtbereitschaft</small></div><div class="body"><h3>Rund um die Uhr</h3><p>Um 3 Uhr nachts erreichen Sie echte Menschen. Mit Stimme. Und Kaffee.</p></div></div>
+      <div class="card"><div class="ph" style="--c1:#eb5757;--c2:#ff5fa2"><div class="big">💐</div><small>Foto: Blumenwerkstatt</small></div><div class="body"><h3>Handgemacht</h3><p>Jede Blume, jede Naht, jede Hydraulikpumpe: von Hand verlötet, verklebt, verliebt.</p></div></div>
+      <div class="card"><div class="ph" style="--c1:#27ae60;--c2:#7ef0c8"><div class="big">🌍</div><small>Foto: Grüne Wiese</small></div><div class="body"><h3>Nachhaltig</h3><p>Öl der Hydraulik ist biologisch abbaubar. Der Humor ist es nicht.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="saerge" style="background:rgba(90,45,114,.07)">
+  <div class="wrap">
+    <span class="kicker">Die Kollektion</span>
+    <h2>Unsere Sargmodelle</h2>
+    <p class="lead">Jedes Modell ist serienmäßig weich gepolstert. Wer Hartholz will, bekommt es – wir fragen dann aber besorgt nach.</p>
+    <div class="grid">
+      <article class="card"><div class="ph" style="--c1:#ff5fa2;--c2:#b04fd1"><div class="big">🧸</div><small>Bild: Samtpfote Deluxe</small></div><div class="body"><h3>Samtpfote Deluxe</h3><div><span class="tag">Plüsch</span><span class="tag">Hydraulik</span></div><p>Der Klassiker: 4 cm Flauschpolster, Wippfunktion und eingebauter Schnurr-Lautsprecher.</p><div class="price">ab 3.490 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#222;--c2:#ffd24a"><div class="big">🚗</div><small>Bild: El Último Camino</small></div><div class="body"><h3>El Último Camino</h3><div><span class="tag">Lowrider</span><span class="tag">Chrom</span></div><p>Candy-Lack, Speichenfelgen, 4-Punkt-Hydraulik. Rollt bei 0,3 km/h – und hüpft bei 1,2 Metern.</p><div class="price">ab 6.990 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#7ef0c8;--c2:#2d9cdb"><div class="big">☁️</div><small>Bild: Wolke 7</small></div><div class="body"><h3>Wolke 7</h3><div><span class="tag">Schwebend</span><span class="tag">Nebel</span></div><p>Weiß, wattig, mit Trockeneis-Nebelmaschine. Der Sarg schwebt (optisch, Magnete, ehrlich).</p><div class="price">ab 4.290 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#8e44ad;--c2:#222"><div class="big">🕺</div><small>Bild: Disco Inferno</small></div><div class="body"><h3>Disco Inferno</h3><div><span class="tag">Spiegelkugel</span><span class="tag">LED</span></div><p>Spiegelkugeldeckel, 16 Mio. LED-Farben, Bassboxen. Opa wollte immer, dass es kracht.</p><div class="price">ab 5.490 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#6fcf97;--c2:#27ae60"><div class="big">🌱</div><small>Bild: Gemüsebeet</small></div><div class="body"><h3>Gemüsebeet</h3><div><span class="tag">Bio</span><span class="tag">Kompostierbar</span></div><p>Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten. Nach drei auch Zucchini (viele).</p><div class="price">ab 1.990 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#ffd24a;--c2:#f2994a"><div class="big">👑</div><small>Bild: Königin der Nacht</small></div><div class="body"><h3>Königin der Nacht</h3><div><span class="tag">Gold</span><span class="tag">Samt</span></div><p>Vergoldete Zierleisten, Thronkissen, ausfahrbares Zepter und Fanfarenmodul. Für Hoheiten.</p><div class="price">ab 9.990 €</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="konfi">
+  <div class="wrap">
+    <span class="kicker">Live &amp; interaktiv</span>
+    <h2>Der Sarg-Konfigurator 3000</h2>
+    <p class="lead">Schrauben Sie sich Ihren Traumsarg zusammen. Drücken Sie „Hüpf!“ und testen Sie die Hydraulik – Federweg inklusive.</p>
+    <div class="konfi">
+      <div class="stage">
+        <div id="coffinWrap">
+          <svg viewBox="0 0 520 280" role="img" aria-label="Vorschau des konfigurierten Sargs">
+            <defs>
+              <pattern id="plushPat" width="14" height="14" patternUnits="userSpaceOnUse">
+                <circle cx="7" cy="7" r="5" fill="rgba(255,255,255,.18)"/>
+                <circle cx="7" cy="7" r="1.6" fill="rgba(0,0,0,.25)"/>
+              </pattern>
+              <pattern id="velvetPat" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 6L6 0" stroke="rgba(255,255,255,.12)"/></pattern>
+              <radialGradient id="disco"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#999"/></radialGradient>
+            </defs>
+            <g id="coffinBody">
+              <!-- Lowrider-Sarg -->
+              <path id="shell" d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="#ff5fa2" stroke="#2a1533" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="url(#plushPat)" id="plushLayer"/>
+              <path d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="url(#velvetPat)" id="velvetLayer" opacity="0"/>
+              <path d="M130 82 H390 L450 150 H70 Z" fill="rgba(255,255,255,.18)" stroke="rgba(0,0,0,.4)" stroke-width="3"/>
+              <path id="stripe" d="M52 168 H468" stroke="#ffd24a" stroke-width="7" stroke-linecap="round"/>
+              <g id="extras"></g>
+            </g>
+            <!-- Räder + Hydraulik -->
+            <g id="wheels">
+              <g class="piston" id="pistonL"><rect x="108" y="186" width="10" height="30" fill="#bbb" stroke="#333" stroke-width="2" id="pistonLr"/><circle cx="113" cy="228" r="24" fill="#222" stroke="#ffd24a" stroke-width="4"/><circle cx="113" cy="228" r="10" fill="#ffd24a"/></g>
+              <g class="piston" id="pistonR"><rect x="402" y="186" width="10" height="30" fill="#bbb" stroke="#333" stroke-width="2" id="pistonRr"/><circle cx="407" cy="228" r="24" fill="#222" stroke="#ffd24a" stroke-width="4"/><circle cx="407" cy="228" r="10" fill="#ffd24a"/></g>
+            </g>
+          </svg>
+        </div>
+        <div class="road"></div>
+        <div id="stats"></div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn" id="hopBtn" type="button">🦘 Hüpf!</button>
+          <button class="btn alt" id="randBtn" type="button">🎲 Überrasch mich</button>
+        </div>
+      </div>
+
+      <form class="panel" id="cfg" onsubmit="return false">
+        <div class="field">
+          <label for="model">Modell</label>
+          <select id="model">
+            <option value="0" data-p="3490">Samtpfote Deluxe (3.490 €)</option>
+            <option value="1" data-p="6990">El Último Camino (6.990 €)</option>
+            <option value="2" data-p="4290">Wolke 7 (4.290 €)</option>
+            <option value="3" data-p="5490">Disco Inferno (5.490 €)</option>
+            <option value="4" data-p="9990">Königin der Nacht (9.990 €)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Farbe</label>
+          <div class="swatches" id="swatches"></div>
+        </div>
+        <div class="field">
+          <label for="plush">Polsterung</label>
+          <select id="plush">
+            <option value="plush" data-p="0">Plüsch „Teddy“ (extra flauschig)</option>
+            <option value="velvet" data-p="250">Samt „Kaisers neue Kissen“ (+250 €)</option>
+            <option value="fluff" data-p="480">Alpaka-Fluff (+480 €)</option>
+            <option value="cloud" data-p="900">Wolkenschaum, memory (+900 €)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="hyd">Hydraulik-Stufe: <output id="hydOut"></output></label>
+          <input type="range" id="hyd" min="0" max="5" step="1" value="3">
+        </div>
+        <div class="field">
+          <label>Extras</label>
+          <div class="chips" id="extraChips"></div>
+        </div>
+        <div class="field">
+          <label for="name">Gravur / Schriftzug am Deckel</label>
+          <input id="name" type="text" maxlength="24" placeholder="z. B. „Hasta la vista, Baby“" style="width:100%;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--plum2);background:var(--card);color:var(--ink)">
+        </div>
+        <div class="total">
+          <div>Gesamtpreis<br><strong id="total">0 €</strong></div>
+          <a class="btn" href="#kontakt" id="reserve">Unverbindlich anfragen</a>
+        </div>
+        <p style="font-size:.8rem;opacity:.7;margin:10px 0 0">* Der Sarg ist zum Zeitpunkt der Bestellung noch nicht benutzt. Die Hydraulik schon (Probehüpfen).</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <span class="kicker">Für Technik-Nerds &amp; Trauernde mit Humor</span>
+    <h2>Spezifikationen &amp; Modifikationen</h2>
+    <p class="lead">Alle Daten ohne Gewähr, aber mit großer Begeisterung. Maße gelten für Standardgröße „Mensch“ (Tiersärge auf Anfrage).</p>
+
+    <h3 style="margin-top:34px">Hydraulik-Stufen</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Stufe</th><th>Name</th><th>Federweg</th><th>Pumpen</th><th>Besonderheit</th><th>Aufpreis</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>Friedhofs-Fixiert</td><td>0 cm</td><td>–</td><td>Sarg bleibt, wo er ist. Wie früher.</td><td>0 €</td></tr>
+        <tr><td>1</td><td>Sanftes Wiegen</td><td>8 cm</td><td>1 Hub</td><td>Beruhigende Wiegenbewegung (wie Hängematte)</td><td>+390 €</td></tr>
+        <tr><td>2</td><td>Gemütlich Schaukeln</td><td>15 cm</td><td>2 Hub</td><td>Seitliches Schaukeln, Schnarchen optional</td><td>+790 €</td></tr>
+        <tr><td>3</td><td>Cruiser</td><td>30 cm</td><td>4 Hub</td><td>Vorne-hinten-Nicken, Beat-Sync mit Playlist</td><td>+1.290 €</td></tr>
+        <tr><td>4</td><td>Hopper</td><td>60 cm</td><td>6 Hub</td><td>Echtes Hüpfen, Blumenkränze bleiben dran (mit Klettband)</td><td>+2.190 €</td></tr>
+        <tr><td>5</td><td>Dreirad-Move</td><td>120 cm</td><td>8 Hub + Turbo</td><td>Drei-Rad-Pose, Konfetti-Auswurf, Lizenz-Hinweis des TÜV</td><td>+3.990 €</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 style="margin-top:44px">Polstermaterialien</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Material</th><th>Flauschgrad</th><th>Dicke</th><th>Duftoption</th><th>Kuschelfaktor</th></tr></thead>
+      <tbody>
+        <tr><td>Plüsch „Teddy“</td><td>★★★★☆</td><td>4 cm</td><td>Vanille, Honig</td><td>Kinderzimmer-Niveau</td></tr>
+        <tr><td>Samt „Kaisers neue Kissen“</td><td>★★★☆☆</td><td>2 cm</td><td>Zedernholz, Zigarre (virtuell)</td><td>Herrschaftlich</td></tr>
+        <tr><td>Alpaka-Fluff</td><td>★★★★★</td><td>6 cm</td><td>Bergwiese</td><td>Fast schon gefährlich</td></tr>
+        <tr><td>Wolkenschaum</td><td>★★★★★+</td><td>10 cm</td><td>Frischer Morgen</td><td>Man will nie wieder raus</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 style="margin-top:44px">Zusatzmodule</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Modul</th><th>Beschreibung</th><th>Leistung / Maß</th><th>Preis</th></tr></thead>
+      <tbody>
+        <tr><td>🎵 Subwoofer-Set</td><td>2× 12" im Sockel, Lieblingsplaylist oder Orgelversion davon</td><td>2000 W RMS</td><td>690 €</td></tr>
+        <tr><td>💡 Neon-Unterboden</td><td>Pinkes Licht für Stimmung unter dem Sarg</td><td>RGB, 16 Mio. Farben</td><td>290 €</td></tr>
+        <tr><td>🔥 Flammenlack</td><td>Handlackierte Flammen an den Seiten, kein offenes Feuer</td><td>5 Schichten</td><td>590 €</td></tr>
+        <tr><td>🪩 Spiegelkugel</td><td>Dreht sich langsam über dem Kopfteil</td><td>Ø 25 cm</td><td>340 €</td></tr>
+        <tr><td>🌫️ Nebelmaschine</td><td>Für majestätischen Auftritt</td><td>1,2 m³/min</td><td>390 €</td></tr>
+        <tr><td>🎺 Fanfarenmodul</td><td>Tusch bei Betreten und Verlassen des Raumes</td><td>Mono, laut</td><td>190 €</td></tr>
+        <tr><td>🐱 Schnurr-Sound</td><td>Beruhigendes Schnurren im Kopfkissen</td><td>25 Hz, warm</td><td>140 €</td></tr>
+        <tr><td>🛜 WLAN-Hotspot</td><td>Für den Fall, dass im Jenseits Empfang ist</td><td>Wi-Fi 6</td><td>99 €</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 style="margin-top:44px">Technische Eckdaten</h3>
+    <div class="grid" style="margin-top:16px">
+      <div class="card"><div class="body"><h3>📏 Maße</h3><p>Länge 215 cm · Breite 72 cm · Höhe 48 cm (Hydraulik eingefahren). XXL-Version +20 cm Länge, +15 cm Breite, +1 Cupholder.</p></div></div>
+      <div class="card"><div class="body"><h3>⚖️ Gewicht</h3><p>Leergewicht 64 kg (Plüsch) – 118 kg (Chrom-Edition). Max. Zuladung: 180 kg plus Erinnerungen.</p></div></div>
+      <div class="card"><div class="body"><h3>🔋 Energie</h3><p>Lithium-Akku 48 V, Laufzeit ca. 6 Std. Hüpfbetrieb, 10 Tage Ruhebetrieb. Ladekabel liegt bei (falls nötig).</p></div></div>
+      <div class="card"><div class="body"><h3>🛡️ Garantie</h3><p>Lebenslang. Wirklich. Bei Defekt kommen wir persönlich vorbei – falls Sie uns nicht mehr erreichen, schauen wir selber nach.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="arten" style="background:rgba(255,210,74,.14)">
+  <div class="wrap">
+    <span class="kicker">Mal was anderes</span>
+    <h2>Ausgefallene Bestattungsarten</h2>
+    <p class="lead">Nicht jeder Abschied muss im Boden enden. Manche dürfen in den Himmel, ins Meer oder in einen Plattenspieler. Alle Varianten gesetzlich zulässig (soweit Ihr Bundesland mitspielt; wir klären das gern für Sie, mit viel Papier).</p>
+    <div class="grid">
+      <article class="card"><div class="ph" style="--c1:#0f2027;--c2:#2c5364"><div class="big">🚀</div><small>Bild: Weltraumbestattung</small></div><div class="body"><h3>Ab ins All</h3><p>Ein Teil der Asche reist per Rakete in den Orbit und kreist 2–10 Jahre um die Erde, bevor er als Sternschnuppe verglüht. Mit Livestream.</p><div class="price">ab 4.900 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#6dd5ed;--c2:#2193b0"><div class="big">🪸</div><small>Bild: Korallenriff</small></div><div class="body"><h3>Memorial-Riff</h3><p>Die Asche wird mit Beton gemischt und zu einem künstlichen Riff geformt. Fische ziehen ein, Taucher staunen.</p><div class="price">ab 2.600 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#232526;--c2:#414345"><div class="big">💎</div><small>Bild: Erinnerungsdiamant</small></div><div class="body"><h3>Diamant-Bestattung</h3><p>Aus dem enthaltenen Kohlenstoff werden unter Druck echte Diamanten gewonnen. Opa funkelt am Ringfinger.</p><div class="price">ab 3.900 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#ff512f;--c2:#dd2476"><div class="big">🎆</div><small>Bild: Feuerwerk</small></div><div class="body"><h3>Himmel in Farbe</h3><p>Die Asche wird in individuelle Feuerwerksraketen gefüllt. 4 Minuten Show, dazu Lieblingssong. Mit Böllergenehmigung.</p><div class="price">ab 2.200 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#56ab2f;--c2:#a8e063"><div class="big">🌳</div><small>Bild: Baumkapsel</small></div><div class="body"><h3>Lebensbaum-Kapsel</h3><p>Biologisch abbaubare Urne, in die ein Baum gepflanzt wird. Aus Trauer wird Schatten, aus Asche Eiche.</p><div class="price">ab 1.400 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#1a1a2e;--c2:#e94560"><div class="big">💿</div><small>Bild: Vinyl-Platte</small></div><div class="body"><h3>Letzte Platte</h3><p>Die Asche wird zu einer spielbaren Schallplatte gepresst – mit Sprachnachricht auf Seite A, Lieblingssong auf Seite B.</p><div class="price">ab 1.800 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#c0392b;--c2:#f39c12"><div class="big">🎈</div><small>Bild: Ballonreise</small></div><div class="body"><h3>Stratosphären-Ballon</h3><p>Ein Heliumballon trägt die Asche in 35 km Höhe, wo sie sich verteilt. Eine ganz sanfte Himmelfahrt.</p><div class="price">ab 3.200 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#614385;--c2:#516395"><div class="big">🎨</div><small>Bild: Aschekunst</small></div><div class="body"><h3>Farbe des Lebens</h3><p>Aus Asche wird Farbe: Sie malen Ihr Lieblingsmotiv, wir mischen. Oder wir malen mit Fingern. Beides möglich.</p><div class="price">ab 890 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#fceabb;--c2:#f8b500"><div class="big">🏖️</div><small>Bild: Bio-Seebestattung</small></div><div class="body"><h3>Wellen-Wiegen</h3><p>Seebestattung auf der Nordsee mit Kapitänsmütze, Möwen und Matrosenlied. Wasserfeste Urne inklusive.</p><div class="price">ab 1.750 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#f12711;--c2:#f5af19"><div class="big">🎯</div><small>Bild: Kanonenabschuss</small></div><div class="body"><h3>Kanone frei!</h3><p>Der Klassiker nach Hunter S. Thompson: Aus einer Kanone, mit Konfetti, in kontrollierter Umgebung. Mit Sicherheitsabstand.</p><div class="price">ab 7.500 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#43cea2;--c2:#185a9d"><div class="big">🍄</div><small>Bild: Pilzsarg</small></div><div class="body"><h3>Myzel-Reise</h3><p>Der Körper wird in einem Pilzanzug bestattet und kehrt als Waldboden in den Kreislauf zurück. Kompostieren mit Stil.</p><div class="price">ab 2.100 €</div></div></article>
+      <article class="card"><div class="ph" style="--c1:#8360c3;--c2:#2ebf91"><div class="big">🏍️</div><small>Bild: Letzte Ausfahrt</small></div><div class="body"><h3>Letzte Ausfahrt</h3><p>Prozession mit 40 Motorrädern, Lowrider-Sarg voran. Hydraulik bei Ampelrot. Polizei winkt freundlich.</p><div class="price">ab 5.800 €</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf">
+  <div class="wrap">
+    <span class="kicker">So läuft's</span>
+    <h2>In 5 Schritten zum würdigen Abschied</h2>
+    <div class="steps">
+      <div class="step"><h3>Kennenlernen</h3><p>Anruf oder Besuch. Tee, Taschentücher, Zeit. Wir hören einfach zu.</p></div>
+      <div class="step"><h3>Gestalten</h3><p>Sarg konfigurieren, Musik wählen, Blumen, Reden. Alles mit Probehüpfen.</p></div>
+      <div class="step"><h3>Behördendschungel</h3><p>Wir erledigen Sterbeurkunde, Renten, Kündigungen. Sie müssen nicht mal Formulare lesen.</p></div>
+      <div class="step"><h3>Abschied feiern</h3><p>Trauerfeier, Wake, Konfettikanone. Von still bis laut, ganz wie Sie es wollen.</p></div>
+      <div class="step"><h3>Danach da sein</h3><p>Trauergruppen, Gedenktage und Kuchen. Auch noch nach Monaten.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="stimmen" style="background:rgba(90,45,114,.07)">
+  <div class="wrap">
+    <span class="kicker">Stimmen</span>
+    <h2>Was Hinterbliebene sagen</h2>
+    <div class="grid">
+      <figure class="quote" style="margin:0"><p>Oma hat bekommen, was sie immer wollte: Auftritt mit Nebel und Hüpfen. Wir haben geweint und gelacht, ungefähr gleichzeitig.</p><cite>– Familie Schulze, Hamburg</cite></figure>
+      <figure class="quote" style="margin:0"><p>Mein Vater fuhr Lowrider, seit 1978. Dass er auch zum Friedhof so rollt, war ein Traum. Danke!</p><cite>– Carlos M., Köln</cite></figure>
+      <figure class="quote" style="margin:0"><p>Endlich ein Bestatter, der keine Grabesmiene macht, aber mit Respekt arbeitet. Wir kommen wieder. Also, nicht so bald.</p><cite>– A. Berger, München</cite></figure>
+    </div>
+    <div class="ph" style="--c1:#5a2d72;--c2:#ff5fa2;margin-top:28px;min-height:240px"><div class="big">📸</div><strong>Bildergalerie: Unsere schönsten Verabschiedungen</strong><small>Platzhalter · Slider 1600×600 px</small></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="kicker">Häufige Fragen</span>
+    <h2>FAQ</h2>
+    <details><summary>Ist Hydraulik am Sarg überhaupt erlaubt?</summary><p>Ja, solange der Sarg beim Transport nicht hüpft, sondern nur bei der Trauerfeier. Auf öffentlichen Straßen gilt: Hydraulik aus. Auf dem Gelände: Hydraulik an. Wir klären das mit Ordnungsamt und Friedhofsverwaltung.</p></details>
+    <details><summary>Wie sicher ist das Hüpfen mit Blumengestecken?</summary><p>Sehr. Alle Gestecke haben Klettverschlüsse und Gummihalter. Das letzte Mal ist ein Nelkenstrauß nur einmal in die Orgel geflogen. Das war ein anderer Betrieb.</p></details>
+    <details><summary>Kann ich den Sarg vorab testen?</summary><p>Nur den Prototypen, nur im Showroom, nur mit Helm. Probeliegen ist gesetzlich erlaubt, begeisterte Zustimmung auch.</p></details>
+    <details><summary>Was kostet eine Bestattung insgesamt?</summary><p>Das hängt ab von Sarg, Bestattungsart und Feier. Die Kosten legen wir transparent offen, bevor wir irgendetwas tun. Ratenzahlung möglich, Hüpfzuschlag nicht verhandelbar.</p></details>
+    <details><summary>Bieten Sie auch Haustier-Bestattungen an?</summary><p>Aber ja. Hundesärge mit Knochenornamenten, Katzensärge mit Kratzbrett und Hydraulik für Hamster (3 mm Federweg, sehr süß).</p></details>
+    <details><summary>Und die Vorsorge?</summary><p>Wer vorsorgt, entlastet. Sie planen Ihre Feier selbst, wir führen sie aus und bitten Sie nur, nicht zu früh zu kommen.</p></details>
+  </div>
+</section>
+
+<section id="kontakt" style="background:var(--plum);color:#fff">
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+    <div>
+      <span class="kicker">Wir sind da</span>
+      <h2 style="margin-top:14px">Kontakt</h2>
+      <p>Tag und Nacht erreichbar. Anruf genügt. Oder ein Zettel am Hydraulikbock.</p>
+      <p><strong>📞 0800 – 123 LOW RIDE</strong><br>📧 hallo@sanft-und-lowrider.example<br>📍 Allee der Stille 7, 12345 Ruhelingen<br>🕐 24/7 · Beratung: Mo–Sa 9–18 Uhr</p>
+      <div class="ph" style="--c1:#2c5364;--c2:#6dd5ed;min-height:180px"><div class="big">🗺️</div><small>Platzhalter · Karte / Anfahrt</small></div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Danke! Wir melden uns 💜';">
+      <div class="field"><label for="n">Name</label><input id="n" required style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0"></div>
+      <div class="field"><label for="m">E-Mail oder Telefon</label><input id="m" required style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0"></div>
+      <div class="field"><label for="t">Ihre Nachricht</label><textarea id="t" rows="5" style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0" placeholder="Zum Beispiel: Ich möchte das Modell El Último Camino mit Flammenlack."></textarea></div>
+      <button class="btn" type="submit">Nachricht senden</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:Georgia,serif;font-size:1.3rem">⚰️ Sanft &amp; Lowrider – Bestattungen</p>
+    <p>„Wir bringen Sie sicher ans Ziel. Nur etwas tiefer.“</p>
+    <small>Demo-Seite, alle Angaben, Preise und Namen fiktiv. · Impressum · Datenschutz · © 1889 – ∞</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const models = [
+    {name:'Samtpfote Deluxe', color:'#ff5fa2', stripe:'#ffd24a'},
+    {name:'El Último Camino', color:'#6a1b9a', stripe:'#ffd24a'},
+    {name:'Wolke 7', color:'#cfeaff', stripe:'#ffffff'},
+    {name:'Disco Inferno', color:'#222', stripe:'#7ef0c8'},
+    {name:'Königin der Nacht', color:'#b8860b', stripe:'#fff'}
+  ];
+  const colors = [
+    ['Candy-Pink','#ff5fa2'],['Pflaume','#6a1b9a'],['Mitternacht','#1b1b3a'],
+    ['Minze','#4ed1a5'],['Gold','#e0a800'],['Feuerrot','#d62828'],['Wolkenweiß','#f4f4ff']
+  ];
+  const hydNames = ['Fixiert','Sanftes Wiegen','Gemütlich Schaukeln','Cruiser','Hopper','Dreirad-Move'];
+  const hydPrice = [0,390,790,1290,2190,3990];
+  const hydCm = [0,8,15,30,60,120];
+  const extras = [
+    {id:'sub',  label:'🎵 Subwoofer',   p:690},
+    {id:'neon', label:'💡 Neon-Unterboden', p:290},
+    {id:'flame',label:'🔥 Flammenlack', p:590},
+    {id:'ball', label:'🪩 Spiegelkugel',p:340},
+    {id:'fog',  label:'🌫️ Nebel',       p:390},
+    {id:'fan',  label:'🎺 Fanfare',     p:190},
+    {id:'purr', label:'🐱 Schnurr-Sound',p:140},
+    {id:'wifi', label:'🛜 WLAN',        p:99}
+  ];
+  let color = colors[0][1];
+
+  // UI aufbauen
+  const sw = $('#swatches');
+  colors.forEach(([n,c],i)=>{
+    const b = document.createElement('button');
+    b.type='button'; b.style.background=c; b.title=n; b.setAttribute('aria-label',n);
+    b.setAttribute('aria-pressed', i===0);
+    b.onclick=()=>{ color=c; [...sw.children].forEach(x=>x.setAttribute('aria-pressed', x===b)); render(); };
+    sw.appendChild(b);
+  });
+  const ec = $('#extraChips');
+  extras.forEach(e=>{
+    const l = document.createElement('label');
+    l.innerHTML = `<input type="checkbox" value="${e.id}"> ${e.label} <small>(+${e.p} €)</small>`;
+    l.querySelector('input').addEventListener('change', render);
+    ec.appendChild(l);
+  });
+  ['model','plush','hyd','name'].forEach(id => $('#'+id).addEventListener('input', ()=>{
+    if(id==='model'){ // Modell setzt Grundfarbe
+      const m = models[+$('#model').value];
+      color = m.color; [...sw.children].forEach(x=>x.setAttribute('aria-pressed', false));
+    }
+    render();
+  }));
+
+  const fmt = n => n.toLocaleString('de-DE') + ' €';
+  function checked(){ return [...ec.querySelectorAll('input:checked')].map(i=>i.value); }
+
+  function render(){
+    const m = models[+$('#model').value];
+    const plush = $('#plush');
+    const hyd = +$('#hyd').value;
+    const sel = checked();
+    const base = +$('#model').selectedOptions[0].dataset.p;
+    const pp = +plush.selectedOptions[0].dataset.p;
+    const ex = extras.filter(e=>sel.includes(e.id)).reduce((a,e)=>a+e.p,0);
+    const total = base + pp + hydPrice[hyd] + ex;
+
+    $('#hydOut').textContent = `${hyd} – ${hydNames[hyd]}`;
+    $('#total').textContent = fmt(total);
+    $('#shell').setAttribute('fill', color);
+    $('#stripe').setAttribute('stroke', m.stripe);
+
+    const pat = plush.value;
+    $('#plushLayer').style.opacity = pat==='plush' || pat==='fluff' ? 1 : 0;
+    $('#velvetLayer').style.opacity = pat==='velvet' ? 1 : (pat==='cloud'?.6:0);
+    $('#shell').setAttribute('stroke-width', pat==='fluff'?9:pat==='cloud'?12:5);
+    $('#shell').setAttribute('stroke-dasharray', pat==='fluff'?'2 6':'none');
+
+    // Hydraulik: Radabstand zum Sarg
+    const lift = hyd*6;
+    $('#coffinBody').style.transform = `translateY(${-lift}px)`;
+    ['pistonLr','pistonRr'].forEach(id=>{
+      const r = $('#'+id); r.setAttribute('height', 30+lift);
+    });
+    $('#pistonL').style.transform = `translateY(0)`; $('#pistonR').style.transform = `translateY(0)`;
+    $('#coffinWrap').style.setProperty('--h', (hyd*12+6)+'px');
+
+    // Extras zeichnen
+    let svg = '';
+    if(sel.includes('neon')) svg += `<rect x="60" y="192" width="400" height="6" fill="#7ef0c8" opacity=".9" rx="3"><animate attributeName="opacity" values=".3;1;.3" dur="1.4s" repeatCount="indefinite"/></rect>`;
+    if(sel.includes('flame')) svg += `<path d="M60 190 q10-26 25-6 q6-28 22 0 q12-26 26 0 q10-20 24 6Z" fill="#ff9500" stroke="#d62828" stroke-width="3"/><path d="M360 190 q10-26 25-6 q6-28 22 0 q12-26 26 0 q10-20 24 6Z" fill="#ff9500" stroke="#d62828" stroke-width="3"/>`;
+    if(sel.includes('ball')) svg += `<line x1="260" y1="30" x2="260" y2="70" stroke="#aaa" stroke-width="3"/><circle cx="260" cy="50" r="20" fill="url(#disco)" stroke="#555" stroke-width="2"><animate attributeName="r" values="19;22;19" dur="1s" repeatCount="indefinite"/></circle>`;
+    if(sel.includes('fog')) svg += `<g opacity=".7" fill="#fff"><circle cx="80" cy="252" r="22"><animate attributeName="cx" values="60;460" dur="6s" repeatCount="indefinite"/></circle><circle cx="130" cy="262" r="26"><animate attributeName="cx" values="130;500;130" dur="8s" repeatCount="indefinite"/></circle></g>`;
+    if(sel.includes('sub')) svg += `<circle cx="150" cy="168" r="18" fill="#111" stroke="#ccc" stroke-width="3"/><circle cx="150" cy="168" r="6" fill="#444"/><circle cx="370" cy="168" r="18" fill="#111" stroke="#ccc" stroke-width="3"/><circle cx="370" cy="168" r="6" fill="#444"/>`;
+    if(sel.includes('fan')) svg += `<path d="M470 150 l36 -14 v28 z" fill="#ffd24a" stroke="#333" stroke-width="2"/><text x="478" y="120" font-size="22">🎺</text>`;
+    if(sel.includes('purr')) svg += `<text x="130" y="60" font-size="22">🐱</text>`;
+    if(sel.includes('wifi')) svg += `<text x="420" y="60" font-size="22">📶</text>`;
+    const nm = $('#name').value.trim();
+    if(nm) svg += `<text x="260" y="124" text-anchor="middle" font-family="Georgia" font-style="italic" font-size="20" fill="#fff" stroke="#2a1533" stroke-width=".8">${nm.replace(/[<>&]/g,'')}</text>`;
+    $('#extras').innerHTML = svg;
+
+    const specs = [
+      `Federweg: ${hydCm[hyd]} cm`,
+      `Gewicht: ${64 + hyd*5 + sel.length*3 + (plush.value==='cloud'?10:0)} kg`,
+      `Flauschgrad: ${'★'.repeat({plush:4,velvet:3,fluff:5,cloud:5}[plush.value])}`,
+      `Extras: ${sel.length}/8`
+    ];
+    $('#stats').innerHTML = `> ${m.name}<br>> ` + specs.join(' · ');
+  }
+
+  // Hüpfen
+  const stage = $('#coffinWrap');
+  $('#hopBtn').onclick = ()=>{
+    const body = $('#coffinBody');
+    stage.classList.remove('hop'); void stage.offsetWidth; stage.classList.add('hop');
+    setTimeout(()=>stage.classList.remove('hop'), 2800);
+  };
+  $('#randBtn').onclick = ()=>{
+    $('#model').value = Math.floor(Math.random()*models.length);
+    $('#plush').selectedIndex = Math.floor(Math.random()*4);
+    $('#hyd').value = Math.floor(Math.random()*6);
+    color = colors[Math.floor(Math.random()*colors.length)][1];
+    ec.querySelectorAll('input').forEach(i=>i.checked = Math.random()<.4);
+    render(); $('#hopBtn').click();
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
