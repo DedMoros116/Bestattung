@@ -197,6 +197,29 @@ input[type=text]::placeholder,textarea::placeholder{color:var(--muted)}
 .total small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fine{font-size:.78rem;color:var(--muted)}
 
+/* Regler, Draufsicht, Gags */
+.sls{display:grid;gap:20px}
+.sls.off{opacity:.45}
+.sl-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-weight:700;font-size:.95rem;flex-wrap:wrap}
+.sl-h output{font-family:var(--f-mono);font-size:.8rem;font-weight:400;color:var(--brass-ink);text-align:right}
+.sl .ticks{font-size:.66rem}
+.group>.t{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink);margin-bottom:12px}
+.readout{grid-template-columns:auto 1fr}
+.readout .topv,.readout .quip{grid-column:1/-1}
+.topv{width:100%;height:auto;max-height:150px;border-top:1px solid var(--line);padding-top:10px}
+.tvt{font-family:var(--f-mono);font-size:8px;fill:#1a1020;font-weight:500}
+.tvs{font-family:var(--f-mono);font-size:6px;fill:var(--muted);letter-spacing:.1em}
+.quip{font-family:var(--f-display);font-style:italic;font-size:1.2rem;line-height:1.3;color:var(--brass-ink);min-height:2.6em;margin:0;border-top:1px solid var(--line);padding-top:10px}
+.quip.swap{animation:fadeIn .6s both}
+.q{font-family:var(--f-display);font-style:italic;font-size:1.1rem;color:var(--fg)!important}
+.q span{font-family:var(--f-mono);font-style:normal;font-size:.68rem;letter-spacing:.06em;color:var(--muted)}
+.plakette{position:absolute;right:18px;top:16px;z-index:2;width:62px;height:62px;border-radius:50%;background:radial-gradient(circle,#2f7a4f 0 55%,#d8b25a 56% 100%);display:grid;place-items:center;text-align:center;color:#fff;font-family:var(--f-mono);font-size:.62rem;line-height:1.15;box-shadow:0 4px 14px rgba(0,0,0,.5);transform:rotate(8deg);animation:wob 6s ease-in-out infinite;cursor:help}
+.plakette b{font-size:.8rem;display:block}
+@keyframes wob{50%{transform:rotate(-6deg)}}
+.hopc{font-variant-numeric:tabular-nums;color:#f0d792}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:95;background:var(--fg);color:var(--bg);padding:12px 20px;max-width:min(92vw,520px);font-size:.9rem;border-radius:2px;pointer-events:none;transition:all .4s cubic-bezier(.2,.8,.2,1)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
 /* Specs */
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:22px}
 .tab{font:inherit;font-size:.86rem;background:transparent;color:var(--muted);border:1px solid var(--line);padding:9px 18px;cursor:pointer;border-radius:2px;transition:all .2s}
@@ -330,14 +353,16 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       <div class="hero-cta"><a class="btn" href="#konfi">Sarg konfigurieren</a><a class="btn ghost" href="#arten">Bestattungsarten</a></div>
     </div>
     <div class="stage" id="heroStage">
+      <div class="plakette" title="Nächste Hauptuntersuchung: nie" aria-hidden="true"><div><b>HU</b>12<br>2099</div></div>
       <div id="heroCoffin"></div>
-      <div class="cap"><span class="live">Modell El Último Camino · Hydraulik Stufe 4</span><button class="btn sm ghost" id="heroHop" type="button" style="color:#efe6d8;border-color:rgba(239,230,216,.35)">Probehüpfen</button></div>
+      <div class="cap"><span class="live">Modell El Último Camino · Hüpfer heute: <b class="hopc">0</b></span><button class="btn sm ghost" id="heroHop" type="button" style="color:#efe6d8;border-color:rgba(239,230,216,.35)">Probehüpfen</button></div>
     </div>
     <div class="facts">
       <div class="fact reveal"><b data-count="137">137</b><span>Jahre Berufserfahrung</span></div>
-      <div class="fact reveal"><b><span data-count="24">24</span><small>/7</small></b><span>Erreichbarkeit, auch nachts</span></div>
+      <div class="fact reveal"><b><span data-count="24">24</span><small>/7</small></b><span>Erreichbarkeit. Besonders nachts.</span></div>
       <div class="fact reveal"><b data-count="12">12</b><span>Bestattungsarten im Angebot</span></div>
       <div class="fact reveal"><b data-count="120">120</b><span>cm maximaler Federweg</span></div>
+      <div class="fact reveal"><b data-count="0">0</b><span>Beschwerden unserer Kunden. Direkt.</span></div>
     </div>
   </div>
 </header>
@@ -374,11 +399,13 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       <div class="preview">
         <div class="stage" id="cfgStage">
           <div id="cfgCoffin"></div>
-          <div class="cap"><span id="cfgCap" class="live">Live-Vorschau</span><span></span></div>
+          <div class="cap"><span id="cfgCap" class="live">Live-Vorschau</span><span>Hüpfer heute: <b class="hopc">0</b></span></div>
         </div>
         <div class="readout">
           <svg class="gauge" viewBox="0 0 120 72" aria-hidden="true" id="gauge"></svg>
           <dl id="stats"></dl>
+          <svg class="topv" id="topView" viewBox="0 0 300 130" role="img" aria-label="Draufsicht ohne Deckel mit Polsterung"></svg>
+          <p class="quip" id="quip" aria-live="polite"></p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn" id="hopBtn" type="button">Probehüpfen</button>
@@ -387,20 +414,18 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       </div>
 
       <form class="panel" id="cfg" onsubmit="return false">
+        <div class="group"><div class="t">Schnellauswahl</div><div class="chips" id="presets" style="margin-bottom:0"></div></div>
         <fieldset class="group"><legend>1 · Modell</legend><div class="opts" id="fModel"></div></fieldset>
         <fieldset class="group"><legend>2 · Lack</legend><div class="swatches" id="fColor"></div><p class="fine" id="colorName" style="margin-top:10px"></p></fieldset>
-        <fieldset class="group"><legend>3 · Polsterung</legend><div class="opts two" id="fPlush"></div></fieldset>
-        <div class="group range"><label class="t" for="hyd">4 · Hydraulik</label>
-          <div class="hydname"><span id="hydName"></span><small id="hydCm"></small></div>
-          <input type="range" id="hyd" min="0" max="5" step="1" value="4">
-          <div class="ticks" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
-        </div>
-        <fieldset class="group"><legend>5 · Ausstattung</legend><div class="opts two" id="fExtras"></div></fieldset>
-        <div class="group"><label class="t" for="engr">6 · Gravur auf dem Deckel</label><input type="text" id="engr" maxlength="26" placeholder="z. B. Hasta la vista"></div>
+        <fieldset class="group"><legend>3 · Maße</legend><div class="sls" id="slSize"></div></fieldset>
+        <fieldset class="group"><legend>4 · Polster und Gewicht</legend><div class="opts two" id="fPlush"></div><div class="sls" id="slPad" style="margin-top:22px"></div></fieldset>
+        <fieldset class="group"><legend>5 · Hydraulik</legend><div class="sls" id="slHyd"></div></fieldset>
+        <fieldset class="group"><legend>6 · Ausstattung</legend><div class="opts two" id="fExtras"></div><div class="sls" id="slBass" style="margin-top:22px"></div><p class="fine" id="bassNote"></p></fieldset>
+        <div class="group"><label class="t" for="engr">7 · Gravur auf dem Deckel</label><input type="text" id="engr" maxlength="26" placeholder="z. B. Hasta la vista"></div>
         <div class="sum">
           <ul id="sumList"></ul>
           <div class="total"><div><small>Gesamtpreis inkl. MwSt.</small><b id="total">0 €</b></div><a class="btn" href="#kontakt" id="ask">Unverbindlich anfragen</a></div>
-          <p class="fine">Preise sind fiktive Beispielwerte. Der Sarg ist zum Zeitpunkt der Bestellung noch unbenutzt, die Hydraulik nicht (Probehüpfen).</p>
+          <p class="fine">Preise sind fiktive Beispielwerte. Kleinere Maße werden nicht günstiger, Schreiner sind sentimental. Der Sarg ist zum Zeitpunkt der Bestellung noch unbenutzt, die Hydraulik nicht (Probehüpfen).</p>
         </div>
       </form>
     </div>
@@ -417,6 +442,10 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       <div class="reveal"><h3>Gewicht</h3><p>Leergewicht 64 kg (Plüsch) bis 118 kg (Chrom-Edition). Maximale Zuladung 180 kg zuzüglich Erinnerungen.</p></div>
       <div class="reveal"><h3>Energie</h3><p>Lithium-Akku mit 48 V, rund 6 Stunden Hüpfbetrieb, 10 Tage Ruhebetrieb. Ladegerät liegt bei.</p></div>
       <div class="reveal"><h3>Garantie</h3><p>Lebenslang auf Rahmen, Pumpe und Polster. Sollten wir Sie nicht mehr erreichen, prüfen wir selbst nach.</p></div>
+      <div class="reveal"><h3>Widerruf</h3><p>14 Tage Widerrufsrecht. Gilt für Lebende, die uns den Sarg nur kurz ausleihen wollten.</p></div>
+      <div class="reveal"><h3>Rückgabe</h3><p>Nicht vorgesehen. Beschwerden bislang: 0. Wir führen Strichliste.</p></div>
+      <div class="reveal"><h3>TÜV</h3><p>Plakette gültig bis 2099. Nächste Hauptuntersuchung: nie, weil der Prüfer sich nicht traut.</p></div>
+      <div class="reveal"><h3>Wiederauferstehung</h3><p>Bei Rückkehr erstatten wir den Kaufpreis anteilig. Der Sarg bleibt selbstverständlich Ihrer.</p></div>
     </div>
   </div>
 </section>
@@ -468,10 +497,10 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       <h2>Wir sind erreichbar. Immer.</h2>
       <p class="lead">Ein Anruf genügt. Nachts nehmen echte Menschen ab, mit Stimme und Kaffee.</p>
       <dl class="cdata" style="margin-bottom:0">
-        <div><dt>Telefon</dt><dd>0800 123 5693 (24 Stunden)</dd></div>
+        <div><dt>Telefon</dt><dd>0800 123 5693 · Wartezeit: keine</dd></div>
         <div><dt>E-Mail</dt><dd>hallo@sanft-und-lowrider.example</dd></div>
         <div><dt>Haus</dt><dd>Allee der Stille 7, 12345 Ruhelingen</dd></div>
-        <div><dt>Beratung</dt><dd>Montag bis Samstag, 9 bis 18 Uhr</dd></div>
+        <div><dt>Beratung</dt><dd>Montag bis Samstag, 9 bis 18 Uhr. Sonntags auch, aber leiser.</dd></div>
       </dl>
     </div>
     <form class="cf reveal" id="cform">
@@ -486,8 +515,10 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 </section>
 
 <footer>
-  <div class="wrap"><b>Sanft &amp; Lowrider Bestattungen</b><span>Demoseite, alle Angaben, Preise und Namen sind fiktiv. · © 1889 bis heute</span></div>
+  <div class="wrap"><b>Sanft &amp; Lowrider Bestattungen</b><span>Wir bringen Sie sicher ans Ziel. Nur etwas tiefer. · Demoseite, alle Angaben fiktiv. · © 1889 bis heute<br><small style="opacity:.6">Tipp: Fünfmal aufs Logo klicken.</small></span></div>
 </footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -497,12 +528,19 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 
   /* ---------- Daten ---------- */
   const MODELS=[
-    {n:'Samtpfote Deluxe',p:3490,c:'#8e2a52',h:330,t:'Der Klassiker: vier Zentimeter Plüsch, Wiegefunktion und ein leises Schnurren im Kopfkissen.',m:['Plüsch Teddy','Federweg bis 30 cm','64 kg']},
-    {n:'El Último Camino',p:6990,c:'#5b1470',h:285,t:'Candy-Lack, Speichenfelgen, Vier-Punkt-Hydraulik. Rollt mit 0,3 km/h und hüpft auf Wunsch.',m:['Chrom & Candy','Federweg bis 120 cm','96 kg']},
-    {n:'Wolke 7',p:4290,c:'#d9dbe6',h:215,t:'Weiß, wattig, mit Nebelmaschine. Der Sarg schwebt optisch, getragen von Magneten und Zuversicht.',m:['Wolkenschaum','Federweg bis 15 cm','71 kg']},
-    {n:'Disco Inferno',p:5490,c:'#1b1b22',h:265,t:'Spiegelkugel, LED-Unterboden und Subwoofer. Für alle, die sich einen Abgang mit Bass wünschen.',m:['Lack Schwarz','Federweg bis 60 cm','102 kg']},
-    {n:'Gemüsebeet',p:1990,c:'#3f6b3a',h:125,t:'Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten, nach drei auch Zucchini, reichlich.',m:['Kompostierbar','ohne Hydraulik','38 kg']},
-    {n:'Königin der Nacht',p:9990,c:'#9a7418',h:42,t:'Vergoldete Zierleisten, Thronkissen und ein Fanfarenmodul. Auftritt mit Hoheitsanspruch.',m:['Samt & Blattgold','Federweg bis 60 cm','118 kg']}
+    {n:'Samtpfote Deluxe',p:3490,c:'#8e2a52',h:330,t:'Der Klassiker: vier Zentimeter Plüsch, Wiegefunktion und ein leises Schnurren im Kopfkissen.',m:['Plüsch Teddy','Federweg bis 30 cm','64 kg'],d:{len:215,wid:72,hgt:50,pad:6,mass:64,fw:30,bass:70},q:['Habe nie besser geruht.','Kunde, ehem. Hausarzt']},
+    {n:'El Último Camino',p:6990,c:'#5b1470',h:285,t:'Candy-Lack, Speichenfelgen, Vier-Punkt-Hydraulik. Rollt mit 0,3 km/h und hüpft auf Wunsch.',m:['Chrom & Candy','Federweg bis 120 cm','96 kg'],d:{len:225,wid:76,hgt:52,pad:4,mass:96,fw:60,bass:70},q:['Meine Frau sagt, ich hüpfe seit Jahren nicht mehr. Jetzt schon.','Herr M., Rentner']},
+    {n:'Wolke 7',p:4290,c:'#d9dbe6',h:215,t:'Weiß, wattig, mit Nebelmaschine. Der Sarg schwebt optisch, getragen von Magneten und Zuversicht.',m:['Wolkenschaum','Federweg bis 15 cm','71 kg'],d:{len:215,wid:74,hgt:54,pad:10,mass:71,fw:15,bass:70},q:['Endlich schwebe ich über den Dingen.','Frau K., Schwebebalken-Trainerin a. D.']},
+    {n:'Disco Inferno',p:5490,c:'#1b1b22',h:265,t:'Spiegelkugel, LED-Unterboden und Subwoofer. Für alle, die sich einen Abgang mit Bass wünschen.',m:['Lack Schwarz','Federweg bis 60 cm','102 kg'],d:{len:225,wid:78,hgt:50,pad:4,mass:102,fw:60,bass:100},q:['Der Bass hat sogar die Totenmesse aufgemischt.','DJ Torsten, posthum']},
+    {n:'Gemüsebeet',p:1990,c:'#3f6b3a',h:125,t:'Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten, nach drei auch Zucchini, reichlich.',m:['Kompostierbar','ohne Hydraulik','38 kg'],d:{len:210,wid:70,hgt:46,pad:3,mass:42,fw:0,bass:70},q:['Dieses Jahr gab es die besten Tomaten der Familie.','Familie H., Hinterbliebene']},
+    {n:'Königin der Nacht',p:9990,c:'#9a7418',h:42,t:'Vergoldete Zierleisten, Thronkissen und ein Fanfarenmodul. Auftritt mit Hoheitsanspruch.',m:['Samt & Blattgold','Federweg bis 60 cm','118 kg'],d:{len:230,wid:82,hgt:56,pad:6,mass:118,fw:60,bass:70},q:['Ich habe nie so gut gethront.','Gräfin von T.']}
+  ];
+  const PRESETS=[
+    ['Standard',{len:215,wid:72,hgt:50,pad:4,mass:80,fw:60},'Standard: bewährt seit 1889, nur mit mehr Federung.'],
+    ['Basketballer-XXL',{len:250,wid:88,hgt:62,pad:6,mass:110,fw:60},'Basketballer-XXL: Kirchentür geprüft, Kopf einziehen nicht nötig.'],
+    ['Federleicht',{len:205,wid:62,hgt:42,pad:3,mass:45,fw:30},'Federleicht: Bitte nicht bei Föhn aufstellen.'],
+    ['Der Tresor',{len:225,wid:90,hgt:52,pad:2,mass:155,fw:0},'Der Tresor: Bankgeheimnis auch nach 100 Jahren garantiert.'],
+    ['Maximal übertrieben',{len:260,wid:110,hgt:70,pad:15,mass:60,fw:120,bass:128,ex:['sub','neon','fog','ball','flame']},'Maximal übertrieben. Bitte Kirchenvorstand vorab informieren.']
   ];
   const COLORS=[['Rubinrot','#8e2a52'],['Aubergine','#5b1470'],['Mitternacht','#1b1b22'],['Tannengrün','#1f5a45'],['Champagner','#c8a45c'],['Karminrot','#b3202f'],['Perlweiß','#e6e4ee']];
   const PLUSH=[['plush','Plüsch „Teddy“',0],['velvet','Samt „Kaisers neue Kissen“',250],['fluff','Alpaka-Fluff',480],['cloud','Wolkenschaum',900]];
@@ -528,6 +566,10 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
     ['Kann ich einen Sarg vorab testen?','Im Showroom steht ein Prototyp bereit. Probeliegen ist erlaubt, bitte mit Helm.'],
     ['Was kostet eine Bestattung insgesamt?','Das hängt von Sarg, Bestattungsart und Feier ab. Wir legen alle Kosten schriftlich vor, bevor irgendetwas beauftragt wird. Ratenzahlung ist möglich, der Hüpfzuschlag ist es nicht.'],
     ['Bieten Sie Tierbestattungen an?','Ja. Hundesärge mit Knochenornament, Katzensärge mit Kratzbrett und Hamstersärge mit 3 mm Federweg.'],
+    ['Hält der Sarg auch eine Wiederbelebung aus?','Ja. Der Deckel öffnet von innen mit einem Klick, dazu gibt es eine Notklingel mit Dreiklang. In 137 Jahren wurde sie nie benutzt, aber wir sind vorbereitet.'],
+    ['Kann ich den Sarg zwischenzeitlich als Couchtisch nutzen?','Technisch ja, der Deckel trägt 120 kg. Die Garantie erlischt dann, weil wir Sie nicht um Erlaubnis gefragt haben.'],
+    ['Gibt es Treuepunkte?','Ja. Beim zehnten Sarg ist der elfte gratis. Die Einlösung erfolgt in der Regel nicht durch Sie.'],
+    ['Wie laut darf die Musik sein?','Der Pfarrer entscheidet. Wir empfehlen bis 90 dB. Ab 110 dB vermerken wir im Vertrag, dass wir davon abgeraten haben.'],
     ['Wie funktioniert die Vorsorge?','Sie planen Ihre Feier selbst, wir führen sie aus. Die Kosten können Sie treuhänderisch hinterlegen. Wir bitten nur darum, nicht zu früh zu kommen.']
   ];
   const SPECS={
@@ -542,7 +584,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 
   /* ---------- Statische Teile rendern ---------- */
   $('#marq').innerHTML=[...ARTEN,...ARTEN].map(a=>`<span>${a[2]}</span>`).join('');
-  $('#models').innerHTML=MODELS.map(m=>`<article class="card reveal">${ph('Foto · '+m.n+', Dreiviertelansicht · 1600×1200',m.h,'4/3')}<h3>${m.n}<span>ab ${eur(m.p)}</span></h3><p>${m.t}</p><div class="meta">${m.m.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+  $('#models').innerHTML=MODELS.map(m=>`<article class="card reveal">${ph('Foto · '+m.n+', Dreiviertelansicht · 1600×1200',m.h,'4/3')}<h3>${m.n}<span>ab ${eur(m.p)}</span></h3><p>${m.t}</p><p class="q">„${m.q[0]}“ <span>${m.q[1]}</span></p><div class="meta">${m.m.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
   $('#gal').innerHTML=[['Abschied am See',300,'3/2'],['Prozession, Köln',12,'3/2'],['Nebel und Orgel',215,'1/1'],['Riff-Einsetzung',190,'1/1'],['Feuerwerk, Hamburg',350,'1/1']].map(g=>ph('Galerie · '+g[0],g[1],g[2])).join('');
   $('#faqList').innerHTML=FAQ.map(f=>`<details class="reveal"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
 
@@ -578,16 +620,16 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
   }
 
   /* ---------- Sarg-Engine ---------- */
-  let uid=0; const live=new Set();
+  let uid=0; const live=new Set(); const CX=450, YB=236, YW=262;
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   function makeCoffin(host,label){
-    const id='k'+(uid++); const yL=262;
+    const id='k'+(uid++);
     let spokes=''; for(let a=0;a<360;a+=12.9) spokes+=`<line x1="0" y1="-6" x2="0" y2="-26.5" transform="rotate(${a.toFixed(1)})"/>`;
-    const BODY='M44 236V204Q44 190 60 186L108 160H692L740 186Q756 190 756 204V236Z';
-    const wheel=cx=>`<g transform="translate(${cx} ${yL})"><circle r="38" fill="#0c0a0e"/><circle r="33" fill="#ece7de"/><circle r="27.5" fill="#0c0a0e"/><circle r="26.5" fill="url(#${id}c)"/><g class="spin" stroke="#6b6b73" stroke-width=".9">${spokes}</g><circle r="16" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".7"/><circle r="6.5" fill="url(#${id}b)"/></g>`;
-    host.innerHTML=`<svg viewBox="0 0 800 340" role="img" aria-label="${label}">
+    const wheel=cls=>`<g class="${cls}"><circle r="38" fill="#0c0a0e"/><circle r="33" fill="#ece7de"/><circle r="27.5" fill="#0c0a0e"/><circle r="26.5" fill="url(#${id}c)"/><g class="spin" stroke="#6b6b73" stroke-width=".9">${spokes}</g><circle r="16" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".7"/><circle r="6.5" fill="url(#${id}b)"/></g>`;
+    host.innerHTML=`<svg viewBox="0 -44 900 384" role="img" aria-label="${label}">
 <defs>
 <linearGradient id="${id}p" x1="0" y1="0" x2="0" y2="1"><stop class="s0" offset="0"/><stop class="s1" offset=".5"/><stop class="s2" offset="1"/></linearGradient>
-<linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <linearGradient id="${id}c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fafafa"/><stop offset=".35" stop-color="#8e8e96"/><stop offset=".6" stop-color="#e9e9ee"/><stop offset="1" stop-color="#5e5e66"/></linearGradient>
 <linearGradient id="${id}b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f0d792"/><stop offset=".5" stop-color="#b68d3e"/><stop offset="1" stop-color="#f4e2b0"/></linearGradient>
 <linearGradient id="${id}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c070f" stop-opacity="0"/><stop offset=".12" stop-color="#0c070f" stop-opacity=".9"/><stop offset="1" stop-color="#050307"/></linearGradient>
@@ -595,72 +637,107 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 <pattern id="${id}t2" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="4" fill="rgba(255,255,255,.2)" stroke="rgba(0,0,0,.22)"/></pattern>
 <filter id="${id}bl" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="10"/></filter>
 <filter id="${id}fz"><feTurbulence baseFrequency=".8" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter>
-<clipPath id="${id}cl"><path d="${BODY}"/></clipPath>
+<clipPath id="${id}cl"><path class="clipP"/></clipPath>
 </defs>
-<rect x="0" y="298" width="800" height="42" fill="url(#${id}f)"/>
-<line class="road" x1="0" x2="800" y1="324" y2="324" stroke="#fff" stroke-opacity=".16" stroke-width="2"/>
-<ellipse class="shadow" cx="400" cy="302" rx="340" ry="9" fill="#000" opacity=".55"/>
-<ellipse class="glow" cx="400" cy="296" rx="320" ry="13" fill="#39f5c8" filter="url(#${id}bl)" opacity="0"/>
-<g class="fog" opacity="0"><ellipse class="fogc" cx="250" cy="290" rx="190" ry="26" fill="#fff" opacity=".22" filter="url(#${id}bl)"/><ellipse class="fogc" cx="560" cy="286" rx="210" ry="30" fill="#fff" opacity=".2" filter="url(#${id}bl)"/></g>
-<rect x="188" y="258" width="424" height="7" rx="2" fill="#2b2332"/>
+<rect x="0" y="298" width="900" height="42" fill="url(#${id}f)"/>
+<line class="road" x1="0" x2="900" y1="324" y2="324" stroke="#fff" stroke-opacity=".16" stroke-width="2"/>
+<ellipse class="shadow" cx="${CX}" cy="302" rx="340" ry="9" fill="#000" opacity=".55"/>
+<ellipse class="glow" cx="${CX}" cy="296" rx="320" ry="13" fill="#39f5c8" filter="url(#${id}bl)" opacity="0"/>
+<g class="fog" opacity="0"><ellipse class="fogc" cx="300" cy="290" rx="190" ry="26" fill="#fff" opacity=".22" filter="url(#${id}bl)"/><ellipse class="fogc" cx="620" cy="286" rx="210" ry="30" fill="#fff" opacity=".2" filter="url(#${id}bl)"/></g>
+<rect class="axle" y="258" height="7" rx="2" fill="#2b2332"/>
 <g class="pist"></g>
 <g class="body">
- <path d="${BODY}" fill="url(#${id}p)" stroke="rgba(0,0,0,.55)" stroke-width="1.5"/>
+ <path class="kor" fill="url(#${id}p)" stroke="rgba(0,0,0,.55)" stroke-width="1.5"/>
  <g clip-path="url(#${id}cl)">
-  <rect class="tuft" x="44" y="197" width="712" height="40" fill="url(#${id}t1)"/>
-  <rect class="cloud" x="44" y="197" width="712" height="40" fill="#fff" opacity="0"/>
-  <circle cx="190" cy="${yL}" r="47" fill="#07040a"/><circle cx="610" cy="${yL}" r="47" fill="#07040a"/>
+  <rect class="tuft" fill="url(#${id}t1)"/>
+  <rect class="cloud" fill="#fff" opacity="0"/>
+  <circle class="ar1" cy="${YW}" r="47" fill="#07040a"/><circle class="ar2" cy="${YW}" r="47" fill="#07040a"/>
   <g class="flames"></g><g class="subs"></g>
  </g>
- <path d="M120 168H680L716 186H84Z" fill="rgba(0,0,0,.18)" stroke="url(#${id}b)" stroke-width="1.4"/>
- <path d="${BODY}" fill="url(#${id}g)"/>
- <line x1="46" y1="195" x2="754" y2="195" stroke="url(#${id}b)" stroke-width="2.6"/>
- <rect x="258" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="342" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="432" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="516" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/>
- <g class="ball" opacity="0"><line x1="400" y1="20" x2="400" y2="108" stroke="#999" stroke-width="1.5"/><circle cx="400" cy="124" r="18" fill="url(#${id}c)"/><g class="spin" style="animation-play-state:running"><path d="M382 124H418M400 106V142M388 112Q400 124 388 136M412 112Q400 124 412 136" stroke="#333" stroke-width=".8" fill="none"/></g></g>
- <text class="eng" x="400" y="184" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-size="21" fill="#f0d792" stroke="rgba(0,0,0,.35)" stroke-width=".4"></text>
+ <path class="korg" fill="url(#${id}g)" opacity=".4"/>
+ <line class="pin" stroke="url(#${id}b)" stroke-width="2.6"/>
+ <g class="hand" fill="url(#${id}b)"></g>
+ <path class="lid" fill="url(#${id}p)" stroke="rgba(0,0,0,.55)" stroke-width="1.5"/>
+ <path class="lens" fill="rgba(0,0,0,.16)" stroke="url(#${id}b)" stroke-width="1.4"/>
+ <path class="lidg" fill="url(#${id}g)"/>
+ <rect class="seam" rx="6" fill="url(#${id}t2)" stroke="rgba(0,0,0,.55)" stroke-width="1.2"/>
+ <rect class="seam2" rx="6" fill="#fff" opacity=".12"/>
+ <text class="eng" x="${CX}" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-size="21" fill="#f0d792" stroke="rgba(0,0,0,.35)" stroke-width=".4"></text>
+ <g class="ball" opacity="0"><line stroke="#999" stroke-width="1.5"/><circle r="18" fill="url(#${id}c)"/><g class="spin" style="animation-play-state:running"><path d="M-18 0H18M0 -18V18M-12 -12Q0 0 -12 12M12 -12Q0 0 12 12" stroke="#333" stroke-width=".8" fill="none"/></g></g>
 </g>
-${wheel(190)}${wheel(610)}
+${wheel('w1')}${wheel('w2')}
 </svg>`;
     const q=s=>host.querySelector(s);
-    const st={F:{p:0,v:0},R:{p:0,v:0},level:0,ph:Math.random()*6};
-    const api={host,st,
-      color(c){const s=$$('stop',q('linearGradient'));s[0].setAttribute('stop-color',shade(c,.28));s[1].setAttribute('stop-color',c);s[2].setAttribute('stop-color',shade(c,-.45))},
+    const A=(s,o)=>{const e=q(s);for(const k in o)e.setAttribute(k,o[k])};
+    const st={F:{p:0,v:0},R:{p:0,v:0},level:0,ph:Math.random()*6,hl:350,imp:1,sag:0,bass:0,sub:false,cones:[],ex:new Set(),d:{len:215,hgt:50},yT:114,yK:166,lh:52};
+    const api={host,st,visible:false,
+      color(c){const s=host.querySelectorAll('linearGradient')[0].querySelectorAll('stop');s[0].setAttribute('stop-color',shade(c,.28));s[1].setAttribute('stop-color',c);s[2].setAttribute('stop-color',shade(c,-.45))},
       level(l){st.level=l},
+      mass(kg){st.imp=clamp(1.3-(kg-60)/160,.55,1.3);st.sag=Math.max(0,(kg-80)*.05)},
+      bass(v){st.bass=v},
       plush(k){const t=q('.tuft'),c=q('.cloud');
         t.setAttribute('fill',`url(#${id}${k==='velvet'?'t1':'t2'})`);
         t.setAttribute('filter',k==='fluff'?`url(#${id}fz)`:'none');
-        t.setAttribute('opacity',k==='cloud'?.6:1);c.setAttribute('opacity',k==='cloud'?.35:0)},
+        t.setAttribute('opacity',k==='cloud'?.6:1);c.setAttribute('opacity',k==='cloud'?.35:0);
+        q('.seam').setAttribute('fill',`url(#${id}${k==='velvet'?'t1':'t2'})`)},
+      dims(d){
+        st.d=d; const hl=350*d.len/215,hs=d.hgt/50,x0=CX-hl,x1=CX+hl,yK=YB-58*hs,yT=YB-136*hs,lh=yK-yT;
+        st.hl=hl;st.yT=yT;st.yK=yK;st.lh=lh;
+        const kor=`M${x0} ${YB}V${yK+8}Q${x0} ${yK} ${x0+8} ${yK}H${x1-8}Q${x1} ${yK} ${x1} ${yK+8}V${YB}Z`;
+        A('.kor',{d:kor});A('.clipP',{d:kor});A('.korg',{d:kor});
+        A('.lid',{d:`M${x0+10} ${yK}L${x0+46} ${yK-lh*.55}Q${x0+62} ${yT} ${x0+112} ${yT}H${x1-112}Q${x1-62} ${yT} ${x1-46} ${yK-lh*.55}L${x1-10} ${yK}Z`});
+        A('.lidg',{d:`M${x0+10} ${yK}L${x0+46} ${yK-lh*.55}Q${x0+62} ${yT} ${x0+112} ${yT}H${x1-112}Q${x1-62} ${yT} ${x1-46} ${yK-lh*.55}L${x1-10} ${yK}Z`});
+        A('.lens',{d:`M${x0+104} ${yT+8}H${x1-104}L${x1-78} ${yT+lh*.4}H${x0+78}Z`});
+        A('.seam',{x:x0+4,width:2*hl-8,y:yK-8,height:16});A('.seam2',{x:x0+4,width:2*hl-8,y:yK-8,height:5});
+        A('.tuft',{x:x0,width:2*hl,y:yK+22,height:YB-yK-22});A('.cloud',{x:x0,width:2*hl,y:yK+22,height:YB-yK-22});
+        A('.pin',{x1:x0+2,x2:x1-2,y1:yK+16,y2:yK+16});
+        q('.hand').innerHTML=[-.43,-.17,.17,.43].map(f=>`<rect x="${CX+f*hl-13}" y="${yK+6}" width="26" height="5" rx="2"/>`).join('');
+        const w1=CX-.6*hl,w2=CX+.6*hl;
+        A('.ar1',{cx:w1});A('.ar2',{cx:w2});
+        A('.w1',{transform:`translate(${w1} ${YW})`});A('.w2',{transform:`translate(${w2} ${YW})`});
+        A('.axle',{x:w1-2,width:w2-w1+4});
+        A('.glow',{rx:hl*.9});
+        const e=q('.eng');e.setAttribute('y',yT+lh*.3+9);e.setAttribute('font-size',clamp(lh*.26,13,23));
+        const b=q('.ball');b.setAttribute('transform',`translate(${CX} ${yT-26})`);A('.ball line',{x1:0,x2:0,y1:-(yT-26)+2,y2:-18});
+        api.extras(st.ex);
+      },
       extras(set){
+        st.ex=set;const hl=st.hl,x0=CX-hl,x1=CX+hl,yK=st.yK,hh=Math.min(YB-yK-10,52);
         q('.glow').setAttribute('opacity',set.has('neon')?.85:0);
         q('.fog').setAttribute('opacity',set.has('fog')?1:0);
         q('.ball').setAttribute('opacity',set.has('ball')?1:0);
-        q('.flames').innerHTML=set.has('flame')?[70,150].map(x=>`<path transform="translate(${x} 0)" d="M0 236C6 218 14 224 18 206C28 218 26 226 34 214C40 226 50 220 52 236Z" fill="#ff8a1f" stroke="#c4271b" stroke-width="1.5"/>`).join('')+[560,640].map(x=>`<path transform="translate(${x} 0)" d="M0 236C6 218 14 224 18 206C28 218 26 226 34 214C40 226 50 220 52 236Z" fill="#ff8a1f" stroke="#c4271b" stroke-width="1.5"/>`).join(''):'';
-        q('.subs').innerHTML=set.has('sub')?[300,500].map(x=>`<circle cx="${x}" cy="219" r="14" fill="#0a0a0d" stroke="#bbb" stroke-width="1.5"/><circle cx="${x}" cy="219" r="6" fill="#303038"/>`).join(''):''},
+        const fl=x=>`<path transform="translate(${x} ${YB}) scale(1 ${hh/38})" d="M0 0C6 -18 14 -12 18 -30C28 -18 26 -10 34 -22C40 -10 50 -16 52 0Z" fill="#ff8a1f" stroke="#c4271b" stroke-width="1.5"/>`;
+        q('.flames').innerHTML=set.has('flame')?[x0+16,x0+86,x1-138,x1-68].map(fl).join(''):'';
+        q('.subs').innerHTML=set.has('sub')?[CX-.28*hl,CX+.28*hl].map(x=>`<circle cx="${x}" cy="${YB-22}" r="15" fill="#0a0a0d" stroke="#bbb" stroke-width="1.5"/><circle class="cone" cx="${x}" cy="${YB-22}" r="7" fill="#33333b"/>`).join(''):'';
+        st.sub=set.has('sub');st.cones=[...host.querySelectorAll('.cone')];
+      },
       name(t){q('.eng').textContent=t},
       rolling(on){host.classList.toggle('rolling',on)},
-      hop(){const I=2.4+st.level*2.1;st.F.v+=I;setTimeout(()=>{st.R.v+=I},210);setTimeout(()=>{st.F.v+=I*1.3;st.R.v+=I*1.3},520)},
-      visible:false
+      hop(){const I=(2.4+st.level*2.1)*st.imp;st.F.v+=I;setTimeout(()=>{st.R.v+=I},210);setTimeout(()=>{st.F.v+=I*1.3;st.R.v+=I*1.3},520);if(api.onhop)api.onhop()}
     };
-    const rods=[250,550].map(()=>{const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML='<line stroke="url(#'+id+'c)" stroke-width="6" stroke-linecap="round"/><rect width="14" height="32" rx="2" fill="url(#'+id+'c)" stroke="#3a3a40" stroke-width=".8"/>';q('.pist').appendChild(g);return g});
-    api.draw=function(){
-      const f=st.F.p,r=st.R.p,yc=(f+r)/2,a=Math.atan((f-r)/420),deg=a*57.2958;
-      q('.body').setAttribute('transform',`translate(0 ${-yc.toFixed(2)}) rotate(${deg.toFixed(3)} 400 236)`);
-      [250,550].forEach((xp,i)=>{const dx=xp-400,x=400+dx*Math.cos(a),top=236+dx*Math.sin(a)-yc,g=rods[i],l=g.firstChild,c=g.lastChild;
+    const rods=[0,1].map(()=>{const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML='<line stroke="url(#'+id+'c)" stroke-width="6" stroke-linecap="round"/><rect width="14" height="32" rx="2" fill="url(#'+id+'c)" stroke="#3a3a40" stroke-width=".8"/>';q('.pist').appendChild(g);return g});
+    api.draw=function(shake){
+      const f=st.F.p,r=st.R.p,yc=(f+r)/2+shake,span=1.2*st.hl,a=Math.atan((f-r)/span),deg=a*57.2958;
+      q('.body').setAttribute('transform',`translate(0 ${(-yc).toFixed(2)}) rotate(${deg.toFixed(3)} ${CX} ${YB})`);
+      [-1,1].forEach((sg,i)=>{const dx=sg*.43*st.hl,x=CX+dx*Math.cos(a),top=YB+dx*Math.sin(a)-yc,g=rods[i],l=g.firstChild,c=g.lastChild;
         l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1',top.toFixed(1));l.setAttribute('y2',258);
         c.setAttribute('x',x-7);c.setAttribute('y',226)});
-      const sh=q('.shadow');sh.setAttribute('rx',(340-Math.max(yc,0)*.7).toFixed(1));sh.setAttribute('opacity',(.55-Math.max(yc,0)*.004).toFixed(2));
+      const sh=q('.shadow');sh.setAttribute('rx',(st.hl*.97-Math.max(yc,0)*.7).toFixed(1));sh.setAttribute('opacity',(.55-Math.max(yc,0)*.004).toFixed(2));
     };
     api.step=function(t){
       for(const e of [st.F,st.R]){
-        const target=st.level*9+(st.level>0?Math.sin(t/800+st.ph+(e===st.R?1:0))*(.6+st.level*.5):0);
+        const base=st.level>0?Math.max(0,st.level*9-st.sag):0;
+        const target=base+(st.level>0?Math.sin(t/800+st.ph+(e===st.R?1:0))*(.6+st.level*.5):0);
         e.v+=(target-e.p)*.09; e.v*=.88; e.p+=e.v;
         if(e.p<-4){e.p=-4;e.v=Math.abs(e.v)*.3}
       }
-      api.draw();
+      let shake=0;
+      if(st.sub&&st.bass>66){const k=(st.bass-66)/64;shake=(Math.random()-.5)*k*2.2;const pul=Math.sin(t/(70-k*30));st.cones.forEach(c=>c.setAttribute('r',(7+pul*k*3.2).toFixed(2)))}
+      api.draw(shake);
     };
     live.add(api);
     if('IntersectionObserver' in window) new IntersectionObserver(es=>{api.visible=es[0].isIntersecting}).observe(host); else api.visible=true;
-    api.draw();
+    api.dims({len:215,hgt:50});api.draw(0);
     return api;
   }
   (function loop(t){live.forEach(c=>{if(c.visible&&!reduce)c.step(t)});requestAnimationFrame(loop)})(0);
@@ -691,67 +768,163 @@ ${wheel(190)}${wheel(610)}
       if(++f<330)requestAnimationFrame(step);else c.clearRect(0,0,cv.width,cv.height)})();
   }
 
+  /* ---------- Hupe, Toast, Hüpferzähler ---------- */
+  const toast=$('#toast');let tt;
+  function say(msg){toast.textContent=msg;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),3600)}
+  function horn(){
+    try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();
+      const t=ac.currentTime;[[392,0],[392,.16],[392,.32],[523,.5],[659,.95],[392,1.3],[392,1.46],[392,1.62],[523,1.8],[659,2.25]].forEach(([f,s])=>{
+        const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=f;const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=1400;
+        g.gain.setValueAtTime(.0001,t+s);g.gain.exponentialRampToValueAtTime(.12,t+s+.02);g.gain.exponentialRampToValueAtTime(.0001,t+s+(s%1.3<.7&&f<500?.13:.4));
+        o.connect(lp).connect(g).connect(ac.destination);o.start(t+s);o.stop(t+s+.5)})}catch(e){}
+  }
+  let hops=12+Math.floor(Math.random()*30);
+  const bump=()=>{hops++;$$('.hopc').forEach(e=>e.textContent=hops)};
+  $$('.hopc').forEach(e=>e.textContent=hops);
+  let clicks=0,ct;
+  $('.logo').addEventListener('click',()=>{clicks++;clearTimeout(ct);ct=setTimeout(()=>clicks=0,2500);
+    if(clicks>=5){clicks=0;horn();[0,700,1400].forEach(d=>setTimeout(()=>hero.hop(),d));petals();say('Hupe freigeschaltet. Bitte nicht auf dem Friedhofsparkplatz benutzen.')}});
+
   /* ---------- Hero-Sarg ---------- */
   const hero=makeCoffin($('#heroCoffin'),'Animierter Lowrider-Sarg mit Hydraulik');
-  hero.color('#7a1236');hero.plush('velvet');hero.level(4);hero.extras(new Set(['neon']));hero.name('Hasta la vista');hero.rolling(true);
+  hero.color('#7a1236');hero.plush('velvet');hero.level(3.2);hero.mass(96);hero.dims({len:225,hgt:52});hero.extras(new Set(['neon']));hero.name('Hasta la vista');hero.rolling(true);hero.onhop=bump;
   $('#heroHop').onclick=()=>{hero.hop();pump(4);petals()};
   setInterval(()=>{if(hero.visible&&!reduce)hero.hop()},5200);
   setTimeout(()=>hero.visible&&hero.hop(),900);
 
   /* ---------- Konfigurator ---------- */
-  const cfg=makeCoffin($('#cfgCoffin'),'Konfigurierter Lowrider-Sarg');
-  const S={model:1,color:MODELS[1].c,plush:'velvet',hyd:4,extras:new Set(['neon']),name:''};
-  $('#fModel').innerHTML=MODELS.slice(0,5).map((m,i)=>`<label class="opt"><input type="radio" name="model" value="${i}"${i===S.model?' checked':''}><span>${m.n}<small>${eur(m.p)}</small></span></label>`).join('');
-  $('#fColor').innerHTML=COLORS.map((c,i)=>`<label class="sw" title="${c[0]}"><input type="radio" name="color" value="${i}" aria-label="${c[0]}"${c[1]===S.color?' checked':''}><span style="--c:${c[1]}"></span></label>`).join('');
-  $('#fPlush').innerHTML=PLUSH.map(p=>`<label class="opt"><input type="radio" name="plush" value="${p[0]}"${p[0]===S.plush?' checked':''}><span>${p[1]}<small>${p[2]?'+'+eur(p[2]):'inkl.'}</small></span></label>`).join('');
-  $('#fExtras').innerHTML=EXTRAS.map(x=>`<label class="opt"><input type="checkbox" name="ex" value="${x[0]}"${S.extras.has(x[0])?' checked':''}><span>${x[1]}<small>+${eur(x[2])}</small></span></label>`).join('');
+  const cfg=makeCoffin($('#cfgCoffin'),'Konfigurierter Lowrider-Sarg');cfg.onhop=bump;
+  const SL={
+    len:['Länge','cm',190,260],wid:['Breite','cm',55,110],hgt:['Höhe','cm',38,70],
+    pad:['Polsterdicke','cm',1,15],mass:['Leergewicht Korpus','kg',40,160],fw:['Federweg','cm',0,120],bass:['Bassdruck','dB',60,130]
+  };
+  const sl=k=>`<div class="sl"><div class="sl-h"><label for="s_${k}">${SL[k][0]}</label><output id="o_${k}"></output></div><input type="range" id="s_${k}" data-k="${k}" min="${SL[k][2]}" max="${SL[k][3]}" step="1"><div class="ticks" aria-hidden="true"><span>${SL[k][2]} ${SL[k][1]}</span><span>${SL[k][3]} ${SL[k][1]}</span></div></div>`;
+  $('#slSize').innerHTML=sl('len')+sl('wid')+sl('hgt');
+  $('#slPad').innerHTML=sl('pad')+sl('mass');
+  $('#slHyd').innerHTML=sl('fw');
+  $('#slBass').innerHTML=sl('bass');
+  const S={model:1,color:MODELS[1].c,plush:'velvet',extras:new Set(['neon']),name:''};
+  $('#fModel').innerHTML=MODELS.slice(0,5).map((m,i)=>`<label class="opt"><input type="radio" name="model" value="${i}"><span>${m.n}<small>${eur(m.p)}</small></span></label>`).join('');
+  $('#fColor').innerHTML=COLORS.map((c,i)=>`<label class="sw" title="${c[0]}"><input type="radio" name="color" value="${i}" aria-label="${c[0]}"><span style="--c:${c[1]}"></span></label>`).join('');
+  $('#fPlush').innerHTML=PLUSH.map(p=>`<label class="opt"><input type="radio" name="plush" value="${p[0]}"><span>${p[1]}<small>${p[2]?'+'+eur(p[2]):'inkl.'}</small></span></label>`).join('');
+  $('#fExtras').innerHTML=EXTRAS.map(x=>`<label class="opt"><input type="checkbox" name="ex" value="${x[0]}"><span>${x[1]}<small>+${eur(x[2])}</small></span></label>`).join('');
+  $('#presets').innerHTML=PRESETS.map((p,i)=>`<button class="chip" type="button" data-i="${i}">${p[0]}</button>`).join('');
+
   // Manometer
   let g='<path class="arc" d="M10 62A50 50 0 0 1 110 62"/>';
   for(let i=0;i<=5;i++){const a=(-180+i*36)*Math.PI/180,x1=60+Math.cos(a)*50,y1=62+Math.sin(a)*50,x2=60+Math.cos(a)*42,y2=62+Math.sin(a)*42,tx=60+Math.cos(a)*33,ty=62+Math.sin(a)*33+2;g+=`<line class="tick" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/><text x="${tx}" y="${ty}" text-anchor="middle">${i}</text>`}
   g+='<line class="needle" id="needle" x1="60" y1="62" x2="60" y2="22"/><circle cx="60" cy="62" r="4" fill="var(--fg)"/><text x="60" y="71" text-anchor="middle">BAR</text>';
   $('#gauge').innerHTML=g;
 
+  // Draufsicht
+  function poly(cx,cy,L,W,inset){
+    const l=L-2*inset,w=W-2*inset,x0=cx-l/2,x1=cx+l/2;
+    const P=[[x0,cy-.26*w],[x0+.2*l,cy-.5*w],[x0+.78*l,cy-.46*w],[x1,cy-.2*w],[x1,cy+.2*w],[x0+.78*l,cy+.46*w],[x0+.2*l,cy+.5*w],[x0,cy+.26*w]];
+    return 'M'+P.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z';
+  }
+  function topView(L,W,t,pk,col){
+    const k=1.0,l=L*k,w=W*k,cx=150,cy=66;
+    const plushFill={plush:'url(#tvdots)',velvet:'url(#tvdia)',fluff:'url(#tvdots)',cloud:'url(#tvdots)'}[pk];
+    $('#topView').innerHTML=`<defs><pattern id="tvdia" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M4.5 0L9 4.5L4.5 9L0 4.5Z" fill="none" stroke="rgba(0,0,0,.35)" stroke-width=".6"/><circle cx="4.5" cy="4.5" r="1" fill="rgba(255,255,255,.7)"/></pattern><pattern id="tvdots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2.2" fill="rgba(255,255,255,.22)" stroke="rgba(0,0,0,.25)" stroke-width=".4"/></pattern></defs>
+<path d="${poly(cx,cy,l,w,0)}" fill="var(--tvc)" stroke="var(--brass)" stroke-width="1.4"/>
+<path d="${poly(cx,cy,l,w,Math.min(t*k,w/2-4))}" fill="${shade(col,.62)}" stroke="rgba(0,0,0,.4)" stroke-width=".8"/>
+<path d="${poly(cx,cy,l,w,Math.min(t*k,w/2-4))}" fill="${plushFill}" stroke="none"/>
+<ellipse cx="${cx-l/2+Math.min(l*.14,32)}" cy="${cy}" rx="${Math.min(l*.09,22)}" ry="${Math.min(w*.2,18)}" fill="rgba(255,255,255,.55)" stroke="rgba(0,0,0,.25)"/>
+<text x="${cx}" y="${cy+3}" text-anchor="middle" class="tvt">${L} × ${W} cm</text>
+<text x="${cx-l/2-3}" y="${cy-w/2-6}" class="tvs">KOPF</text><text x="${cx+l/2}" y="${cy-w/2-6}" text-anchor="end" class="tvs">FUSS</text>`;
+  }
+
+  const interp=(x,pts)=>{for(let i=1;i<pts.length;i++){if(x<=pts[i][0]){const[a,b]=[pts[i-1],pts[i]];return a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0])}}return pts[pts.length-1][1]};
+  const stufe=fw=>fw<=0?0:fw<=8?1:fw<=15?2:fw<=30?3:fw<=60?4:5;
+  const material=m=>m<55?'Karbon-Leichtbau':m<85?'Pappel mit Plüsch':m<120?'Eiche massiv':'Eiche, bleiverglast';
   let shown=0,tw;
   function tween(to){cancelAnimationFrame(tw);const from=shown,t0=performance.now();(function s(t){const k=Math.min((t-t0)/450,1),e=1-Math.pow(1-k,3);shown=Math.round(from+(to-from)*e);$('#total').textContent=eur(shown);if(k<1)tw=requestAnimationFrame(s)})(t0)}
-  let lastKeys=new Set();
-  function update(){
-    const m=MODELS[S.model],pl=PLUSH.find(p=>p[0]===S.plush),h=HYD[S.hyd],ex=EXTRAS.filter(x=>S.extras.has(x[0]));
-    const colorName=(COLORS.find(c=>c[1]===S.color)||['Modellfarbe'])[0];
-    cfg.color(S.color);cfg.plush(S.plush);cfg.level(S.hyd);cfg.extras(S.extras);cfg.name(S.name);
-    $('#hydName').textContent=`Stufe ${S.hyd} · ${h[0]}`;$('#hydCm').textContent=`Federweg ${h[1]} cm`;
-    $('#colorName').textContent='Lack: '+colorName;
-    $('#needle').style.transform=`rotate(${-90+S.hyd*36}deg)`;
-    const lines=[[m.n,m.p],[pl[1],pl[2]],['Hydraulik · '+h[0],h[2]],...ex.map(x=>[x[1],x[2]])];
-    const keys=new Set(lines.map(l=>l[0]));
-    $('#sumList').innerHTML=lines.map(l=>`<li class="${lastKeys.has(l[0])?'':'new'}"><span>${l[0]}</span><span>${l[1]?eur(l[1]):'inklusive'}</span></li>`).join('');
-    lastKeys=keys;
-    const total=lines.reduce((a,l)=>a+l[1],0); tween(total);
-    const weight=Math.round(parseInt(m.m[2])+S.hyd*5+ex.length*3+(S.plush==='cloud'?10:0));
-    $('#stats').innerHTML=`<dt>Modell</dt><dd>${m.n}</dd><dt>Federweg</dt><dd>${h[1]} cm</dd><dt>Gewicht</dt><dd>${weight} kg</dd><dt>Ausstattung</dt><dd>${ex.length} von 8</dd>`;
-    $('#cfgCap').textContent=`${m.n} · Hydraulik Stufe ${S.hyd}`;
-    cfg.rolling(false);
+  let lastKeys=new Set(),lastQuip='';
+  function quips(s,m,mt,eff){
+    const o=[];
+    if(s.fw>=100)o.push('Ab 100 cm Federweg gilt der Sarg in Bayern rechtlich als Trampolin.');
+    if(s.mass>135)o.push('Bleiverglast: übersteht auch Erbstreitigkeiten.');
+    if(s.mass<55)o.push('So leicht, dass er bei Föhn Trauergäste mitnimmt. Bitte Gewichte an den Henkeln befestigen.');
+    if(s.len>245)o.push('Genug Platz für ein Cello. Oder zwei Tubas.');
+    if(s.len<200)o.push('Kompaktmodell. Für alle, die sich im Leben gern klein gemacht haben.');
+    if(s.hgt>62)o.push('Fast Stehhöhe. Opa wollte schon immer aufrecht gehen.');
+    if(s.pad>=12)o.push('Bei '+s.pad+' cm Polster sind Probeliegen-Termine fast ausgebucht.');
+    if(s.wid>95)o.push('Breite wie ein Chesterfield. Mit Sarg-Funktion.');
+    if(s.extras.has('sub')&&s.bass>110)o.push('Bei '+s.bass+' dB ist Totenruhe vertraglich nicht mehr zugesichert.');
+    if(s.extras.has('fan'))o.push('Die Fanfare bitte vorab mit dem Pfarrer abstimmen.');
+    if(s.extras.has('wifi'))o.push('WLAN-Passwort: 12345678. Wir haben nicht vor, es zu ändern.');
+    if(mt>150)o.push('Mit '+mt+' kg ist Sargtragen zugleich Krafttraining. Bitte Bandscheiben vorab mitteilen.');
+    if(s.fw>0&&eff<s.fw*.7)o.push('Das Gewicht bremst die Hydraulik auf '+eff+' cm. Physik ist leider nicht verhandelbar.');
+    if(!o.length)o.push('Gute Wahl. Der Sarg stimmt Ihnen zu.');
+    return o.slice(0,2).join(' ');
   }
+  function syncUI(){
+    $$('#fModel input').forEach((i,k)=>i.checked=k===S.model);
+    $$('#fColor input').forEach((i,k)=>i.checked=COLORS[k][1]===S.color);
+    $$('#fPlush input').forEach(i=>i.checked=i.value===S.plush);
+    $$('#fExtras input').forEach(i=>i.checked=S.extras.has(i.value));
+    Object.keys(SL).forEach(k=>$('#s_'+k).value=S[k]);
+    $('#engr').value=S.name;
+  }
+  function update(){
+    const m=MODELS[S.model],pl=PLUSH.find(p=>p[0]===S.plush),ex=EXTRAS.filter(x=>S.extras.has(x[0])),st=stufe(S.fw);
+    const colorName=(COLORS.find(c=>c[1]===S.color)||['Modellfarbe'])[0];
+    const hydP=Math.round(interp(S.fw,[[0,0],[8,390],[15,790],[30,1290],[60,2190],[120,3990]])/10)*10;
+    const mt=Math.round(S.mass+S.fw/120*28+ex.length*3+(S.pad-4)*2+(S.plush==='cloud'?10:0));
+    const imp=clamp(1.3-(mt-60)/160,.55,1.3),eff=Math.round(S.fw*Math.min(imp,1));
+    cfg.color(S.color);cfg.plush(S.plush);cfg.dims({len:S.len,hgt:S.hgt});cfg.level(S.fw/24);cfg.mass(mt);cfg.bass(S.bass);cfg.extras(S.extras);cfg.name(S.name);
+    topView(S.len,S.wid,S.pad,S.plush,S.color);
+    $('#topView').style.setProperty('--tvc',S.color);
+    Object.keys(SL).forEach(k=>$('#o_'+k).textContent=S[k]+' '+SL[k][1]);
+    $('#o_mass').textContent=S.mass+' kg · '+material(S.mass);
+    $('#o_fw').textContent=`${S.fw} cm · Stufe ${st} ${HYD[st][0]}`;
+    const sub=S.extras.has('sub');$('#s_bass').disabled=!sub;$('#slBass').classList.toggle('off',!sub);
+    $('#bassNote').textContent=sub?'':'Bassdruck wirkt nur mit Subwoofer-Set.';
+    $('#colorName').textContent='Lack: '+colorName;
+    $('#needle').style.transform=`rotate(${-90+S.fw/24*36}deg)`;
+    const lines=[[m.n,m.p],[pl[1],pl[2]]];
+    const add=(l,v)=>{v=Math.round(v/10)*10;if(v>0)lines.push([l,v])};
+    if(S.len>215)add(`Länge ${S.len} cm`,(S.len-215)*12);
+    if(S.wid>72)add(`Breite ${S.wid} cm`,(S.wid-72)*18);
+    if(S.hgt>50)add(`Höhe ${S.hgt} cm`,(S.hgt-50)*22);
+    if(S.pad>4)add(`Polster ${S.pad} cm`,(S.pad-4)*8);
+    if(S.mass<60)add('Leichtbau-Zuschlag',(60-S.mass)*25);
+    if(S.mass>100)add('Schwergewicht-Zuschlag',(S.mass-100)*12);
+    lines.push(['Hydraulik · '+HYD[st][0],hydP]);
+    ex.forEach(x=>lines.push([x[1],x[2]]));
+    const keys=new Set(lines.map(l=>l[0]+l[1]));
+    $('#sumList').innerHTML=lines.map(l=>`<li class="${lastKeys.has(l[0]+l[1])?'':'new'}"><span>${l[0]}</span><span>${l[1]?eur(l[1]):'inklusive'}</span></li>`).join('');
+    lastKeys=keys;
+    tween(lines.reduce((a,l)=>a+l[1],0));
+    $('#stats').innerHTML=`<dt>Modell</dt><dd>${m.n}</dd><dt>Maße</dt><dd>${S.len} × ${S.wid} × ${S.hgt} cm</dd><dt>Gesamtgewicht</dt><dd>${mt} kg</dd><dt>Material</dt><dd>${material(S.mass)}</dd><dt>Federweg</dt><dd>${eff} cm effektiv</dd><dt>Ausstattung</dt><dd>${ex.length} von 8</dd>`;
+    $('#cfgCap').textContent=`${m.n} · ${S.len} cm · ${mt} kg`;
+    const qt=quips(S,m,mt,eff);
+    if(qt!==lastQuip){const el=$('#quip');el.textContent=qt;el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap');lastQuip=qt}
+  }
+  function applyModel(i){const m=MODELS[i];S.model=i;S.color=m.c;Object.assign(S,m.d);syncUI();update()}
+  Object.assign(S,MODELS[1].d);
+
   $('#cfg').addEventListener('input',e=>{
     const t=e.target;
-    if(t.name==='model'){S.model=+t.value;S.color=MODELS[S.model].c;const ci=COLORS.findIndex(c=>c[1]===S.color);$$('#fColor input').forEach((i,k)=>i.checked=k===ci)}
-    else if(t.name==='color'){S.color=COLORS[+t.value][1]}
-    else if(t.name==='plush'){S.plush=t.value}
-    else if(t.id==='hyd'){S.hyd=+t.value}
+    if(t.name==='model'){applyModel(+t.value);return}
+    if(t.name==='color')S.color=COLORS[+t.value][1];
+    else if(t.name==='plush')S.plush=t.value;
+    else if(t.dataset.k)S[t.dataset.k]=+t.value;
     else if(t.name==='ex'){t.checked?S.extras.add(t.value):S.extras.delete(t.value)}
-    else if(t.id==='engr'){S.name=t.value}
+    else if(t.id==='engr')S.name=t.value;
     update();
-    if(t.id==='hyd'||t.name==='model')cfg.hop();
   });
-  $('#hopBtn').onclick=()=>{cfg.hop();pump(S.hyd);petals()};
+  $('#cfg').addEventListener('change',e=>{if(e.target.name==='model'||e.target.id==='s_fw')cfg.hop()});
+  $('#presets').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const p=PRESETS[+b.dataset.i],{ex,...pd}=p[1];S.bass=70;Object.assign(S,pd);if(ex)S.extras=new Set(ex);syncUI();update();cfg.hop();say(p[2])});
+  $('#hopBtn').onclick=()=>{cfg.hop();pump(S.fw>0?1:0);petals()};
   $('#randBtn').onclick=()=>{
-    S.model=Math.floor(Math.random()*5);S.color=COLORS[Math.floor(Math.random()*COLORS.length)][1];S.plush=PLUSH[Math.floor(Math.random()*4)][0];S.hyd=Math.floor(Math.random()*6);
+    const r=(a,b)=>Math.round(a+Math.random()*(b-a));
+    S.model=r(0,4);S.color=COLORS[r(0,6)][1];S.plush=PLUSH[r(0,3)][0];
+    S.len=r(190,260);S.wid=r(55,110);S.hgt=r(38,70);S.pad=r(1,15);S.mass=r(40,160);S.fw=r(0,120);S.bass=r(60,130);
     S.extras=new Set(EXTRAS.filter(()=>Math.random()<.4).map(x=>x[0]));
-    $$('#fModel input').forEach((i,k)=>i.checked=k===S.model);$$('#fColor input').forEach((i,k)=>i.checked=COLORS[k][1]===S.color);
-    $$('#fPlush input').forEach(i=>i.checked=i.value===S.plush);$('#hyd').value=S.hyd;$$('#fExtras input').forEach(i=>i.checked=S.extras.has(i.value));
-    update();cfg.hop();pump(S.hyd);
+    syncUI();update();cfg.hop();pump(S.fw>0?1:0);
   };
-  cfg.rolling(false);
-  update();
+  syncUI();update();
 })();
 </script>
 
