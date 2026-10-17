@@ -220,6 +220,29 @@ input[type=text]::placeholder,textarea::placeholder{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:95;background:var(--fg);color:var(--bg);padding:12px 20px;max-width:min(92vw,520px);font-size:.9rem;border-radius:2px;pointer-events:none;transition:all .4s cubic-bezier(.2,.8,.2,1)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
+/* Akkordeon und Kacheln im Konfigurator */
+.acc{display:grid}
+.grp>summary{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 30px 17px 0;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink)}
+.grp>summary em{font-style:normal;font-family:var(--f-body);letter-spacing:0;text-transform:none;font-size:.86rem;color:var(--fg);text-align:right}
+.grp>summary:hover{color:var(--fg)}
+.grp .gb{padding:2px 0 24px}
+.grp p{padding:0;max-width:none;animation:none}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.tile{position:relative;display:block;min-width:0}
+.tile input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;z-index:1}
+.tb{display:grid;gap:2px;padding:7px;border:1px solid var(--line);background:var(--bg);transition:border-color .2s,background .2s,transform .2s;height:100%;align-content:start}
+.tile:hover .tb{border-color:var(--muted);transform:translateY(-2px)}
+.tile input:checked+.tb{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 14%,var(--bg))}
+.tile input:focus-visible+.tb{outline:2px solid var(--brass);outline-offset:2px}
+.th{display:block;background:radial-gradient(90% 100% at 50% 20%,#34203e,#140c18);border-radius:2px;aspect-ratio:120/56;overflow:hidden}
+.th svg{width:100%;height:100%;display:block}
+.tb b{font-size:.8rem;font-weight:700;line-height:1.2;margin-top:5px;overflow-wrap:anywhere}
+.tb small{font-family:var(--f-mono);font-size:.66rem;color:var(--muted)}
+.pvbadge{display:none;position:absolute;left:14px;top:12px;z-index:3;background:var(--rose);color:#fff;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px}
+.previewing .pvbadge{display:block}
+.flinks{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:10px}
+.flinks a{color:rgba(239,230,216,.75);text-decoration:none}.flinks a:hover{color:#e1c07c}
+
 /* Specs */
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:22px}
 .tab{font:inherit;font-size:.86rem;background:transparent;color:var(--muted);border:1px solid var(--line);padding:9px 18px;cursor:pointer;border-radius:2px;transition:all .2s}
@@ -333,12 +356,9 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
       Sanft &amp; Lowrider
     </a>
     <div class="nav-links"><ul>
-      <li><a href="#kollektion">Kollektion</a></li>
+      <li><a href="#kollektion">Särge</a></li>
       <li><a href="#konfi">Konfigurator</a></li>
-      <li><a href="#specs">Spezifikationen</a></li>
       <li><a href="#arten">Bestattungsarten</a></li>
-      <li><a href="#ablauf">Ablauf</a></li>
-      <li><a href="#faq">Fragen</a></li>
     </ul></div>
     <a class="btn sm" href="#kontakt"><span>Beratung<span class="hide-s"> anfragen</span></span></a>
   </div>
@@ -398,6 +418,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
     <div class="konfi">
       <div class="preview">
         <div class="stage" id="cfgStage">
+          <span class="pvbadge">Vorschau</span>
           <div id="cfgCoffin"></div>
           <div class="cap"><span id="cfgCap" class="live">Live-Vorschau</span><span>Hüpfer heute: <b class="hopc">0</b></span></div>
         </div>
@@ -415,13 +436,16 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 
       <form class="panel" id="cfg" onsubmit="return false">
         <div class="group"><div class="t">Schnellauswahl</div><div class="chips" id="presets" style="margin-bottom:0"></div></div>
-        <fieldset class="group"><legend>1 · Modell</legend><div class="opts" id="fModel"></div></fieldset>
-        <fieldset class="group"><legend>2 · Lack</legend><div class="swatches" id="fColor"></div><p class="fine" id="colorName" style="margin-top:10px"></p></fieldset>
-        <fieldset class="group"><legend>3 · Maße</legend><div class="sls" id="slSize"></div></fieldset>
-        <fieldset class="group"><legend>4 · Polster und Gewicht</legend><div class="opts two" id="fPlush"></div><div class="sls" id="slPad" style="margin-top:22px"></div></fieldset>
-        <fieldset class="group"><legend>5 · Hydraulik</legend><div class="sls" id="slHyd"></div></fieldset>
-        <fieldset class="group"><legend>6 · Ausstattung</legend><div class="opts two" id="fExtras"></div><div class="sls" id="slBass" style="margin-top:22px"></div><p class="fine" id="bassNote"></p></fieldset>
-        <div class="group"><label class="t" for="engr">7 · Gravur auf dem Deckel</label><input type="text" id="engr" maxlength="26" placeholder="z. B. Hasta la vista"></div>
+        <p class="fine" style="margin-top:-14px">Tipp: Mit der Maus über eine Kachel fahren zeigt die Vorschau sofort am Sarg. Antippen übernimmt.</p>
+        <div class="acc">
+          <details class="grp" open><summary><span>1 · Modell</span><em id="gs_model"></em></summary><div class="gb"><div class="tiles" id="fModel"></div></div></details>
+          <details class="grp" open><summary><span>2 · Lack</span><em id="gs_color"></em></summary><div class="gb"><div class="tiles" id="fColor"></div></div></details>
+          <details class="grp"><summary><span>3 · Maße</span><em id="gs_size"></em></summary><div class="gb"><div class="sls" id="slSize"></div></div></details>
+          <details class="grp"><summary><span>4 · Polster und Gewicht</span><em id="gs_pad"></em></summary><div class="gb"><div class="tiles" id="fPlush"></div><div class="sls" id="slPad" style="margin-top:22px"></div></div></details>
+          <details class="grp"><summary><span>5 · Hydraulik</span><em id="gs_hyd"></em></summary><div class="gb"><div class="sls" id="slHyd"></div></div></details>
+          <details class="grp"><summary><span>6 · Ausstattung</span><em id="gs_ex"></em></summary><div class="gb"><div class="tiles" id="fExtras"></div><div class="sls" id="slBass" style="margin-top:22px"></div><p class="fine" id="bassNote"></p></div></details>
+          <details class="grp"><summary><span>7 · Gravur</span><em id="gs_eng"></em></summary><div class="gb"><input type="text" id="engr" maxlength="26" placeholder="z. B. Hasta la vista" aria-label="Gravur auf dem Deckel"></div></details>
+        </div>
         <div class="sum">
           <ul id="sumList"></ul>
           <div class="total"><div><small>Gesamtpreis inkl. MwSt.</small><b id="total">0 €</b></div><a class="btn" href="#kontakt" id="ask">Unverbindlich anfragen</a></div>
@@ -515,7 +539,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 </section>
 
 <footer>
-  <div class="wrap"><b>Sanft &amp; Lowrider Bestattungen</b><span>Wir bringen Sie sicher ans Ziel. Nur etwas tiefer. · Demoseite, alle Angaben fiktiv. · © 1889 bis heute<br><small style="opacity:.6">Tipp: Fünfmal aufs Logo klicken.</small></span></div>
+  <div class="wrap"><div><b>Sanft &amp; Lowrider Bestattungen</b><div class="flinks"><a href="#haus">Haus</a><a href="#specs">Spezifikationen</a><a href="#ablauf">Ablauf</a><a href="#faq">Fragen</a><a href="#kontakt">Kontakt</a></div></div><span>Wir bringen Sie sicher ans Ziel. Nur etwas tiefer. · Demoseite, alle Angaben fiktiv. · © 1889 bis heute<br><small style="opacity:.6">Tipp: Fünfmal aufs Logo klicken.</small></span></div>
 </footer>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -804,10 +828,40 @@ ${wheel('w1')}${wheel('w2')}
   $('#slHyd').innerHTML=sl('fw');
   $('#slBass').innerHTML=sl('bass');
   const S={model:1,color:MODELS[1].c,plush:'velvet',extras:new Set(['neon']),name:''};
-  $('#fModel').innerHTML=MODELS.slice(0,5).map((m,i)=>`<label class="opt"><input type="radio" name="model" value="${i}"><span>${m.n}<small>${eur(m.p)}</small></span></label>`).join('');
-  $('#fColor').innerHTML=COLORS.map((c,i)=>`<label class="sw" title="${c[0]}"><input type="radio" name="color" value="${i}" aria-label="${c[0]}"><span style="--c:${c[1]}"></span></label>`).join('');
-  $('#fPlush').innerHTML=PLUSH.map(p=>`<label class="opt"><input type="radio" name="plush" value="${p[0]}"><span>${p[1]}<small>${p[2]?'+'+eur(p[2]):'inkl.'}</small></span></label>`).join('');
-  $('#fExtras').innerHTML=EXTRAS.map(x=>`<label class="opt"><input type="checkbox" name="ex" value="${x[0]}"><span>${x[1]}<small>+${eur(x[2])}</small></span></label>`).join('');
+  let mid=0;
+  function mini(o){
+    const id='m'+(mid++),c=o.color,L=o.len||215,H=o.hgt||50,hs=H/50,hl=44*L/215,x0=60-hl,x1=60+hl,yK=40-13*hs,yT=Math.max(40-28*hs,9),lh=yK-yT,ex=o.extras||[],tf=o.plush==='velvet'?'t1':'t2',w1=60-.6*hl,w2=60+.6*hl;
+    const wheel=x=>`<g transform="translate(${x} 43)"><circle r="7.2" fill="#0c0a0e"/><circle r="6" fill="#ece7de"/><circle r="4.6" fill="#8e8e96"/><circle r="1.4" fill="#d8b25a"/></g>`;
+    return `<svg viewBox="0 0 120 56" aria-hidden="true"><defs><linearGradient id="${id}p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(c,.28)}"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="${shade(c,-.45)}"/></linearGradient><pattern id="${id}t1" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M2.5 0L5 2.5L2.5 5L0 2.5Z" fill="none" stroke="rgba(0,0,0,.45)" stroke-width=".45"/></pattern><pattern id="${id}t2" width="3.4" height="3.4" patternUnits="userSpaceOnUse"><circle cx="1.7" cy="1.7" r="1.1" fill="rgba(255,255,255,.38)"/></pattern><filter id="${id}b"><feGaussianBlur stdDeviation="2.4"/></filter></defs>`
+    +(ex.includes('neon')?`<ellipse cx="60" cy="49" rx="${hl}" ry="3.2" fill="#39f5c8" filter="url(#${id}b)"/>`:'')
+    +(ex.includes('fog')?`<g fill="#fff" opacity=".55" filter="url(#${id}b)"><ellipse cx="38" cy="48" rx="22" ry="5"/><ellipse cx="84" cy="47" rx="24" ry="6"/></g>`:'')
+    +`<ellipse cx="60" cy="50.5" rx="${hl}" ry="1.8" fill="#000" opacity=".4"/>
+<path d="M${x0} 40V${yK+2}Q${x0} ${yK} ${x0+2} ${yK}H${x1-2}Q${x1} ${yK} ${x1} ${yK+2}V40Z" fill="url(#${id}p)"/>
+<rect x="${x0}" y="${yK+5}" width="${2*hl}" height="${35-yK}" fill="url(#${id}${tf})"/>
+<rect x="${x0}" y="${yK+3.2}" width="${2*hl}" height=".8" fill="#d8b25a"/>`
+    +(ex.includes('flame')?[x0+5,x0+17,x1-28,x1-16].map(x=>`<path d="M${x} 40Q${x+1} 34 ${x+4} 36Q${x+5} 31 ${x+8} 35Q${x+10} 33 ${x+10} 40Z" fill="#ff8a1f"/>`).join(''):'')
+    +(ex.includes('sub')?[60-.28*hl,60+.28*hl].map(x=>`<circle cx="${x}" cy="35.5" r="3.4" fill="#0a0a0d" stroke="#bbb" stroke-width=".6"/><circle cx="${x}" cy="35.5" r="1.4" fill="#444"/>`).join(''):'')
+    +`<path d="M${x0+3} ${yK}L${x0+11} ${yK-lh*.55}Q${x0+14} ${yT} ${x0+26} ${yT}H${x1-26}Q${x1-14} ${yT} ${x1-11} ${yK-lh*.55}L${x1-3} ${yK}Z" fill="url(#${id}p)"/>
+<rect x="${x0+1}" y="${yK-1.8}" width="${2*hl-2}" height="3.6" rx="1.8" fill="url(#${id}${tf})" stroke="rgba(0,0,0,.5)" stroke-width=".4"/>`
+    +(ex.includes('ball')?`<line x1="60" y1="0" x2="60" y2="${yT-5}" stroke="#999" stroke-width=".6"/><circle cx="60" cy="${yT-2.5}" r="3.2" fill="#dfe0ea"/>`:'')
+    +(ex.includes('fan')?`<path d="M${x1} 33l9-4.5v9z" fill="#d8b25a"/>`:'')
+    +(ex.includes('purr')?`<text x="60" y="${yT+8}" font-size="7" text-anchor="middle" fill="#f0d792">♪ ♪</text>`:'')
+    +(ex.includes('wifi')?`<path d="M54 ${yT+9}Q60 ${yT+3} 66 ${yT+9}M56.5 ${yT+11}Q60 ${yT+7} 63.5 ${yT+11}" stroke="#f0d792" fill="none" stroke-width="1"/>`:'')
+    +wheel(w1)+wheel(w2)+`</svg>`;
+  }
+  const tile=(name,val,pv,b,small,checked)=>`<label class="tile" data-pv="${pv}"><input type="${name==='ex'?'checkbox':'radio'}" name="${name}" value="${val}"><span class="tb"><span class="th"></span><b>${b}</b><small>${small}</small></span></label>`;
+  $('#fModel').innerHTML=MODELS.slice(0,5).map((m,i)=>tile('model',i,'model:'+i,m.n,eur(m.p))).join('');
+  $('#fColor').innerHTML=COLORS.map((c,i)=>tile('color',i,'color:'+i,c[0],'Lack')).join('');
+  $('#fPlush').innerHTML=PLUSH.map(p=>tile('plush',p[0],'plush:'+p[0],p[1],p[2]?'+'+eur(p[2]):'inklusive')).join('');
+  $('#fExtras').innerHTML=EXTRAS.map(x=>tile('ex',x[0],'ex:'+x[0],x[1],'+'+eur(x[2]))).join('');
+  let thumbKey='';
+  function refreshThumbs(){
+    const key=S.color+'|'+S.plush;if(key===thumbKey)return;thumbKey=key;
+    $$('#fModel .th').forEach((e,i)=>e.innerHTML=mini({color:MODELS[i].c,plush:'plush',len:MODELS[i].d.len,hgt:MODELS[i].d.hgt}));
+    $$('#fColor .th').forEach((e,i)=>e.innerHTML=mini({color:COLORS[i][1],plush:S.plush}));
+    $$('#fPlush .th').forEach((e,i)=>e.innerHTML=mini({color:S.color,plush:PLUSH[i][0]}));
+    $$('#fExtras .th').forEach((e,i)=>e.innerHTML=mini({color:S.color,plush:S.plush,extras:[EXTRAS[i][0]]}));
+  }
   $('#presets').innerHTML=PRESETS.map((p,i)=>`<button class="chip" type="button" data-i="${i}">${p[0]}</button>`).join('');
 
   // Manometer
@@ -866,21 +920,25 @@ ${wheel('w1')}${wheel('w2')}
     Object.keys(SL).forEach(k=>$('#s_'+k).value=S[k]);
     $('#engr').value=S.name;
   }
+  function renderCoffin(X){
+    const mt=Math.round(X.mass+X.fw/120*28+X.extras.size*3+(X.pad-4)*2+(X.plush==='cloud'?10:0));
+    cfg.color(X.color);cfg.plush(X.plush);cfg.dims({len:X.len,hgt:X.hgt});cfg.level(X.fw/24);cfg.mass(mt);cfg.bass(X.bass);cfg.extras(X.extras);cfg.name(X.name);
+    topView(X.len,X.wid,X.pad,X.plush,X.color);
+  }
+  let capNow='';
   function update(){
     const m=MODELS[S.model],pl=PLUSH.find(p=>p[0]===S.plush),ex=EXTRAS.filter(x=>S.extras.has(x[0])),st=stufe(S.fw);
     const colorName=(COLORS.find(c=>c[1]===S.color)||['Modellfarbe'])[0];
     const hydP=Math.round(interp(S.fw,[[0,0],[8,390],[15,790],[30,1290],[60,2190],[120,3990]])/10)*10;
     const mt=Math.round(S.mass+S.fw/120*28+ex.length*3+(S.pad-4)*2+(S.plush==='cloud'?10:0));
     const imp=clamp(1.3-(mt-60)/160,.55,1.3),eff=Math.round(S.fw*Math.min(imp,1));
-    cfg.color(S.color);cfg.plush(S.plush);cfg.dims({len:S.len,hgt:S.hgt});cfg.level(S.fw/24);cfg.mass(mt);cfg.bass(S.bass);cfg.extras(S.extras);cfg.name(S.name);
-    topView(S.len,S.wid,S.pad,S.plush,S.color);
+    renderCoffin(S);refreshThumbs();
     $('#topView').style.setProperty('--tvc',S.color);
     Object.keys(SL).forEach(k=>$('#o_'+k).textContent=S[k]+' '+SL[k][1]);
     $('#o_mass').textContent=S.mass+' kg · '+material(S.mass);
     $('#o_fw').textContent=`${S.fw} cm · Stufe ${st} ${HYD[st][0]}`;
     const sub=S.extras.has('sub');$('#s_bass').disabled=!sub;$('#slBass').classList.toggle('off',!sub);
     $('#bassNote').textContent=sub?'':'Bassdruck wirkt nur mit Subwoofer-Set.';
-    $('#colorName').textContent='Lack: '+colorName;
     $('#needle').style.transform=`rotate(${-90+S.fw/24*36}deg)`;
     const lines=[[m.n,m.p],[pl[1],pl[2]]];
     const add=(l,v)=>{v=Math.round(v/10)*10;if(v>0)lines.push([l,v])};
@@ -897,7 +955,10 @@ ${wheel('w1')}${wheel('w2')}
     lastKeys=keys;
     tween(lines.reduce((a,l)=>a+l[1],0));
     $('#stats').innerHTML=`<dt>Modell</dt><dd>${m.n}</dd><dt>Maße</dt><dd>${S.len} × ${S.wid} × ${S.hgt} cm</dd><dt>Gesamtgewicht</dt><dd>${mt} kg</dd><dt>Material</dt><dd>${material(S.mass)}</dd><dt>Federweg</dt><dd>${eff} cm effektiv</dd><dt>Ausstattung</dt><dd>${ex.length} von 8</dd>`;
-    $('#cfgCap').textContent=`${m.n} · ${S.len} cm · ${mt} kg`;
+    capNow=`${m.n} · ${S.len} cm · ${mt} kg`;$('#cfgCap').textContent=capNow;
+    $('#gs_model').textContent=m.n;$('#gs_color').textContent=colorName;$('#gs_size').textContent=`${S.len} × ${S.wid} × ${S.hgt} cm`;
+    $('#gs_pad').textContent=`${pl[1].split(' ')[0]} · ${S.pad} cm · ${S.mass} kg`;$('#gs_hyd').textContent=`${S.fw} cm · Stufe ${st}`;
+    $('#gs_ex').textContent=ex.length?ex.length+' gewählt':'keine';$('#gs_eng').textContent=S.name||'keine';
     const qt=quips(S,m,mt,eff);
     if(qt!==lastQuip){const el=$('#quip');el.textContent=qt;el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap');lastQuip=qt}
   }
@@ -924,6 +985,23 @@ ${wheel('w1')}${wheel('w2')}
     S.extras=new Set(EXTRAS.filter(()=>Math.random()<.4).map(x=>x[0]));
     syncUI();update();cfg.hop();pump(S.fw>0?1:0);
   };
+  /* Live-Vorschau beim Überfahren oder Fokussieren einer Kachel */
+  let pvEl=null;
+  function startPreview(el){
+    const [k,v]=el.dataset.pv.split(':');let X={...S,extras:new Set(S.extras)},nm='';
+    if(k==='model'){const m=MODELS[+v];X={...X,...m.d,color:m.c};nm=m.n}
+    else if(k==='color'){X.color=COLORS[+v][1];nm=COLORS[+v][0]}
+    else if(k==='plush'){X.plush=v;nm=PLUSH.find(p=>p[0]===v)[1]}
+    else if(k==='ex'){X.extras.has(v)?X.extras.delete(v):X.extras.add(v);nm=EXTRAS.find(x=>x[0]===v)[1]+(S.extras.has(v)?' entfernen':' hinzufügen')}
+    renderCoffin(X);$('#cfgStage').classList.add('previewing');$('#cfgCap').textContent='Vorschau: '+nm;
+  }
+  function endPreview(){pvEl=null;renderCoffin(S);$('#cfgStage').classList.remove('previewing');$('#cfgCap').textContent=capNow}
+  const cf=$('#cfg');
+  cf.addEventListener('mouseover',e=>{const el=e.target.closest('[data-pv]');if(!el){if(pvEl)endPreview();return}if(el!==pvEl){pvEl=el;startPreview(el)}});
+  cf.addEventListener('mouseleave',()=>{if(pvEl)endPreview()});
+  cf.addEventListener('focusin',e=>{const el=e.target.closest('[data-pv]');if(el){pvEl=el;startPreview(el)}});
+  cf.addEventListener('focusout',e=>{if(pvEl)endPreview()});
+  cf.addEventListener('click',()=>{if(pvEl)endPreview()});
   syncUI();update();
 })();
 </script>
