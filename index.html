@@ -124,6 +124,10 @@ nav ul a:hover{color:var(--fg)} nav ul a:hover::after{right:0}
 .ph .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%);transform:translateX(-120%);transition:transform .9s}
 .ph:hover .shine,.card:hover .shine{transform:translateX(120%)}
 
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ph.has-img::before,.ph.has-img::after,.ph.has-img em{display:none}
+.card:hover .ph img,.reveal:hover>.ph img{transform:scale(1.05)}
+
 /* Scroll-getriebenes Einblenden; ohne Unterstützung bleibt alles sichtbar */
 @supports (animation-timeline: view()){
   .reveal{animation:revealIn linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
@@ -401,7 +405,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
         <div><b>III</b><h3>Handwerk aus eigener Werkstatt</h3><p>Polsterei, Lackiererei und Hydraulik sitzen im Haus. Garantie auf Lebenszeit.</p></div>
       </div>
     </div>
-    <div class="reveal"><div class="ph" style="--r:4/5;--h:312"><span class="shine"></span><em>Foto · Werkstatt, Polsterei bei der Arbeit · 1200×1500</em></div></div>
+    <div class="reveal"><div class="ph has-img" style="--r:4/5;--h:312"><img src="img/werkstatt-polsterei.jpg" alt="Werkstatt, Polsterei bei der Arbeit" loading="lazy" decoding="async"><span class="shine"></span></div></div>
   </div>
 </section>
 
@@ -559,6 +563,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
     {n:'Gemüsebeet',p:1990,c:'#3f6b3a',h:125,t:'Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten, nach drei auch Zucchini, reichlich.',m:['Kompostierbar','ohne Hydraulik','38 kg'],d:{len:210,wid:70,hgt:46,pad:3,mass:42,fw:0,bass:70},q:['Dieses Jahr gab es die besten Tomaten der Familie.','Familie H., Hinterbliebene']},
     {n:'Königin der Nacht',p:9990,c:'#9a7418',h:42,t:'Vergoldete Zierleisten, Thronkissen und ein Fanfarenmodul. Auftritt mit Hoheitsanspruch.',m:['Samt & Blattgold','Federweg bis 60 cm','118 kg'],d:{len:230,wid:82,hgt:56,pad:6,mass:118,fw:60,bass:70},q:['Ich habe nie so gut gethront.','Gräfin von T.']}
   ];
+  [,'modell-camino','modell-wolke7','modell-disco','modell-gemuesebeet'].forEach((n,i)=>{if(n)MODELS[i].img='img/'+n+'.jpg'});
   const PRESETS=[
     ['Standard',{len:215,wid:72,hgt:50,pad:4,mass:80,fw:60},'Standard: bewährt seit 1889, nur mit mehr Federung.'],
     ['Basketballer-XXL',{len:250,wid:88,hgt:62,pad:6,mass:110,fw:60},'Basketballer-XXL: Kirchentür geprüft, Kopf einziehen nicht nötig.'],
@@ -584,6 +589,7 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
     ['erde','Erde','Myzel-Reise','Der Körper ruht in einem Pilzanzug und kehrt als Waldboden in den Kreislauf zurück. Kompostieren mit Stil.',2100,95,['Biologisch','Waldboden']],
     ['erde','Erde','Letzte Ausfahrt','Prozession mit vierzig Motorrädern, Lowrider-Sarg voran. Hydraulik bei Ampelrot, Polizei winkt freundlich.',5800,320,['40 Maschinen','Streckenplanung']]
   ];
+  ARTEN[0].img='img/art-weltraum.jpg';ARTEN[1].img='img/art-riff.jpg';ARTEN[2].img='img/art-diamant.jpg';
   const FAQ=[
     ['Ist Hydraulik am Sarg überhaupt erlaubt?','Auf öffentlichen Straßen bleibt die Hydraulik aus, auf dem Gelände darf sie arbeiten. Wir klären Einsatz und Genehmigung mit Ordnungsamt und Friedhofsverwaltung.'],
     ['Wie sicher sind Blumengestecke beim Hüpfen?','Alle Gestecke werden mit Klettverschluss und Gummihaltern fixiert. Der eine Nelkenstrauß, der einmal in die Orgel flog, gehört zu einem anderen Betrieb.'],
@@ -604,18 +610,18 @@ footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#ef
 
   /* ---------- Hilfen ---------- */
   function shade(hex,a){const n=parseInt(hex.slice(1),16);const f=c=>Math.round(a<0?c*(1+a):c+(255-c)*a);return '#'+[n>>16,n>>8&255,n&255].map(f).map(x=>x.toString(16).padStart(2,'0')).join('')}
-  const ph=(label,h,r,ex='')=>`<div class="ph" style="--h:${h};--r:${r}"><span class="shine"></span><em>${label}</em>${ex}</div>`;
+  const ph=(label,h,r,ex='',img='')=>`<div class="ph${img?' has-img':''}" style="--h:${h};--r:${r}">${img?`<img src="${img}" alt="${label.replace(/^Foto · /,'').replace(/ · \d+×\d+$/,'')}" loading="lazy" decoding="async">`:''}<span class="shine"></span><em>${label}</em>${ex}</div>`;
 
   /* ---------- Statische Teile rendern ---------- */
   $('#marq').innerHTML=[...ARTEN,...ARTEN].map(a=>`<span>${a[2]}</span>`).join('');
-  $('#models').innerHTML=MODELS.map(m=>`<article class="card reveal">${ph('Foto · '+m.n+', Dreiviertelansicht · 1600×1200',m.h,'4/3')}<h3>${m.n}<span>ab ${eur(m.p)}</span></h3><p>${m.t}</p><p class="q">„${m.q[0]}“ <span>${m.q[1]}</span></p><div class="meta">${m.m.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+  $('#models').innerHTML=MODELS.map(m=>`<article class="card reveal">${ph('Foto · '+m.n+', Dreiviertelansicht · 1600×1200',m.h,'4/3','',m.img)}<h3>${m.n}<span>ab ${eur(m.p)}</span></h3><p>${m.t}</p><p class="q">„${m.q[0]}“ <span>${m.q[1]}</span></p><div class="meta">${m.m.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
   $('#gal').innerHTML=[['Abschied am See',300,'3/2'],['Prozession, Köln',12,'3/2'],['Nebel und Orgel',215,'1/1'],['Riff-Einsetzung',190,'1/1'],['Feuerwerk, Hamburg',350,'1/1']].map(g=>ph('Galerie · '+g[0],g[1],g[2])).join('');
   $('#faqList').innerHTML=FAQ.map(f=>`<details class="reveal"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
 
   const cats=[['alle','Alle'],['himmel','Himmel'],['wasser','Wasser'],['erde','Erde'],['kunst','Erinnerung']];
   $('#chips').innerHTML=cats.map((c,i)=>`<button class="chip" type="button" data-c="${c[0]}" aria-pressed="${i===0}">${c[1]}</button>`).join('');
   function renderArten(f){
-    $('#artenGrid').innerHTML=ARTEN.filter(a=>f==='alle'||a[0]===f).map(a=>`<article class="card">${ph('Foto · '+a[2]+' · 1600×1200',a[5],'4/3')}<div class="cat">${a[1]}</div><h3 style="margin-top:-8px">${a[2]}<span>ab ${eur(a[4])}</span></h3><p>${a[3]}</p><div class="meta">${a[6].map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+    $('#artenGrid').innerHTML=ARTEN.filter(a=>f==='alle'||a[0]===f).map(a=>`<article class="card">${ph('Foto · '+a[2]+' · 1600×1200',a[5],'4/3','',a.img)}<div class="cat">${a[1]}</div><h3 style="margin-top:-8px">${a[2]}<span>ab ${eur(a[4])}</span></h3><p>${a[3]}</p><div class="meta">${a[6].map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
   }
   renderArten('alle');
   $('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderArten(b.dataset.c)});
