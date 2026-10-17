@@ -2,274 +2,406 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sanft & Lowrider – Bestattungen mit Hydraulik</title>
-<meta name="description" content="Das letzte Hüpfen soll das schönste sein: Plüschsärge mit Hydraulik, Weltraumbestattung und mehr.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanft &amp; Lowrider Bestattungen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700&display=swap">
 <style>
-  :root{
-    --plum:#3b1d4a; --plum2:#5a2d72; --pink:#ff5fa2; --gold:#ffd24a; --mint:#7ef0c8;
-    --cream:#fff7ec; --ink:#2a1533; --card:#ffffff; --shadow:0 10px 30px rgba(59,29,74,.18);
+/* Layout: editorial luxury-automotive. Dunkle Bühne mit animiertem Sarg im Hero, haarfeine Linien, Messing als einziger Akzent, Rose nur für Aktionen. */
+:root{
+  --bg:#110a14; --surface:#1a1120; --surface2:#241729; --fg:#efe6d8; --muted:#a99cab;
+  --line:rgba(239,230,216,.14); --brass:#c9a45e; --brass-ink:#e1c07c; --rose:#d93f7b; --on-rose:#ffffff;
+  --stage:#140c18; --stage-fg:#efe6d8;
+  --f-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f4f1f5; --surface:#ffffff; --surface2:#ebe6ee; --fg:#1b1220; --muted:#62566a;
+    --line:rgba(27,18,32,.15); --brass:#8a6a2a; --brass-ink:#6b4f17; --rose:#b0215f; color-scheme:light;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --cream:#1c0f24; --ink:#fbeff6; --card:#2b1739; --shadow:0 10px 30px rgba(0,0,0,.5); }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
-  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0 0 .5em}
-  a{color:inherit}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-  section{padding:72px 0}
-  .kicker{display:inline-block;background:var(--gold);color:#3b1d4a;font-weight:700;padding:4px 12px;border-radius:99px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-2deg)}
-  h2{font-size:clamp(1.8rem,4vw,2.8rem)}
-  .lead{font-size:1.1rem;max-width:62ch;opacity:.9}
+}
+:root[data-theme="light"]{
+  --bg:#f4f1f5; --surface:#ffffff; --surface2:#ebe6ee; --fg:#1b1220; --muted:#62566a;
+  --line:rgba(27,18,32,.15); --brass:#8a6a2a; --brass-ink:#6b4f17; --rose:#b0215f; color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(2.1rem,5vw,3.4rem)}
+h3{font-size:1.5rem}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(56px,9vw,112px)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-ink);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--brass)}
+.lead{font-size:1.12rem;color:var(--muted);max-width:60ch;margin-top:18px}
+.head{display:grid;gap:4px;margin-bottom:44px;max-width:780px}
+.mono{font-family:var(--f-mono)}
 
-  /* Nav */
-  nav{position:sticky;top:0;z-index:50;background:var(--plum);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;flex-wrap:wrap}
-  .logo{font-family:Georgia,serif;font-weight:700;font-size:1.2rem;text-decoration:none}
-  nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-  nav a{text-decoration:none;font-size:.95rem}
-  nav ul a:hover{color:var(--gold)}
+/* Nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px 24px;padding-block:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:1.45rem;font-weight:600;letter-spacing:.01em}
+.logo svg{width:30px;height:30px;color:var(--brass)}
+nav ul{display:flex;gap:4px 26px;list-style:none;margin:0;padding:0}
+nav ul a{font-size:.88rem;text-decoration:none;color:var(--muted);transition:color .2s;position:relative;padding-block:4px}
+nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--brass);transition:right .3s}
+nav ul a:hover{color:var(--fg)} nav ul a:hover::after{right:0}
+.nav-links{order:3;width:100%;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links ul{width:max-content}
+@media (min-width:980px){.nav-links{order:0;width:auto;overflow:visible}}
 
-  /* Hero */
-  .hero{background:radial-gradient(circle at 80% 20%,var(--plum2),var(--plum) 60%);color:#fff;padding:80px 0 100px;position:relative;overflow:hidden}
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-  .hero h1{font-size:clamp(2.2rem,6vw,4.2rem)}
-  .hero h1 em{color:var(--pink);font-style:normal}
-  .btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:700;padding:14px 26px;border-radius:99px;background:var(--pink);color:#fff;text-decoration:none;box-shadow:0 6px 0 #b83a74;transition:transform .1s,box-shadow .1s}
-  .btn:hover{transform:translateY(2px);box-shadow:0 4px 0 #b83a74}
-  .btn.alt{background:var(--gold);color:var(--plum);box-shadow:0 6px 0 #c49a1e}
-  .btn.alt:hover{box-shadow:0 4px 0 #c49a1e}
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-  .bubbles span{position:absolute;bottom:-40px;font-size:2rem;animation:rise 9s linear infinite;opacity:.5}
-  @keyframes rise{to{transform:translateY(-120vh) rotate(40deg)}}
+.btn{display:inline-flex;align-items:center;gap:10px;font:inherit;font-weight:700;font-size:.92rem;letter-spacing:.02em;padding:13px 24px;border:1px solid var(--rose);background:var(--rose);color:var(--on-rose);text-decoration:none;cursor:pointer;border-radius:2px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px var(--rose)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--brass);box-shadow:none}
+.btn.sm{padding:9px 16px;font-size:.82rem}
 
-  /* Image placeholders */
-  .ph{position:relative;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-    min-height:200px;color:#fff;padding:16px;background:
-    repeating-linear-gradient(45deg,rgba(255,255,255,.08) 0 14px,transparent 14px 28px),linear-gradient(135deg,var(--c1,#8e44ad),var(--c2,#ff5fa2));box-shadow:var(--shadow)}
-  .ph .big{font-size:4rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
-  .ph small{background:rgba(0,0,0,.35);padding:2px 10px;border-radius:99px;margin-top:6px;font-size:.75rem}
-  .ph.tall{min-height:340px}
+/* Hero */
+.hero{padding-block:clamp(40px,7vw,88px) 0}
+.hero h1{font-size:clamp(2.6rem,8vw,5.4rem);max-width:none}
+.hero h1 i{color:var(--brass-ink);font-style:italic}
+.hero h1 span{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 span b{display:block;font-weight:inherit;animation:lineUp 1.1s cubic-bezier(.2,.8,.2,1) both}
+.hero h1 span:nth-child(2) b{animation-delay:.14s}
+@keyframes lineUp{from{transform:translateY(105%)}to{transform:none}}
+.hero-row{display:flex;flex-wrap:wrap;gap:20px 56px;align-items:flex-end;justify-content:space-between;margin-top:22px}
+.hero-row .lead{margin:0;max-width:46ch;animation:fadeIn 1.2s .5s both}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;animation:fadeIn 1.2s .7s both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-  /* Cards */
-  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:32px}
-  .card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .2s}
-  .card:hover{transform:translateY(-6px) rotate(-.6deg)}
-  .card .ph{border-radius:0;box-shadow:none;min-height:160px}
-  .card .body{padding:18px;flex:1;display:flex;flex-direction:column;gap:8px}
-  .card h3{margin:0;font-size:1.25rem}
-  .tag{display:inline-block;background:var(--mint);color:#06402c;border-radius:6px;padding:1px 8px;font-size:.75rem;font-weight:700;margin-right:4px}
-  .price{margin-top:auto;font-weight:700;color:var(--pink)}
+.stage{position:relative;margin-top:32px;background:radial-gradient(70% 90% at 50% 28%,#34203e 0,var(--stage) 72%);border:1px solid var(--line);border-radius:3px;overflow:hidden;color:var(--stage-fg)}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 79px,rgba(255,255,255,.025) 79px 80px)}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.stage .cap{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;z-index:2;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;color:rgba(239,230,216,.7)}
+.live{display:inline-flex;align-items:center;gap:8px}
+.live::before{content:"";width:7px;height:7px;border-radius:50%;background:#46e0a0;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.road{stroke-dasharray:46 46;animation:road 2.4s linear infinite}
+@keyframes road{to{stroke-dashoffset:-92}}
+.spin{animation:spin 1.8s linear infinite;animation-play-state:paused;transform-box:fill-box;transform-origin:center}
+.rolling .spin{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glow{animation:glow 2.6s ease-in-out infinite}
+@keyframes glow{50%{opacity:.5}}
+.fogc{animation:drift 9s ease-in-out infinite alternate}
+.fogc:nth-child(2){animation-duration:13s;animation-delay:-4s}
+@keyframes drift{from{transform:translateX(-40px)}to{transform:translateX(60px)}}
 
-  /* Konfigurator */
-  #konfi{background:linear-gradient(180deg,var(--cream),#f5dff0 50%,var(--cream))}
-  @media (prefers-color-scheme: dark){#konfi{background:linear-gradient(180deg,var(--cream),#2a1238 50%,var(--cream))}}
-  .konfi{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:32px}
-  .stage{background:var(--card);border-radius:22px;padding:20px;box-shadow:var(--shadow);position:sticky;top:70px;align-self:start;overflow:hidden}
-  .stage svg{width:100%;height:auto;display:block}
-  .road{height:10px;background:repeating-linear-gradient(90deg,#555 0 30px,#777 30px 60px);border-radius:5px}
-  .panel{background:var(--card);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
-  .field{margin-bottom:16px}
-  .field label{display:block;font-weight:700;margin-bottom:6px}
-  select,input[type=range]{width:100%;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--plum2);background:var(--card);color:var(--ink)}
-  input[type=range]{padding:0;accent-color:var(--pink)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chips label{font-weight:400;display:flex;align-items:center;gap:6px;background:rgba(255,95,162,.12);padding:6px 12px;border-radius:99px;cursor:pointer;margin:0}
-  .swatches{display:flex;gap:10px;flex-wrap:wrap}
-  .swatches button{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-  .swatches button[aria-pressed=true]{border-color:var(--ink);transform:scale(1.15)}
-  .total{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;padding-top:16px;border-top:3px dashed var(--plum2)}
-  .total strong{font-size:1.8rem;color:var(--pink)}
-  .hop{animation:hop .9s ease-in-out infinite}
-  @keyframes hop{0%,100%{transform:translateY(0)}30%{transform:translateY(calc(var(--h,20px) * -1))}50%{transform:translateY(0)}65%{transform:translateY(calc(var(--h,20px) * -.4))}}
-  .piston{transition:all .3s}
-  #stats{font-family:monospace;font-size:.85rem;background:var(--plum);color:var(--mint);padding:10px 14px;border-radius:10px;margin-top:12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:1px solid var(--line)}
+.fact{padding:26px 20px 26px 0}
+.fact b{display:block;font-family:var(--f-display);font-size:clamp(2.4rem,5vw,3.6rem);font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+.fact b small{font-size:.45em;color:var(--brass-ink);margin-left:4px;font-family:var(--f-mono);letter-spacing:.06em}
+.fact span{font-size:.85rem;color:var(--muted)}
 
-  /* Tabellen */
-  .tablewrap{overflow-x:auto;margin-top:28px;border-radius:16px;box-shadow:var(--shadow)}
-  table{border-collapse:collapse;width:100%;background:var(--card);min-width:640px}
-  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid rgba(90,45,114,.2)}
-  th{background:var(--plum);color:#fff;font-family:Georgia,serif}
-  tr:hover td{background:rgba(255,210,74,.15)}
+.marquee{overflow:hidden;border-bottom:1px solid var(--line);padding-block:18px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee div{display:flex;gap:44px;width:max-content;animation:marq 48s linear infinite;font-family:var(--f-display);font-style:italic;font-size:1.6rem;color:var(--muted)}
+.marquee div span::after{content:"\2726";margin-left:44px;color:var(--brass);font-style:normal;font-size:.8em}
+@keyframes marq{to{transform:translateX(-50%)}}
 
-  /* Ablauf */
-  .steps{counter-reset:s;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:30px}
-  .step{background:var(--card);padding:22px;border-radius:18px;box-shadow:var(--shadow);position:relative;padding-top:38px}
-  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:18px;width:42px;height:42px;border-radius:50%;background:var(--pink);color:#fff;font-weight:700;display:grid;place-items:center;font-size:1.3rem;box-shadow:0 4px 0 #b83a74}
+/* Platzhalterbilder */
+.ph{--h:300;position:relative;aspect-ratio:var(--r,4/3);max-width:100%;overflow:hidden;border-radius:2px;
+  background:
+   repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 11px),
+   radial-gradient(120% 90% at 18% 0%,hsl(var(--h) 45% 34%) 0,transparent 62%),
+   linear-gradient(165deg,hsl(var(--h) 34% 15%),hsl(calc(var(--h) + 35) 40% 8%));
+  transition:filter .5s}
+.ph::before,.ph::after{content:"";position:absolute;width:14px;height:14px;border:1px solid rgba(255,255,255,.4)}
+.ph::before{top:12px;left:12px;border-right:0;border-bottom:0}
+.ph::after{bottom:12px;right:12px;border-left:0;border-top:0}
+.ph em{position:absolute;left:14px;bottom:12px;right:34px;font-style:normal;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.07em;color:rgba(255,255,255,.78);text-transform:uppercase}
+.ph .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.12) 50%,transparent 60%);transform:translateX(-120%);transition:transform .9s}
+.ph:hover .shine,.card:hover .shine{transform:translateX(120%)}
 
-  /* Stimmen */
-  .quote{background:var(--plum);color:#fff;border-radius:18px;padding:22px;position:relative}
-  .quote::before{content:"“";font-size:4rem;position:absolute;top:-6px;left:14px;color:var(--gold);font-family:Georgia}
-  .quote p{margin-top:22px}
-  .quote cite{color:var(--mint)}
+/* Scroll-getriebenes Einblenden; ohne Unterstützung bleibt alles sichtbar */
+@supports (animation-timeline: view()){
+  .reveal{animation:revealIn linear both;animation-timeline:view();animation-range:entry 0% entry 38%}
+}
+@keyframes revealIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 
-  /* FAQ */
-  details{background:var(--card);border-radius:14px;padding:14px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
-  summary{cursor:pointer;font-weight:700}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,80px);align-items:center}
+.split>*{min-width:0}
+.principles{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.principles div{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:4px 18px}
+.principles b{font-family:var(--f-mono);font-size:.78rem;color:var(--brass-ink);font-weight:500;padding-top:4px}
+.principles h3{font-size:1.35rem}
+.principles p{grid-column:2;color:var(--muted);font-size:.95rem}
 
-  footer{background:var(--plum);color:#fff;padding:48px 0 28px;text-align:center}
-  footer small{opacity:.7;display:block;margin-top:18px}
-  .rip-cursor{cursor:pointer}
+/* Kollektion */
+.cards{display:grid;gap:34px 26px;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr))}
+.card{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card .ph{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .ph{transform:scale(1.015)}
+.card h3{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3 span{font-family:var(--f-mono);font-size:.82rem;color:var(--brass-ink);white-space:nowrap}
+.card p{color:var(--muted);font-size:.95rem}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;color:var(--muted);padding-top:12px;border-top:1px solid var(--line);margin-top:auto}
 
-  @media (max-width:820px){
-    .hero .wrap,.konfi{grid-template-columns:1fr}
-    .stage{position:static}
-    nav ul{gap:12px}
-  }
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Konfigurator */
+#konfi{background:var(--surface);border-block:1px solid var(--line)}
+.konfi{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4vw,48px);align-items:start}
+.preview{position:sticky;top:calc(84px + env(safe-area-inset-top,0px));display:grid;gap:14px}
+.preview .stage{margin:0}
+.readout{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;border:1px solid var(--line);padding:14px 18px;background:var(--bg)}
+.gauge{width:120px}
+.gauge .arc{fill:none;stroke:var(--line);stroke-width:5}
+.gauge .tick{stroke:var(--muted);stroke-width:1.2}
+.gauge text{font-family:var(--f-mono);font-size:7px;fill:var(--muted)}
+.needle{stroke:var(--rose);stroke-width:2.4;stroke-linecap:round;transform-origin:60px 62px;transition:transform 1s cubic-bezier(.3,1.7,.5,1)}
+.readout dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 16px;font-family:var(--f-mono);font-size:.76rem}
+.readout dt{color:var(--muted)} .readout dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.panel{display:grid;gap:30px}
+.group>legend,.group>label.t{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink);margin-bottom:12px;display:block;padding:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.opts{display:grid;gap:8px}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.opt span{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:12px 16px;border:1px solid var(--line);background:var(--bg);transition:border-color .2s,background .2s,transform .2s}
+.opt:hover span{border-color:var(--muted)}
+.opt input:checked+span{border-color:var(--brass);background:color-mix(in srgb,var(--brass) 12%,var(--bg))}
+.opt input:focus-visible+span{outline:2px solid var(--brass);outline-offset:2px}
+.opt small{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);white-space:nowrap}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.swatches{display:flex;gap:12px;flex-wrap:wrap}
+.sw{position:relative}
+.sw input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.sw span{display:block;width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 -8px 12px rgba(0,0,0,.35),inset 0 6px 10px rgba(255,255,255,.3);border:2px solid transparent;outline:1px solid var(--line);outline-offset:2px;transition:transform .25s}
+.sw input:checked+span{outline:2px solid var(--brass);transform:scale(1.1)}
+.sw input:focus-visible+span{outline:2px solid var(--fg)}
+.range{display:grid;gap:10px}
+input[type=range]{width:100%;accent-color:var(--rose);height:28px;background:transparent}
+.ticks{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;color:var(--muted)}
+.hydname{display:flex;justify-content:space-between;gap:10px;font-weight:700;flex-wrap:wrap}
+.hydname small{font-family:var(--f-mono);font-weight:400;color:var(--muted)}
+input[type=text]{width:100%;font:inherit;padding:12px 14px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:2px}
+input[type=text]::placeholder,textarea::placeholder{color:var(--muted)}
+.sum{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:8px}
+.sum ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.92rem}
+.sum li{display:flex;justify-content:space-between;gap:14px}
+.sum li span:last-child{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);white-space:nowrap}
+.sum li.new{animation:flash 1s}
+@keyframes flash{from{background:color-mix(in srgb,var(--brass) 30%,transparent)}to{background:transparent}}
+.total{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:8px;padding-top:18px;border-top:1px solid var(--fg)}
+.total b{font-family:var(--f-display);font-size:clamp(2.4rem,6vw,3.2rem);font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+.total small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fine{font-size:.78rem;color:var(--muted)}
+
+/* Specs */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:22px}
+.tab{font:inherit;font-size:.86rem;background:transparent;color:var(--muted);border:1px solid var(--line);padding:9px 18px;cursor:pointer;border-radius:2px;transition:all .2s}
+.tab:hover{color:var(--fg)}
+.tab[aria-selected=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.tablewrap{overflow-x:auto;border-top:1px solid var(--fg)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
+th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted);text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--line)}
+td{padding:15px 16px 15px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:700;white-space:nowrap}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:color-mix(in srgb,var(--brass) 8%,transparent)}
+td.num{font-family:var(--f-mono);font-size:.85rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar{display:block;height:5px;background:var(--line);min-width:90px;position:relative;margin-top:8px}
+.bar i{position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--rose)}
+.go .bar i{animation:barIn 1.1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes barIn{from{width:0}}
+.tech{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin-top:50px;border-top:1px solid var(--line)}
+.tech div{padding:24px 24px 24px 0;border-bottom:1px solid var(--line)}
+.tech h3{font-size:1.25rem;margin-bottom:6px}
+.tech p{color:var(--muted);font-size:.92rem}
+
+/* Bestattungsarten */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+.chip{font:inherit;font-size:.84rem;border:1px solid var(--line);background:transparent;color:var(--muted);padding:8px 16px;cursor:pointer;border-radius:99px;transition:all .2s}
+.chip:hover{color:var(--fg);border-color:var(--muted)}
+.chip[aria-pressed=true]{background:var(--brass);border-color:var(--brass);color:#1a1020}
+.arten .card{animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.cat{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-ink)}
+
+/* Ablauf */
+.timeline{position:relative;display:grid;gap:0;max-width:760px;padding-left:44px}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:1px;background:var(--brass);transform-origin:top}
+@supports (animation-timeline: view()){
+  .timeline::before{animation:grow linear both;animation-timeline:view();animation-range:entry 30% cover 55%}
+}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.tstep{position:relative;padding-bottom:38px}
+.tstep::before{content:"";position:absolute;left:-39px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--brass);box-shadow:0 0 0 5px var(--bg)}
+.tstep b{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;color:var(--brass-ink);font-weight:500}
+.tstep h3{margin:4px 0 6px}
+.tstep p{color:var(--muted);max-width:56ch}
+
+/* Stimmen */
+#stimmen{background:var(--surface);border-block:1px solid var(--line)}
+blockquote{margin:0;display:flex;flex-direction:column;gap:18px;justify-content:space-between;min-width:0}
+blockquote p{font-family:var(--f-display);font-size:1.5rem;line-height:1.3;font-style:italic}
+blockquote p::before{content:"\201E";color:var(--brass);margin-right:2px}
+blockquote p::after{content:"\201C";color:var(--brass)}
+cite{font-style:normal;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted)}
+.quotes{display:grid;gap:44px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.gallery{display:grid;gap:10px;grid-template-columns:repeat(6,1fr);margin-top:56px}
+.gallery .ph{grid-column:span 2}
+.gallery .ph:first-child{grid-column:span 3}.gallery .ph:nth-child(2){grid-column:span 3}
+@media (max-width:640px){.gallery{grid-template-columns:1fr 1fr}.gallery .ph,.gallery .ph:first-child,.gallery .ph:nth-child(2){grid-column:span 1}}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:22px 40px 22px 0;font-family:var(--f-display);font-size:1.45rem;position:relative;transition:color .2s}
+summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--brass-ink)}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;border-right:1.5px solid var(--brass);border-bottom:1.5px solid var(--brass);transform:translateY(-70%) rotate(45deg);transition:transform .3s}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{padding:0 40px 24px 0;color:var(--muted);max-width:68ch;animation:fadeIn .5s both}
+
+/* Kontakt */
+#kontakt{background:var(--stage);color:var(--stage-fg);position:relative;overflow:hidden}
+#kontakt .eyebrow{color:#e1c07c}
+#kontakt .lead,#kontakt .fine{color:rgba(239,230,216,.7)}
+#kontakt::before{content:"";position:absolute;width:60vw;height:60vw;max-width:800px;max-height:800px;right:-15vw;top:-20vw;background:radial-gradient(circle,rgba(217,63,123,.22),transparent 65%);animation:breathe 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes breathe{to{transform:scale(1.2);opacity:.6}}
+.contact{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,80px)}
+.contact>*{min-width:0}
+.cdata{display:grid;gap:14px;margin-top:30px;font-size:.98rem}
+.cdata div{display:grid;grid-template-columns:90px 1fr;gap:12px;border-top:1px solid rgba(239,230,216,.16);padding-top:12px}
+.cdata dt{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#e1c07c;padding-top:4px}
+.cdata dd{margin:0}
+form.cf{display:grid;gap:18px;align-content:start}
+.cf label{display:grid;gap:6px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#e1c07c}
+.cf input,.cf textarea{font:inherit;font-size:1rem;letter-spacing:0;text-transform:none;padding:13px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(239,230,216,.22);color:#efe6d8;border-radius:2px;width:100%}
+.cf input:focus,.cf textarea:focus{outline:2px solid #e1c07c;outline-offset:1px}
+.cf textarea::placeholder{color:rgba(239,230,216,.5)}
+.ok{font-size:.95rem;color:#7ef0c8;min-height:1.5em}
+footer{background:var(--stage);color:rgba(239,230,216,.7);border-top:1px solid rgba(239,230,216,.14);padding-block:32px calc(32px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;justify-content:space-between;gap:12px 28px;flex-wrap:wrap;font-size:.82rem}
+footer b{font-family:var(--f-display);font-size:1.3rem;font-weight:600;color:#efe6d8}
+
+@media (max-width:640px){
+  .stage .cap{position:static;padding:12px 16px;background:rgba(0,0,0,.35)}
+  .logo{flex:1}
+  .hide-s{display:none}
+}
+@media (max-width:860px){
+  .split,.konfi,.contact{grid-template-columns:1fr}
+  .preview{position:static}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="#top">⚰️ Sanft &amp; Lowrider</a>
-    <ul>
-      <li><a href="#saerge">Särge</a></li>
+    <a class="logo" href="#top" aria-label="Sanft und Lowrider, Startseite">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 20V14l5-5h12l5 5v6z"/><circle cx="10" cy="24" r="3"/><circle cx="22" cy="24" r="3"/><path d="M5 17h22"/></svg>
+      Sanft &amp; Lowrider
+    </a>
+    <div class="nav-links"><ul>
+      <li><a href="#kollektion">Kollektion</a></li>
       <li><a href="#konfi">Konfigurator</a></li>
-      <li><a href="#specs">Specs</a></li>
+      <li><a href="#specs">Spezifikationen</a></li>
       <li><a href="#arten">Bestattungsarten</a></li>
       <li><a href="#ablauf">Ablauf</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
-    </ul>
+      <li><a href="#faq">Fragen</a></li>
+    </ul></div>
+    <a class="btn sm" href="#kontakt"><span>Beratung<span class="hide-s"> anfragen</span></span></a>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <div class="bubbles" aria-hidden="true"><span style="left:8%;animation-delay:0s">🫧</span><span style="left:30%;animation-delay:2s">✨</span><span style="left:55%;animation-delay:4s">🫧</span><span style="left:78%;animation-delay:1s">💜</span><span style="left:92%;animation-delay:5s">✨</span></div>
   <div class="wrap">
-    <div>
-      <span class="kicker">Seit 1889 · Familienbetrieb · 4. Generation</span>
-      <h1 style="margin-top:16px">Das letzte Hüpfen soll <em>das schönste</em> sein.</h1>
-      <p class="lead">Wir bestatten mit Herz, Hirn, Hochachtung – und <strong>Hydraulik</strong>. Plüschige Särge, die sanft wippen, tiefer gehen und im Zweifel mit 3 Zoll Bodenfreiheit über die Friedhofsallee gleiten. Weil Abschied auch Stil haben darf.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#konfi">Sarg konfigurieren</a>
-        <a class="btn alt" href="#arten">Verrückte Bestattungen</a>
-      </div>
+    <div class="eyebrow">Bestattungshaus · gegründet 1889 · vierte Generation</div>
+    <h1><span><b>Würdevoll bis zur letzten</b></span><span><b><i>Federung.</i></b></span></h1>
+    <div class="hero-row">
+      <p class="lead">Wir begleiten Familien mit Ruhe, Sorgfalt und Humor, wo er gewünscht ist. Unsere Särge sind von Hand gepolstert, hydraulisch gelagert und deutlich besser gefedert als Ihr Dienstwagen.</p>
+      <div class="hero-cta"><a class="btn" href="#konfi">Sarg konfigurieren</a><a class="btn ghost" href="#arten">Bestattungsarten</a></div>
     </div>
-    <div class="ph tall" style="--c1:#6a2c91;--c2:#ff5fa2">
-      <div class="big">🛋️⚰️✨</div>
-      <strong>Bild: Der „Samtpfote Deluxe“ im Sonnenuntergang</strong>
-      <small>Platzhalter · 900×1200 px</small>
+    <div class="stage" id="heroStage">
+      <div id="heroCoffin"></div>
+      <div class="cap"><span class="live">Modell El Último Camino · Hydraulik Stufe 4</span><button class="btn sm ghost" id="heroHop" type="button" style="color:#efe6d8;border-color:rgba(239,230,216,.35)">Probehüpfen</button></div>
+    </div>
+    <div class="facts">
+      <div class="fact reveal"><b data-count="137">137</b><span>Jahre Berufserfahrung</span></div>
+      <div class="fact reveal"><b><span data-count="24">24</span><small>/7</small></b><span>Erreichbarkeit, auch nachts</span></div>
+      <div class="fact reveal"><b data-count="12">12</b><span>Bestattungsarten im Angebot</span></div>
+      <div class="fact reveal"><b data-count="120">120</b><span>cm maximaler Federweg</span></div>
     </div>
   </div>
 </header>
 
-<section id="werte">
-  <div class="wrap">
-    <span class="kicker">Unser Versprechen</span>
-    <h2>Würde, Wärme &amp; Wumms</h2>
-    <p class="lead">Trauer ist ernst. Das Leben davor war es selten. Wir nehmen Ihren Abschied sehr ernst – und uns selbst überhaupt nicht. 24/7 erreichbar, diskret, mit Taschentuchvorrat für ein mittleres Fußballstadion.</p>
-    <div class="grid">
-      <div class="card"><div class="ph" style="--c1:#2d9cdb;--c2:#7ef0c8"><div class="big">🤝</div><small>Foto: Beratungsgespräch</small></div><div class="body"><h3>Persönliche Beratung</h3><p>Bei Tee, Keksen und ehrlichem Zuhören. Kein Verkaufsdruck, nur Plüsch-Druck (siehe Sitzprobe).</p></div></div>
-      <div class="card"><div class="ph" style="--c1:#f2994a;--c2:#ffd24a"><div class="big">🌙</div><small>Foto: Nachtbereitschaft</small></div><div class="body"><h3>Rund um die Uhr</h3><p>Um 3 Uhr nachts erreichen Sie echte Menschen. Mit Stimme. Und Kaffee.</p></div></div>
-      <div class="card"><div class="ph" style="--c1:#eb5757;--c2:#ff5fa2"><div class="big">💐</div><small>Foto: Blumenwerkstatt</small></div><div class="body"><h3>Handgemacht</h3><p>Jede Blume, jede Naht, jede Hydraulikpumpe: von Hand verlötet, verklebt, verliebt.</p></div></div>
-      <div class="card"><div class="ph" style="--c1:#27ae60;--c2:#7ef0c8"><div class="big">🌍</div><small>Foto: Grüne Wiese</small></div><div class="body"><h3>Nachhaltig</h3><p>Öl der Hydraulik ist biologisch abbaubar. Der Humor ist es nicht.</p></div></div>
+<div class="marquee" aria-hidden="true"><div id="marq"></div></div>
+
+<section id="haus">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="eyebrow">Unser Haus</div>
+      <h2>Ernst in der Sache, gelassen im Ton.</h2>
+      <p class="lead">Trauer verdient Raum. Das Leben davor war selten humorlos. Wir finden den Ton, der zu Ihrer Familie passt, und setzen ihn mit Präzision um, vom leisen Abschied bis zur Prozession mit Fahrwerk.</p>
+      <div class="principles">
+        <div><b>I</b><h3>Beratung ohne Druck</h3><p>Sie entscheiden in Ihrem Tempo. Wir hören zu, erklären und rechnen offen vor.</p></div>
+        <div><b>II</b><h3>Kosten vorab, schriftlich</h3><p>Jede Position steht vor der Beauftragung fest. Ratenzahlung ist möglich.</p></div>
+        <div><b>III</b><h3>Handwerk aus eigener Werkstatt</h3><p>Polsterei, Lackiererei und Hydraulik sitzen im Haus. Garantie auf Lebenszeit.</p></div>
+      </div>
     </div>
+    <div class="reveal"><div class="ph" style="--r:4/5;--h:312"><span class="shine"></span><em>Foto · Werkstatt, Polsterei bei der Arbeit · 1200×1500</em></div></div>
   </div>
 </section>
 
-<section id="saerge" style="background:rgba(90,45,114,.07)">
+<section id="kollektion" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <span class="kicker">Die Kollektion</span>
-    <h2>Unsere Sargmodelle</h2>
-    <p class="lead">Jedes Modell ist serienmäßig weich gepolstert. Wer Hartholz will, bekommt es – wir fragen dann aber besorgt nach.</p>
-    <div class="grid">
-      <article class="card"><div class="ph" style="--c1:#ff5fa2;--c2:#b04fd1"><div class="big">🧸</div><small>Bild: Samtpfote Deluxe</small></div><div class="body"><h3>Samtpfote Deluxe</h3><div><span class="tag">Plüsch</span><span class="tag">Hydraulik</span></div><p>Der Klassiker: 4 cm Flauschpolster, Wippfunktion und eingebauter Schnurr-Lautsprecher.</p><div class="price">ab 3.490 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#222;--c2:#ffd24a"><div class="big">🚗</div><small>Bild: El Último Camino</small></div><div class="body"><h3>El Último Camino</h3><div><span class="tag">Lowrider</span><span class="tag">Chrom</span></div><p>Candy-Lack, Speichenfelgen, 4-Punkt-Hydraulik. Rollt bei 0,3 km/h – und hüpft bei 1,2 Metern.</p><div class="price">ab 6.990 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#7ef0c8;--c2:#2d9cdb"><div class="big">☁️</div><small>Bild: Wolke 7</small></div><div class="body"><h3>Wolke 7</h3><div><span class="tag">Schwebend</span><span class="tag">Nebel</span></div><p>Weiß, wattig, mit Trockeneis-Nebelmaschine. Der Sarg schwebt (optisch, Magnete, ehrlich).</p><div class="price">ab 4.290 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#8e44ad;--c2:#222"><div class="big">🕺</div><small>Bild: Disco Inferno</small></div><div class="body"><h3>Disco Inferno</h3><div><span class="tag">Spiegelkugel</span><span class="tag">LED</span></div><p>Spiegelkugeldeckel, 16 Mio. LED-Farben, Bassboxen. Opa wollte immer, dass es kracht.</p><div class="price">ab 5.490 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#6fcf97;--c2:#27ae60"><div class="big">🌱</div><small>Bild: Gemüsebeet</small></div><div class="body"><h3>Gemüsebeet</h3><div><span class="tag">Bio</span><span class="tag">Kompostierbar</span></div><p>Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten. Nach drei auch Zucchini (viele).</p><div class="price">ab 1.990 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#ffd24a;--c2:#f2994a"><div class="big">👑</div><small>Bild: Königin der Nacht</small></div><div class="body"><h3>Königin der Nacht</h3><div><span class="tag">Gold</span><span class="tag">Samt</span></div><p>Vergoldete Zierleisten, Thronkissen, ausfahrbares Zepter und Fanfarenmodul. Für Hoheiten.</p><div class="price">ab 9.990 €</div></div></article>
-    </div>
+    <div class="head reveal"><div class="eyebrow">Kollektion</div><h2>Sechs Modelle, alle mit Polster.</h2><p class="lead">Jedes Modell ist serienmäßig weich gepolstert und kann mit Hydraulik, Lack und Ausstattung individualisiert werden.</p></div>
+    <div class="cards" id="models"></div>
   </div>
 </section>
 
 <section id="konfi">
   <div class="wrap">
-    <span class="kicker">Live &amp; interaktiv</span>
-    <h2>Der Sarg-Konfigurator 3000</h2>
-    <p class="lead">Schrauben Sie sich Ihren Traumsarg zusammen. Drücken Sie „Hüpf!“ und testen Sie die Hydraulik – Federweg inklusive.</p>
+    <div class="head reveal"><div class="eyebrow">Konfigurator</div><h2>Ihr Sarg, Ihre Federung.</h2><p class="lead">Stellen Sie Modell, Lack, Polster und Hydraulik zusammen. Mit „Probehüpfen“ testen Sie die Wirkung, die Anzeige zeigt den Druck im System.</p></div>
     <div class="konfi">
-      <div class="stage">
-        <div id="coffinWrap">
-          <svg viewBox="0 0 520 280" role="img" aria-label="Vorschau des konfigurierten Sargs">
-            <defs>
-              <pattern id="plushPat" width="14" height="14" patternUnits="userSpaceOnUse">
-                <circle cx="7" cy="7" r="5" fill="rgba(255,255,255,.18)"/>
-                <circle cx="7" cy="7" r="1.6" fill="rgba(0,0,0,.25)"/>
-              </pattern>
-              <pattern id="velvetPat" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 6L6 0" stroke="rgba(255,255,255,.12)"/></pattern>
-              <radialGradient id="disco"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#999"/></radialGradient>
-            </defs>
-            <g id="coffinBody">
-              <!-- Lowrider-Sarg -->
-              <path id="shell" d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="#ff5fa2" stroke="#2a1533" stroke-width="5" stroke-linejoin="round"/>
-              <path d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="url(#plushPat)" id="plushLayer"/>
-              <path d="M50 150 L120 70 H400 L470 150 L470 190 H50 Z" fill="url(#velvetPat)" id="velvetLayer" opacity="0"/>
-              <path d="M130 82 H390 L450 150 H70 Z" fill="rgba(255,255,255,.18)" stroke="rgba(0,0,0,.4)" stroke-width="3"/>
-              <path id="stripe" d="M52 168 H468" stroke="#ffd24a" stroke-width="7" stroke-linecap="round"/>
-              <g id="extras"></g>
-            </g>
-            <!-- Räder + Hydraulik -->
-            <g id="wheels">
-              <g class="piston" id="pistonL"><rect x="108" y="186" width="10" height="30" fill="#bbb" stroke="#333" stroke-width="2" id="pistonLr"/><circle cx="113" cy="228" r="24" fill="#222" stroke="#ffd24a" stroke-width="4"/><circle cx="113" cy="228" r="10" fill="#ffd24a"/></g>
-              <g class="piston" id="pistonR"><rect x="402" y="186" width="10" height="30" fill="#bbb" stroke="#333" stroke-width="2" id="pistonRr"/><circle cx="407" cy="228" r="24" fill="#222" stroke="#ffd24a" stroke-width="4"/><circle cx="407" cy="228" r="10" fill="#ffd24a"/></g>
-            </g>
-          </svg>
+      <div class="preview">
+        <div class="stage" id="cfgStage">
+          <div id="cfgCoffin"></div>
+          <div class="cap"><span id="cfgCap" class="live">Live-Vorschau</span><span></span></div>
         </div>
-        <div class="road"></div>
-        <div id="stats"></div>
-        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn" id="hopBtn" type="button">🦘 Hüpf!</button>
-          <button class="btn alt" id="randBtn" type="button">🎲 Überrasch mich</button>
+        <div class="readout">
+          <svg class="gauge" viewBox="0 0 120 72" aria-hidden="true" id="gauge"></svg>
+          <dl id="stats"></dl>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" id="hopBtn" type="button">Probehüpfen</button>
+          <button class="btn ghost" id="randBtn" type="button">Zufällige Konfiguration</button>
         </div>
       </div>
 
       <form class="panel" id="cfg" onsubmit="return false">
-        <div class="field">
-          <label for="model">Modell</label>
-          <select id="model">
-            <option value="0" data-p="3490">Samtpfote Deluxe (3.490 €)</option>
-            <option value="1" data-p="6990">El Último Camino (6.990 €)</option>
-            <option value="2" data-p="4290">Wolke 7 (4.290 €)</option>
-            <option value="3" data-p="5490">Disco Inferno (5.490 €)</option>
-            <option value="4" data-p="9990">Königin der Nacht (9.990 €)</option>
-          </select>
+        <fieldset class="group"><legend>1 · Modell</legend><div class="opts" id="fModel"></div></fieldset>
+        <fieldset class="group"><legend>2 · Lack</legend><div class="swatches" id="fColor"></div><p class="fine" id="colorName" style="margin-top:10px"></p></fieldset>
+        <fieldset class="group"><legend>3 · Polsterung</legend><div class="opts two" id="fPlush"></div></fieldset>
+        <div class="group range"><label class="t" for="hyd">4 · Hydraulik</label>
+          <div class="hydname"><span id="hydName"></span><small id="hydCm"></small></div>
+          <input type="range" id="hyd" min="0" max="5" step="1" value="4">
+          <div class="ticks" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         </div>
-        <div class="field">
-          <label>Farbe</label>
-          <div class="swatches" id="swatches"></div>
+        <fieldset class="group"><legend>5 · Ausstattung</legend><div class="opts two" id="fExtras"></div></fieldset>
+        <div class="group"><label class="t" for="engr">6 · Gravur auf dem Deckel</label><input type="text" id="engr" maxlength="26" placeholder="z. B. Hasta la vista"></div>
+        <div class="sum">
+          <ul id="sumList"></ul>
+          <div class="total"><div><small>Gesamtpreis inkl. MwSt.</small><b id="total">0 €</b></div><a class="btn" href="#kontakt" id="ask">Unverbindlich anfragen</a></div>
+          <p class="fine">Preise sind fiktive Beispielwerte. Der Sarg ist zum Zeitpunkt der Bestellung noch unbenutzt, die Hydraulik nicht (Probehüpfen).</p>
         </div>
-        <div class="field">
-          <label for="plush">Polsterung</label>
-          <select id="plush">
-            <option value="plush" data-p="0">Plüsch „Teddy“ (extra flauschig)</option>
-            <option value="velvet" data-p="250">Samt „Kaisers neue Kissen“ (+250 €)</option>
-            <option value="fluff" data-p="480">Alpaka-Fluff (+480 €)</option>
-            <option value="cloud" data-p="900">Wolkenschaum, memory (+900 €)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="hyd">Hydraulik-Stufe: <output id="hydOut"></output></label>
-          <input type="range" id="hyd" min="0" max="5" step="1" value="3">
-        </div>
-        <div class="field">
-          <label>Extras</label>
-          <div class="chips" id="extraChips"></div>
-        </div>
-        <div class="field">
-          <label for="name">Gravur / Schriftzug am Deckel</label>
-          <input id="name" type="text" maxlength="24" placeholder="z. B. „Hasta la vista, Baby“" style="width:100%;font:inherit;padding:8px;border-radius:10px;border:2px solid var(--plum2);background:var(--card);color:var(--ink)">
-        </div>
-        <div class="total">
-          <div>Gesamtpreis<br><strong id="total">0 €</strong></div>
-          <a class="btn" href="#kontakt" id="reserve">Unverbindlich anfragen</a>
-        </div>
-        <p style="font-size:.8rem;opacity:.7;margin:10px 0 0">* Der Sarg ist zum Zeitpunkt der Bestellung noch nicht benutzt. Die Hydraulik schon (Probehüpfen).</p>
       </form>
     </div>
   </div>
@@ -277,313 +409,351 @@
 
 <section id="specs">
   <div class="wrap">
-    <span class="kicker">Für Technik-Nerds &amp; Trauernde mit Humor</span>
-    <h2>Spezifikationen &amp; Modifikationen</h2>
-    <p class="lead">Alle Daten ohne Gewähr, aber mit großer Begeisterung. Maße gelten für Standardgröße „Mensch“ (Tiersärge auf Anfrage).</p>
-
-    <h3 style="margin-top:34px">Hydraulik-Stufen</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Stufe</th><th>Name</th><th>Federweg</th><th>Pumpen</th><th>Besonderheit</th><th>Aufpreis</th></tr></thead>
-      <tbody>
-        <tr><td>0</td><td>Friedhofs-Fixiert</td><td>0 cm</td><td>–</td><td>Sarg bleibt, wo er ist. Wie früher.</td><td>0 €</td></tr>
-        <tr><td>1</td><td>Sanftes Wiegen</td><td>8 cm</td><td>1 Hub</td><td>Beruhigende Wiegenbewegung (wie Hängematte)</td><td>+390 €</td></tr>
-        <tr><td>2</td><td>Gemütlich Schaukeln</td><td>15 cm</td><td>2 Hub</td><td>Seitliches Schaukeln, Schnarchen optional</td><td>+790 €</td></tr>
-        <tr><td>3</td><td>Cruiser</td><td>30 cm</td><td>4 Hub</td><td>Vorne-hinten-Nicken, Beat-Sync mit Playlist</td><td>+1.290 €</td></tr>
-        <tr><td>4</td><td>Hopper</td><td>60 cm</td><td>6 Hub</td><td>Echtes Hüpfen, Blumenkränze bleiben dran (mit Klettband)</td><td>+2.190 €</td></tr>
-        <tr><td>5</td><td>Dreirad-Move</td><td>120 cm</td><td>8 Hub + Turbo</td><td>Drei-Rad-Pose, Konfetti-Auswurf, Lizenz-Hinweis des TÜV</td><td>+3.990 €</td></tr>
-      </tbody>
-    </table></div>
-
-    <h3 style="margin-top:44px">Polstermaterialien</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Material</th><th>Flauschgrad</th><th>Dicke</th><th>Duftoption</th><th>Kuschelfaktor</th></tr></thead>
-      <tbody>
-        <tr><td>Plüsch „Teddy“</td><td>★★★★☆</td><td>4 cm</td><td>Vanille, Honig</td><td>Kinderzimmer-Niveau</td></tr>
-        <tr><td>Samt „Kaisers neue Kissen“</td><td>★★★☆☆</td><td>2 cm</td><td>Zedernholz, Zigarre (virtuell)</td><td>Herrschaftlich</td></tr>
-        <tr><td>Alpaka-Fluff</td><td>★★★★★</td><td>6 cm</td><td>Bergwiese</td><td>Fast schon gefährlich</td></tr>
-        <tr><td>Wolkenschaum</td><td>★★★★★+</td><td>10 cm</td><td>Frischer Morgen</td><td>Man will nie wieder raus</td></tr>
-      </tbody>
-    </table></div>
-
-    <h3 style="margin-top:44px">Zusatzmodule</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Modul</th><th>Beschreibung</th><th>Leistung / Maß</th><th>Preis</th></tr></thead>
-      <tbody>
-        <tr><td>🎵 Subwoofer-Set</td><td>2× 12" im Sockel, Lieblingsplaylist oder Orgelversion davon</td><td>2000 W RMS</td><td>690 €</td></tr>
-        <tr><td>💡 Neon-Unterboden</td><td>Pinkes Licht für Stimmung unter dem Sarg</td><td>RGB, 16 Mio. Farben</td><td>290 €</td></tr>
-        <tr><td>🔥 Flammenlack</td><td>Handlackierte Flammen an den Seiten, kein offenes Feuer</td><td>5 Schichten</td><td>590 €</td></tr>
-        <tr><td>🪩 Spiegelkugel</td><td>Dreht sich langsam über dem Kopfteil</td><td>Ø 25 cm</td><td>340 €</td></tr>
-        <tr><td>🌫️ Nebelmaschine</td><td>Für majestätischen Auftritt</td><td>1,2 m³/min</td><td>390 €</td></tr>
-        <tr><td>🎺 Fanfarenmodul</td><td>Tusch bei Betreten und Verlassen des Raumes</td><td>Mono, laut</td><td>190 €</td></tr>
-        <tr><td>🐱 Schnurr-Sound</td><td>Beruhigendes Schnurren im Kopfkissen</td><td>25 Hz, warm</td><td>140 €</td></tr>
-        <tr><td>🛜 WLAN-Hotspot</td><td>Für den Fall, dass im Jenseits Empfang ist</td><td>Wi-Fi 6</td><td>99 €</td></tr>
-      </tbody>
-    </table></div>
-
-    <h3 style="margin-top:44px">Technische Eckdaten</h3>
-    <div class="grid" style="margin-top:16px">
-      <div class="card"><div class="body"><h3>📏 Maße</h3><p>Länge 215 cm · Breite 72 cm · Höhe 48 cm (Hydraulik eingefahren). XXL-Version +20 cm Länge, +15 cm Breite, +1 Cupholder.</p></div></div>
-      <div class="card"><div class="body"><h3>⚖️ Gewicht</h3><p>Leergewicht 64 kg (Plüsch) – 118 kg (Chrom-Edition). Max. Zuladung: 180 kg plus Erinnerungen.</p></div></div>
-      <div class="card"><div class="body"><h3>🔋 Energie</h3><p>Lithium-Akku 48 V, Laufzeit ca. 6 Std. Hüpfbetrieb, 10 Tage Ruhebetrieb. Ladekabel liegt bei (falls nötig).</p></div></div>
-      <div class="card"><div class="body"><h3>🛡️ Garantie</h3><p>Lebenslang. Wirklich. Bei Defekt kommen wir persönlich vorbei – falls Sie uns nicht mehr erreichen, schauen wir selber nach.</p></div></div>
+    <div class="head reveal"><div class="eyebrow">Spezifikationen</div><h2>Technische Daten und Modifikationen.</h2><p class="lead">Maße gelten für die Standardgröße „Mensch“. Tiersärge, Übergrößen und Sonderwünsche fertigen wir auf Anfrage.</p></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="tablewrap reveal" id="tbl"></div>
+    <div class="tech">
+      <div class="reveal"><h3>Maße</h3><p>Länge 215 cm, Breite 72 cm, Höhe 48 cm bei eingefahrener Hydraulik. Die XXL-Ausführung ist 20 cm länger, 15 cm breiter und hat einen Becherhalter.</p></div>
+      <div class="reveal"><h3>Gewicht</h3><p>Leergewicht 64 kg (Plüsch) bis 118 kg (Chrom-Edition). Maximale Zuladung 180 kg zuzüglich Erinnerungen.</p></div>
+      <div class="reveal"><h3>Energie</h3><p>Lithium-Akku mit 48 V, rund 6 Stunden Hüpfbetrieb, 10 Tage Ruhebetrieb. Ladegerät liegt bei.</p></div>
+      <div class="reveal"><h3>Garantie</h3><p>Lebenslang auf Rahmen, Pumpe und Polster. Sollten wir Sie nicht mehr erreichen, prüfen wir selbst nach.</p></div>
     </div>
   </div>
 </section>
 
-<section id="arten" style="background:rgba(255,210,74,.14)">
+<section id="arten" style="background:var(--surface);border-block:1px solid var(--line)">
   <div class="wrap">
-    <span class="kicker">Mal was anderes</span>
-    <h2>Ausgefallene Bestattungsarten</h2>
-    <p class="lead">Nicht jeder Abschied muss im Boden enden. Manche dürfen in den Himmel, ins Meer oder in einen Plattenspieler. Alle Varianten gesetzlich zulässig (soweit Ihr Bundesland mitspielt; wir klären das gern für Sie, mit viel Papier).</p>
-    <div class="grid">
-      <article class="card"><div class="ph" style="--c1:#0f2027;--c2:#2c5364"><div class="big">🚀</div><small>Bild: Weltraumbestattung</small></div><div class="body"><h3>Ab ins All</h3><p>Ein Teil der Asche reist per Rakete in den Orbit und kreist 2–10 Jahre um die Erde, bevor er als Sternschnuppe verglüht. Mit Livestream.</p><div class="price">ab 4.900 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#6dd5ed;--c2:#2193b0"><div class="big">🪸</div><small>Bild: Korallenriff</small></div><div class="body"><h3>Memorial-Riff</h3><p>Die Asche wird mit Beton gemischt und zu einem künstlichen Riff geformt. Fische ziehen ein, Taucher staunen.</p><div class="price">ab 2.600 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#232526;--c2:#414345"><div class="big">💎</div><small>Bild: Erinnerungsdiamant</small></div><div class="body"><h3>Diamant-Bestattung</h3><p>Aus dem enthaltenen Kohlenstoff werden unter Druck echte Diamanten gewonnen. Opa funkelt am Ringfinger.</p><div class="price">ab 3.900 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#ff512f;--c2:#dd2476"><div class="big">🎆</div><small>Bild: Feuerwerk</small></div><div class="body"><h3>Himmel in Farbe</h3><p>Die Asche wird in individuelle Feuerwerksraketen gefüllt. 4 Minuten Show, dazu Lieblingssong. Mit Böllergenehmigung.</p><div class="price">ab 2.200 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#56ab2f;--c2:#a8e063"><div class="big">🌳</div><small>Bild: Baumkapsel</small></div><div class="body"><h3>Lebensbaum-Kapsel</h3><p>Biologisch abbaubare Urne, in die ein Baum gepflanzt wird. Aus Trauer wird Schatten, aus Asche Eiche.</p><div class="price">ab 1.400 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#1a1a2e;--c2:#e94560"><div class="big">💿</div><small>Bild: Vinyl-Platte</small></div><div class="body"><h3>Letzte Platte</h3><p>Die Asche wird zu einer spielbaren Schallplatte gepresst – mit Sprachnachricht auf Seite A, Lieblingssong auf Seite B.</p><div class="price">ab 1.800 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#c0392b;--c2:#f39c12"><div class="big">🎈</div><small>Bild: Ballonreise</small></div><div class="body"><h3>Stratosphären-Ballon</h3><p>Ein Heliumballon trägt die Asche in 35 km Höhe, wo sie sich verteilt. Eine ganz sanfte Himmelfahrt.</p><div class="price">ab 3.200 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#614385;--c2:#516395"><div class="big">🎨</div><small>Bild: Aschekunst</small></div><div class="body"><h3>Farbe des Lebens</h3><p>Aus Asche wird Farbe: Sie malen Ihr Lieblingsmotiv, wir mischen. Oder wir malen mit Fingern. Beides möglich.</p><div class="price">ab 890 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#fceabb;--c2:#f8b500"><div class="big">🏖️</div><small>Bild: Bio-Seebestattung</small></div><div class="body"><h3>Wellen-Wiegen</h3><p>Seebestattung auf der Nordsee mit Kapitänsmütze, Möwen und Matrosenlied. Wasserfeste Urne inklusive.</p><div class="price">ab 1.750 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#f12711;--c2:#f5af19"><div class="big">🎯</div><small>Bild: Kanonenabschuss</small></div><div class="body"><h3>Kanone frei!</h3><p>Der Klassiker nach Hunter S. Thompson: Aus einer Kanone, mit Konfetti, in kontrollierter Umgebung. Mit Sicherheitsabstand.</p><div class="price">ab 7.500 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#43cea2;--c2:#185a9d"><div class="big">🍄</div><small>Bild: Pilzsarg</small></div><div class="body"><h3>Myzel-Reise</h3><p>Der Körper wird in einem Pilzanzug bestattet und kehrt als Waldboden in den Kreislauf zurück. Kompostieren mit Stil.</p><div class="price">ab 2.100 €</div></div></article>
-      <article class="card"><div class="ph" style="--c1:#8360c3;--c2:#2ebf91"><div class="big">🏍️</div><small>Bild: Letzte Ausfahrt</small></div><div class="body"><h3>Letzte Ausfahrt</h3><p>Prozession mit 40 Motorrädern, Lowrider-Sarg voran. Hydraulik bei Ampelrot. Polizei winkt freundlich.</p><div class="price">ab 5.800 €</div></div></article>
-    </div>
+    <div class="head reveal"><div class="eyebrow">Bestattungsarten</div><h2>Nicht jeder Abschied endet im Boden.</h2><p class="lead">Von der Weltraumbestattung bis zur Schallplatte: alle Varianten sind rechtlich zulässig, soweit Ihr Bundesland mitspielt. Die Genehmigungen übernehmen wir.</p></div>
+    <div class="chips" id="chips" role="group" aria-label="Filter"></div>
+    <div class="cards arten" id="artenGrid"></div>
   </div>
 </section>
 
 <section id="ablauf">
   <div class="wrap">
-    <span class="kicker">So läuft's</span>
-    <h2>In 5 Schritten zum würdigen Abschied</h2>
-    <div class="steps">
-      <div class="step"><h3>Kennenlernen</h3><p>Anruf oder Besuch. Tee, Taschentücher, Zeit. Wir hören einfach zu.</p></div>
-      <div class="step"><h3>Gestalten</h3><p>Sarg konfigurieren, Musik wählen, Blumen, Reden. Alles mit Probehüpfen.</p></div>
-      <div class="step"><h3>Behördendschungel</h3><p>Wir erledigen Sterbeurkunde, Renten, Kündigungen. Sie müssen nicht mal Formulare lesen.</p></div>
-      <div class="step"><h3>Abschied feiern</h3><p>Trauerfeier, Wake, Konfettikanone. Von still bis laut, ganz wie Sie es wollen.</p></div>
-      <div class="step"><h3>Danach da sein</h3><p>Trauergruppen, Gedenktage und Kuchen. Auch noch nach Monaten.</p></div>
+    <div class="head reveal"><div class="eyebrow">Ablauf</div><h2>In fünf Schritten zum Abschied.</h2></div>
+    <div class="timeline">
+      <div class="tstep reveal"><b>SCHRITT 1</b><h3>Kennenlernen</h3><p>Telefonat oder Besuch. Wir nehmen uns Zeit, hören zu und beantworten Fragen, auch die unbequemen.</p></div>
+      <div class="tstep reveal"><b>SCHRITT 2</b><h3>Gestalten</h3><p>Sarg, Bestattungsart, Musik, Blumen, Reden. Auf Wunsch mit Probehüpfen im Showroom.</p></div>
+      <div class="tstep reveal"><b>SCHRITT 3</b><h3>Formalitäten</h3><p>Sterbeurkunde, Rente, Versicherungen, Kündigungen. Wir erledigen den Papierkram, Sie unterschreiben.</p></div>
+      <div class="tstep reveal"><b>SCHRITT 4</b><h3>Abschied feiern</h3><p>Von der stillen Verabschiedung bis zur Prozession. Wir koordinieren Ablauf, Technik und Catering.</p></div>
+      <div class="tstep reveal"><b>SCHRITT 5</b><h3>Danach da sein</h3><p>Trauergruppen, Gedenktage und ein offenes Ohr. Auch Monate später.</p></div>
     </div>
   </div>
 </section>
 
-<section id="stimmen" style="background:rgba(90,45,114,.07)">
+<section id="stimmen">
   <div class="wrap">
-    <span class="kicker">Stimmen</span>
-    <h2>Was Hinterbliebene sagen</h2>
-    <div class="grid">
-      <figure class="quote" style="margin:0"><p>Oma hat bekommen, was sie immer wollte: Auftritt mit Nebel und Hüpfen. Wir haben geweint und gelacht, ungefähr gleichzeitig.</p><cite>– Familie Schulze, Hamburg</cite></figure>
-      <figure class="quote" style="margin:0"><p>Mein Vater fuhr Lowrider, seit 1978. Dass er auch zum Friedhof so rollt, war ein Traum. Danke!</p><cite>– Carlos M., Köln</cite></figure>
-      <figure class="quote" style="margin:0"><p>Endlich ein Bestatter, der keine Grabesmiene macht, aber mit Respekt arbeitet. Wir kommen wieder. Also, nicht so bald.</p><cite>– A. Berger, München</cite></figure>
+    <div class="head reveal"><div class="eyebrow">Stimmen</div><h2>Was Familien uns schreiben.</h2></div>
+    <div class="quotes">
+      <blockquote class="reveal"><p>Oma bekam den Auftritt, den sie sich immer gewünscht hat, mit Nebel und Federung. Wir haben geweint und gelacht, ungefähr gleichzeitig.</p><cite>FAMILIE SCHULZE · HAMBURG</cite></blockquote>
+      <blockquote class="reveal"><p>Mein Vater fuhr seit 1978 Lowrider. Dass er auch seinen letzten Weg so rollt, hätte ihn gefreut. Danke für die Umsetzung.</p><cite>CARLOS M. · KÖLN</cite></blockquote>
+      <blockquote class="reveal"><p>Endlich ein Haus ohne Grabesmiene, aber mit Respekt. Wir kommen wieder. Nicht bald, aber gern.</p><cite>A. BERGER · MÜNCHEN</cite></blockquote>
     </div>
-    <div class="ph" style="--c1:#5a2d72;--c2:#ff5fa2;margin-top:28px;min-height:240px"><div class="big">📸</div><strong>Bildergalerie: Unsere schönsten Verabschiedungen</strong><small>Platzhalter · Slider 1600×600 px</small></div>
+    <div class="gallery" id="gal"></div>
   </div>
 </section>
 
-<section id="faq">
-  <div class="wrap">
-    <span class="kicker">Häufige Fragen</span>
-    <h2>FAQ</h2>
-    <details><summary>Ist Hydraulik am Sarg überhaupt erlaubt?</summary><p>Ja, solange der Sarg beim Transport nicht hüpft, sondern nur bei der Trauerfeier. Auf öffentlichen Straßen gilt: Hydraulik aus. Auf dem Gelände: Hydraulik an. Wir klären das mit Ordnungsamt und Friedhofsverwaltung.</p></details>
-    <details><summary>Wie sicher ist das Hüpfen mit Blumengestecken?</summary><p>Sehr. Alle Gestecke haben Klettverschlüsse und Gummihalter. Das letzte Mal ist ein Nelkenstrauß nur einmal in die Orgel geflogen. Das war ein anderer Betrieb.</p></details>
-    <details><summary>Kann ich den Sarg vorab testen?</summary><p>Nur den Prototypen, nur im Showroom, nur mit Helm. Probeliegen ist gesetzlich erlaubt, begeisterte Zustimmung auch.</p></details>
-    <details><summary>Was kostet eine Bestattung insgesamt?</summary><p>Das hängt ab von Sarg, Bestattungsart und Feier. Die Kosten legen wir transparent offen, bevor wir irgendetwas tun. Ratenzahlung möglich, Hüpfzuschlag nicht verhandelbar.</p></details>
-    <details><summary>Bieten Sie auch Haustier-Bestattungen an?</summary><p>Aber ja. Hundesärge mit Knochenornamenten, Katzensärge mit Kratzbrett und Hydraulik für Hamster (3 mm Federweg, sehr süß).</p></details>
-    <details><summary>Und die Vorsorge?</summary><p>Wer vorsorgt, entlastet. Sie planen Ihre Feier selbst, wir führen sie aus und bitten Sie nur, nicht zu früh zu kommen.</p></details>
+<section id="faq" style="border-bottom:1px solid var(--line)">
+  <div class="wrap" style="max-width:860px">
+    <div class="head reveal"><div class="eyebrow">Häufige Fragen</div><h2>Gut zu wissen.</h2></div>
+    <div id="faqList"></div>
   </div>
 </section>
 
-<section id="kontakt" style="background:var(--plum);color:#fff">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
-    <div>
-      <span class="kicker">Wir sind da</span>
-      <h2 style="margin-top:14px">Kontakt</h2>
-      <p>Tag und Nacht erreichbar. Anruf genügt. Oder ein Zettel am Hydraulikbock.</p>
-      <p><strong>📞 0800 – 123 LOW RIDE</strong><br>📧 hallo@sanft-und-lowrider.example<br>📍 Allee der Stille 7, 12345 Ruhelingen<br>🕐 24/7 · Beratung: Mo–Sa 9–18 Uhr</p>
-      <div class="ph" style="--c1:#2c5364;--c2:#6dd5ed;min-height:180px"><div class="big">🗺️</div><small>Platzhalter · Karte / Anfahrt</small></div>
+<section id="kontakt">
+  <div class="wrap contact">
+    <div class="reveal">
+      <div class="eyebrow">Kontakt</div>
+      <h2>Wir sind erreichbar. Immer.</h2>
+      <p class="lead">Ein Anruf genügt. Nachts nehmen echte Menschen ab, mit Stimme und Kaffee.</p>
+      <dl class="cdata" style="margin-bottom:0">
+        <div><dt>Telefon</dt><dd>0800 123 5693 (24 Stunden)</dd></div>
+        <div><dt>E-Mail</dt><dd>hallo@sanft-und-lowrider.example</dd></div>
+        <div><dt>Haus</dt><dd>Allee der Stille 7, 12345 Ruhelingen</dd></div>
+        <div><dt>Beratung</dt><dd>Montag bis Samstag, 9 bis 18 Uhr</dd></div>
+      </dl>
     </div>
-    <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Danke! Wir melden uns 💜';">
-      <div class="field"><label for="n">Name</label><input id="n" required style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0"></div>
-      <div class="field"><label for="m">E-Mail oder Telefon</label><input id="m" required style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0"></div>
-      <div class="field"><label for="t">Ihre Nachricht</label><textarea id="t" rows="5" style="width:100%;font:inherit;padding:10px;border-radius:10px;border:0" placeholder="Zum Beispiel: Ich möchte das Modell El Último Camino mit Flammenlack."></textarea></div>
-      <button class="btn" type="submit">Nachricht senden</button>
+    <form class="cf reveal" id="cform">
+      <label for="cn">Name<input id="cn" required autocomplete="name"></label>
+      <label for="cm">E-Mail oder Telefon<input id="cm" required></label>
+      <label for="ct">Ihre Nachricht<textarea id="ct" rows="5" placeholder="Zum Beispiel: Ich interessiere mich für El Último Camino mit Flammenlack."></textarea></label>
+      <div><button class="btn" type="submit">Nachricht senden</button></div>
+      <p class="ok" id="ok" role="status"></p>
+      <p class="fine">Demonstrationsformular. Es werden keine Daten übertragen.</p>
     </form>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <p style="font-family:Georgia,serif;font-size:1.3rem">⚰️ Sanft &amp; Lowrider – Bestattungen</p>
-    <p>„Wir bringen Sie sicher ans Ziel. Nur etwas tiefer.“</p>
-    <small>Demo-Seite, alle Angaben, Preise und Namen fiktiv. · Impressum · Datenschutz · © 1889 – ∞</small>
-  </div>
+  <div class="wrap"><b>Sanft &amp; Lowrider Bestattungen</b><span>Demoseite, alle Angaben, Preise und Namen sind fiktiv. · © 1889 bis heute</span></div>
 </footer>
 
 <script>
 (function(){
-  const $ = s => document.querySelector(s);
-  const models = [
-    {name:'Samtpfote Deluxe', color:'#ff5fa2', stripe:'#ffd24a'},
-    {name:'El Último Camino', color:'#6a1b9a', stripe:'#ffd24a'},
-    {name:'Wolke 7', color:'#cfeaff', stripe:'#ffffff'},
-    {name:'Disco Inferno', color:'#222', stripe:'#7ef0c8'},
-    {name:'Königin der Nacht', color:'#b8860b', stripe:'#fff'}
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const eur=n=>n.toLocaleString('de-DE')+' €';
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* ---------- Daten ---------- */
+  const MODELS=[
+    {n:'Samtpfote Deluxe',p:3490,c:'#8e2a52',h:330,t:'Der Klassiker: vier Zentimeter Plüsch, Wiegefunktion und ein leises Schnurren im Kopfkissen.',m:['Plüsch Teddy','Federweg bis 30 cm','64 kg']},
+    {n:'El Último Camino',p:6990,c:'#5b1470',h:285,t:'Candy-Lack, Speichenfelgen, Vier-Punkt-Hydraulik. Rollt mit 0,3 km/h und hüpft auf Wunsch.',m:['Chrom & Candy','Federweg bis 120 cm','96 kg']},
+    {n:'Wolke 7',p:4290,c:'#d9dbe6',h:215,t:'Weiß, wattig, mit Nebelmaschine. Der Sarg schwebt optisch, getragen von Magneten und Zuversicht.',m:['Wolkenschaum','Federweg bis 15 cm','71 kg']},
+    {n:'Disco Inferno',p:5490,c:'#1b1b22',h:265,t:'Spiegelkugel, LED-Unterboden und Subwoofer. Für alle, die sich einen Abgang mit Bass wünschen.',m:['Lack Schwarz','Federweg bis 60 cm','102 kg']},
+    {n:'Gemüsebeet',p:1990,c:'#3f6b3a',h:125,t:'Aus Pilzmyzel und Moos. Nach zwei Jahren wachsen Tomaten, nach drei auch Zucchini, reichlich.',m:['Kompostierbar','ohne Hydraulik','38 kg']},
+    {n:'Königin der Nacht',p:9990,c:'#9a7418',h:42,t:'Vergoldete Zierleisten, Thronkissen und ein Fanfarenmodul. Auftritt mit Hoheitsanspruch.',m:['Samt & Blattgold','Federweg bis 60 cm','118 kg']}
   ];
-  const colors = [
-    ['Candy-Pink','#ff5fa2'],['Pflaume','#6a1b9a'],['Mitternacht','#1b1b3a'],
-    ['Minze','#4ed1a5'],['Gold','#e0a800'],['Feuerrot','#d62828'],['Wolkenweiß','#f4f4ff']
+  const COLORS=[['Rubinrot','#8e2a52'],['Aubergine','#5b1470'],['Mitternacht','#1b1b22'],['Tannengrün','#1f5a45'],['Champagner','#c8a45c'],['Karminrot','#b3202f'],['Perlweiß','#e6e4ee']];
+  const PLUSH=[['plush','Plüsch „Teddy“',0],['velvet','Samt „Kaisers neue Kissen“',250],['fluff','Alpaka-Fluff',480],['cloud','Wolkenschaum',900]];
+  const HYD=[['Fixiert',0,0],['Sanftes Wiegen',8,390],['Gemütlich Schaukeln',15,790],['Cruiser',30,1290],['Hopper',60,2190],['Dreirad-Move',120,3990]];
+  const EXTRAS=[['sub','Subwoofer-Set',690],['neon','Neon-Unterboden',290],['flame','Flammenlack',590],['ball','Spiegelkugel',340],['fog','Nebelmaschine',390],['fan','Fanfarenmodul',190],['purr','Schnurr-Sound',140],['wifi','WLAN-Hotspot',99]];
+  const ARTEN=[
+    ['himmel','Weltraum','Ab ins All','Ein Teil der Asche reist per Rakete in den Orbit, kreist zwei bis zehn Jahre und verglüht als Sternschnuppe. Mit Livestream.',4900,200,['Dauer 2–10 Jahre','Livestream']],
+    ['wasser','Wasser','Memorial-Riff','Asche wird mit Beton zu einem künstlichen Riff geformt. Fische ziehen ein, Taucher staunen.',2600,195,['Standort Nordsee','Koordinaten']],
+    ['kunst','Erinnerung','Diamant-Bestattung','Aus dem enthaltenen Kohlenstoff entstehen unter Druck echte Diamanten. Opa funkelt am Ringfinger.',3900,260,['0,3 bis 1 Karat','Zertifikat']],
+    ['himmel','Himmel','Himmel in Farbe','Die Asche wird in Feuerwerksraketen gefüllt. Vier Minuten Show, dazu der Lieblingssong. Mit Genehmigung.',2200,15,['4 Minuten','Musikbegleitung']],
+    ['erde','Erde','Lebensbaum-Kapsel','Biologisch abbaubare Urne, in die ein Baum gepflanzt wird. Aus Trauer wird Schatten, aus Asche Eiche.',1400,120,['Baumart wählbar','Gedenkort']],
+    ['kunst','Erinnerung','Letzte Platte','Die Asche wird in eine spielbare Schallplatte gepresst. Sprachnachricht auf Seite A, Lieblingssong auf B.',1800,340,['33 U/min','Pressung 1 Stück']],
+    ['himmel','Himmel','Stratosphären-Ballon','Ein Heliumballon trägt die Asche in 35 km Höhe, wo sie sich verteilt. Eine sehr sanfte Himmelfahrt.',3200,205,['Höhe 35 km','Flugprotokoll']],
+    ['kunst','Erinnerung','Farbe des Lebens','Aus Asche wird Farbe. Sie malen das Lieblingsmotiv, wir mischen an. Oder wir malen mit den Fingern.',890,300,['Leinwand 60×80','Atelier']],
+    ['wasser','Wasser','Wellen-Wiegen','Seebestattung mit Kapitänsmütze, Möwen und Matrosenlied. Wasserlösliche Urne inklusive.',1750,35,['Mit Schiff','Seekarte']],
+    ['himmel','Himmel','Kanone frei','Der Klassiker nach Hunter S. Thompson: Aus einer Kanone, mit Konfetti, in kontrollierter Umgebung.',7500,8,['Sicherheitsabstand','Konfetti']],
+    ['erde','Erde','Myzel-Reise','Der Körper ruht in einem Pilzanzug und kehrt als Waldboden in den Kreislauf zurück. Kompostieren mit Stil.',2100,95,['Biologisch','Waldboden']],
+    ['erde','Erde','Letzte Ausfahrt','Prozession mit vierzig Motorrädern, Lowrider-Sarg voran. Hydraulik bei Ampelrot, Polizei winkt freundlich.',5800,320,['40 Maschinen','Streckenplanung']]
   ];
-  const hydNames = ['Fixiert','Sanftes Wiegen','Gemütlich Schaukeln','Cruiser','Hopper','Dreirad-Move'];
-  const hydPrice = [0,390,790,1290,2190,3990];
-  const hydCm = [0,8,15,30,60,120];
-  const extras = [
-    {id:'sub',  label:'🎵 Subwoofer',   p:690},
-    {id:'neon', label:'💡 Neon-Unterboden', p:290},
-    {id:'flame',label:'🔥 Flammenlack', p:590},
-    {id:'ball', label:'🪩 Spiegelkugel',p:340},
-    {id:'fog',  label:'🌫️ Nebel',       p:390},
-    {id:'fan',  label:'🎺 Fanfare',     p:190},
-    {id:'purr', label:'🐱 Schnurr-Sound',p:140},
-    {id:'wifi', label:'🛜 WLAN',        p:99}
+  const FAQ=[
+    ['Ist Hydraulik am Sarg überhaupt erlaubt?','Auf öffentlichen Straßen bleibt die Hydraulik aus, auf dem Gelände darf sie arbeiten. Wir klären Einsatz und Genehmigung mit Ordnungsamt und Friedhofsverwaltung.'],
+    ['Wie sicher sind Blumengestecke beim Hüpfen?','Alle Gestecke werden mit Klettverschluss und Gummihaltern fixiert. Der eine Nelkenstrauß, der einmal in die Orgel flog, gehört zu einem anderen Betrieb.'],
+    ['Kann ich einen Sarg vorab testen?','Im Showroom steht ein Prototyp bereit. Probeliegen ist erlaubt, bitte mit Helm.'],
+    ['Was kostet eine Bestattung insgesamt?','Das hängt von Sarg, Bestattungsart und Feier ab. Wir legen alle Kosten schriftlich vor, bevor irgendetwas beauftragt wird. Ratenzahlung ist möglich, der Hüpfzuschlag ist es nicht.'],
+    ['Bieten Sie Tierbestattungen an?','Ja. Hundesärge mit Knochenornament, Katzensärge mit Kratzbrett und Hamstersärge mit 3 mm Federweg.'],
+    ['Wie funktioniert die Vorsorge?','Sie planen Ihre Feier selbst, wir führen sie aus. Die Kosten können Sie treuhänderisch hinterlegen. Wir bitten nur darum, nicht zu früh zu kommen.']
   ];
-  let color = colors[0][1];
+  const SPECS={
+    'Hydraulik':{h:['Stufe','Name','Federweg','Pumpen','Besonderheit','Aufpreis'],r:HYD.map((x,i)=>[String(i),x[0],{bar:x[1]},['—','1 Hub','2 Hub','4 Hub','6 Hub','8 Hub + Turbo'][i],['Sarg bleibt, wo er ist. Wie früher.','Beruhigende Wiegebewegung','Seitliches Schaukeln, Schnarchen optional','Nick-Bewegung, Beat-Sync mit Playlist','Echtes Hüpfen, Gestecke mit Klettband gesichert','Drei-Rad-Pose, Konfettiauswurf, Hinweis des TÜV'][i],x[2]?'+'+eur(x[2]):'0 €'])},
+    'Polster':{h:['Material','Flauschgrad','Dicke','Duft','Charakter','Aufpreis'],r:[['Plüsch „Teddy“','4 / 5','4 cm','Vanille, Honig','Kinderzimmer-Niveau','0 €'],['Samt „Kaisers neue Kissen“','3 / 5','2 cm','Zedernholz, Zigarre','Herrschaftlich','+250 €'],['Alpaka-Fluff','5 / 5','6 cm','Bergwiese','Fast schon gefährlich','+480 €'],['Wolkenschaum','5 / 5+','10 cm','Frischer Morgen','Man will nie wieder raus','+900 €']]},
+    'Module':{h:['Modul','Beschreibung','Leistung / Maß','Preis'],r:[['Subwoofer-Set','2× 12 Zoll im Sockel, Lieblingsplaylist oder deren Orgelversion','2000 W RMS','690 €'],['Neon-Unterboden','Farbiges Licht unter dem Sarg, steuerbar','RGB, 16 Mio. Farben','290 €'],['Flammenlack','Handlackierte Flammen, kein offenes Feuer','5 Schichten','590 €'],['Spiegelkugel','Dreht sich langsam über dem Kopfteil','Ø 25 cm','340 €'],['Nebelmaschine','Für den majestätischen Auftritt','1,2 m³/min','390 €'],['Fanfarenmodul','Tusch beim Betreten und Verlassen des Raums','Mono, laut','190 €'],['Schnurr-Sound','Beruhigendes Schnurren im Kopfkissen','25 Hz, warm','140 €'],['WLAN-Hotspot','Falls im Jenseits Empfang ist','Wi-Fi 6','99 €']]}
+  };
 
-  // UI aufbauen
-  const sw = $('#swatches');
-  colors.forEach(([n,c],i)=>{
-    const b = document.createElement('button');
-    b.type='button'; b.style.background=c; b.title=n; b.setAttribute('aria-label',n);
-    b.setAttribute('aria-pressed', i===0);
-    b.onclick=()=>{ color=c; [...sw.children].forEach(x=>x.setAttribute('aria-pressed', x===b)); render(); };
-    sw.appendChild(b);
-  });
-  const ec = $('#extraChips');
-  extras.forEach(e=>{
-    const l = document.createElement('label');
-    l.innerHTML = `<input type="checkbox" value="${e.id}"> ${e.label} <small>(+${e.p} €)</small>`;
-    l.querySelector('input').addEventListener('change', render);
-    ec.appendChild(l);
-  });
-  ['model','plush','hyd','name'].forEach(id => $('#'+id).addEventListener('input', ()=>{
-    if(id==='model'){ // Modell setzt Grundfarbe
-      const m = models[+$('#model').value];
-      color = m.color; [...sw.children].forEach(x=>x.setAttribute('aria-pressed', false));
-    }
-    render();
-  }));
+  /* ---------- Hilfen ---------- */
+  function shade(hex,a){const n=parseInt(hex.slice(1),16);const f=c=>Math.round(a<0?c*(1+a):c+(255-c)*a);return '#'+[n>>16,n>>8&255,n&255].map(f).map(x=>x.toString(16).padStart(2,'0')).join('')}
+  const ph=(label,h,r,ex='')=>`<div class="ph" style="--h:${h};--r:${r}"><span class="shine"></span><em>${label}</em>${ex}</div>`;
 
-  const fmt = n => n.toLocaleString('de-DE') + ' €';
-  function checked(){ return [...ec.querySelectorAll('input:checked')].map(i=>i.value); }
+  /* ---------- Statische Teile rendern ---------- */
+  $('#marq').innerHTML=[...ARTEN,...ARTEN].map(a=>`<span>${a[2]}</span>`).join('');
+  $('#models').innerHTML=MODELS.map(m=>`<article class="card reveal">${ph('Foto · '+m.n+', Dreiviertelansicht · 1600×1200',m.h,'4/3')}<h3>${m.n}<span>ab ${eur(m.p)}</span></h3><p>${m.t}</p><div class="meta">${m.m.map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+  $('#gal').innerHTML=[['Abschied am See',300,'3/2'],['Prozession, Köln',12,'3/2'],['Nebel und Orgel',215,'1/1'],['Riff-Einsetzung',190,'1/1'],['Feuerwerk, Hamburg',350,'1/1']].map(g=>ph('Galerie · '+g[0],g[1],g[2])).join('');
+  $('#faqList').innerHTML=FAQ.map(f=>`<details class="reveal"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
 
-  function render(){
-    const m = models[+$('#model').value];
-    const plush = $('#plush');
-    const hyd = +$('#hyd').value;
-    const sel = checked();
-    const base = +$('#model').selectedOptions[0].dataset.p;
-    const pp = +plush.selectedOptions[0].dataset.p;
-    const ex = extras.filter(e=>sel.includes(e.id)).reduce((a,e)=>a+e.p,0);
-    const total = base + pp + hydPrice[hyd] + ex;
+  const cats=[['alle','Alle'],['himmel','Himmel'],['wasser','Wasser'],['erde','Erde'],['kunst','Erinnerung']];
+  $('#chips').innerHTML=cats.map((c,i)=>`<button class="chip" type="button" data-c="${c[0]}" aria-pressed="${i===0}">${c[1]}</button>`).join('');
+  function renderArten(f){
+    $('#artenGrid').innerHTML=ARTEN.filter(a=>f==='alle'||a[0]===f).map(a=>`<article class="card">${ph('Foto · '+a[2]+' · 1600×1200',a[5],'4/3')}<div class="cat">${a[1]}</div><h3 style="margin-top:-8px">${a[2]}<span>ab ${eur(a[4])}</span></h3><p>${a[3]}</p><div class="meta">${a[6].map(x=>`<span>${x}</span>`).join('')}</div></article>`).join('');
+  }
+  renderArten('alle');
+  $('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderArten(b.dataset.c)});
 
-    $('#hydOut').textContent = `${hyd} – ${hydNames[hyd]}`;
-    $('#total').textContent = fmt(total);
-    $('#shell').setAttribute('fill', color);
-    $('#stripe').setAttribute('stroke', m.stripe);
+  const tabs=$('#tabs');
+  Object.keys(SPECS).forEach((k,i)=>{const b=document.createElement('button');b.type='button';b.className='tab';b.role='tab';b.textContent=k;b.setAttribute('aria-selected',i===0);b.onclick=()=>showSpec(k);tabs.appendChild(b)});
+  function showSpec(k){
+    $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.textContent===k));
+    const s=SPECS[k];
+    $('#tbl').classList.remove('go');
+    $('#tbl').innerHTML='<table><thead><tr>'+s.h.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+s.r.map(r=>'<tr>'+r.map((c,i)=>typeof c==='object'?`<td class="num">${c.bar} cm<span class="bar" style="--w:${Math.max(c.bar/120*100,1.5)}%"><i></i></span></td>`:`<td${/^[+\d—]/.test(c)&&i>0&&c.length<16?' class="num"':''}>${c}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+    void $('#tbl').offsetWidth; $('#tbl').classList.add('go');
+  }
+  showSpec('Hydraulik');
 
-    const pat = plush.value;
-    $('#plushLayer').style.opacity = pat==='plush' || pat==='fluff' ? 1 : 0;
-    $('#velvetLayer').style.opacity = pat==='velvet' ? 1 : (pat==='cloud'?.6:0);
-    $('#shell').setAttribute('stroke-width', pat==='fluff'?9:pat==='cloud'?12:5);
-    $('#shell').setAttribute('stroke-dasharray', pat==='fluff'?'2 6':'none');
+  $('#cform').addEventListener('submit',e=>{e.preventDefault();$('#ok').textContent='Danke. Dies ist eine Demoseite, es wurde nichts gesendet.';e.target.reset()});
 
-    // Hydraulik: Radabstand zum Sarg
-    const lift = hyd*6;
-    $('#coffinBody').style.transform = `translateY(${-lift}px)`;
-    ['pistonLr','pistonRr'].forEach(id=>{
-      const r = $('#'+id); r.setAttribute('height', 30+lift);
-    });
-    $('#pistonL').style.transform = `translateY(0)`; $('#pistonR').style.transform = `translateY(0)`;
-    $('#coffinWrap').style.setProperty('--h', (hyd*12+6)+'px');
-
-    // Extras zeichnen
-    let svg = '';
-    if(sel.includes('neon')) svg += `<rect x="60" y="192" width="400" height="6" fill="#7ef0c8" opacity=".9" rx="3"><animate attributeName="opacity" values=".3;1;.3" dur="1.4s" repeatCount="indefinite"/></rect>`;
-    if(sel.includes('flame')) svg += `<path d="M60 190 q10-26 25-6 q6-28 22 0 q12-26 26 0 q10-20 24 6Z" fill="#ff9500" stroke="#d62828" stroke-width="3"/><path d="M360 190 q10-26 25-6 q6-28 22 0 q12-26 26 0 q10-20 24 6Z" fill="#ff9500" stroke="#d62828" stroke-width="3"/>`;
-    if(sel.includes('ball')) svg += `<line x1="260" y1="30" x2="260" y2="70" stroke="#aaa" stroke-width="3"/><circle cx="260" cy="50" r="20" fill="url(#disco)" stroke="#555" stroke-width="2"><animate attributeName="r" values="19;22;19" dur="1s" repeatCount="indefinite"/></circle>`;
-    if(sel.includes('fog')) svg += `<g opacity=".7" fill="#fff"><circle cx="80" cy="252" r="22"><animate attributeName="cx" values="60;460" dur="6s" repeatCount="indefinite"/></circle><circle cx="130" cy="262" r="26"><animate attributeName="cx" values="130;500;130" dur="8s" repeatCount="indefinite"/></circle></g>`;
-    if(sel.includes('sub')) svg += `<circle cx="150" cy="168" r="18" fill="#111" stroke="#ccc" stroke-width="3"/><circle cx="150" cy="168" r="6" fill="#444"/><circle cx="370" cy="168" r="18" fill="#111" stroke="#ccc" stroke-width="3"/><circle cx="370" cy="168" r="6" fill="#444"/>`;
-    if(sel.includes('fan')) svg += `<path d="M470 150 l36 -14 v28 z" fill="#ffd24a" stroke="#333" stroke-width="2"/><text x="478" y="120" font-size="22">🎺</text>`;
-    if(sel.includes('purr')) svg += `<text x="130" y="60" font-size="22">🐱</text>`;
-    if(sel.includes('wifi')) svg += `<text x="420" y="60" font-size="22">📶</text>`;
-    const nm = $('#name').value.trim();
-    if(nm) svg += `<text x="260" y="124" text-anchor="middle" font-family="Georgia" font-style="italic" font-size="20" fill="#fff" stroke="#2a1533" stroke-width=".8">${nm.replace(/[<>&]/g,'')}</text>`;
-    $('#extras').innerHTML = svg;
-
-    const specs = [
-      `Federweg: ${hydCm[hyd]} cm`,
-      `Gewicht: ${64 + hyd*5 + sel.length*3 + (plush.value==='cloud'?10:0)} kg`,
-      `Flauschgrad: ${'★'.repeat({plush:4,velvet:3,fluff:5,cloud:5}[plush.value])}`,
-      `Extras: ${sel.length}/8`
-    ];
-    $('#stats').innerHTML = `> ${m.name}<br>> ` + specs.join(' · ');
+  /* ---------- Zähler ---------- */
+  if(!reduce && 'IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(en=>{
+      if(!en.isIntersecting)return; io.unobserve(en.target);
+      const el=en.target,to=+el.dataset.count,t0=performance.now();
+      (function tick(t){const k=Math.min((t-t0)/1500,1),e=1-Math.pow(1-k,4);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(tick)})(t0);
+    }),{threshold:.6});
+    $$('[data-count]').forEach(el=>io.observe(el));
   }
 
-  // Sound + Konfetti
-  let ac;
-  function boing(n){
-    try{
-      ac = ac || new (window.AudioContext||window.webkitAudioContext)();
-      const t = ac.currentTime;
-      for(let i=0;i<n;i++){
-        const o = ac.createOscillator(), g = ac.createGain();
-        o.type='sawtooth'; o.frequency.setValueAtTime(90,t+i*.32);
-        o.frequency.exponentialRampToValueAtTime(420,t+i*.32+.12);
-        o.frequency.exponentialRampToValueAtTime(70,t+i*.32+.28);
-        g.gain.setValueAtTime(.0001,t+i*.32); g.gain.exponentialRampToValueAtTime(.25,t+i*.32+.03);
-        g.gain.exponentialRampToValueAtTime(.0001,t+i*.32+.3);
-        o.connect(g).connect(ac.destination); o.start(t+i*.32); o.stop(t+i*.32+.32);
+  /* ---------- Sarg-Engine ---------- */
+  let uid=0; const live=new Set();
+  function makeCoffin(host,label){
+    const id='k'+(uid++); const yL=262;
+    let spokes=''; for(let a=0;a<360;a+=12.9) spokes+=`<line x1="0" y1="-6" x2="0" y2="-26.5" transform="rotate(${a.toFixed(1)})"/>`;
+    const BODY='M44 236V204Q44 190 60 186L108 160H692L740 186Q756 190 756 204V236Z';
+    const wheel=cx=>`<g transform="translate(${cx} ${yL})"><circle r="38" fill="#0c0a0e"/><circle r="33" fill="#ece7de"/><circle r="27.5" fill="#0c0a0e"/><circle r="26.5" fill="url(#${id}c)"/><g class="spin" stroke="#6b6b73" stroke-width=".9">${spokes}</g><circle r="16" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width=".7"/><circle r="6.5" fill="url(#${id}b)"/></g>`;
+    host.innerHTML=`<svg viewBox="0 0 800 340" role="img" aria-label="${label}">
+<defs>
+<linearGradient id="${id}p" x1="0" y1="0" x2="0" y2="1"><stop class="s0" offset="0"/><stop class="s1" offset=".5"/><stop class="s2" offset="1"/></linearGradient>
+<linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="${id}c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fafafa"/><stop offset=".35" stop-color="#8e8e96"/><stop offset=".6" stop-color="#e9e9ee"/><stop offset="1" stop-color="#5e5e66"/></linearGradient>
+<linearGradient id="${id}b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f0d792"/><stop offset=".5" stop-color="#b68d3e"/><stop offset="1" stop-color="#f4e2b0"/></linearGradient>
+<linearGradient id="${id}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c070f" stop-opacity="0"/><stop offset=".12" stop-color="#0c070f" stop-opacity=".9"/><stop offset="1" stop-color="#050307"/></linearGradient>
+<pattern id="${id}t1" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 0L20 10L10 20L0 10Z" fill="none" stroke="rgba(0,0,0,.42)" stroke-width="1.2"/><circle cx="10" cy="10" r="2.2" fill="rgba(255,255,255,.6)"/></pattern>
+<pattern id="${id}t2" width="11" height="11" patternUnits="userSpaceOnUse"><circle cx="5.5" cy="5.5" r="4" fill="rgba(255,255,255,.2)" stroke="rgba(0,0,0,.22)"/></pattern>
+<filter id="${id}bl" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="10"/></filter>
+<filter id="${id}fz"><feTurbulence baseFrequency=".8" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter>
+<clipPath id="${id}cl"><path d="${BODY}"/></clipPath>
+</defs>
+<rect x="0" y="298" width="800" height="42" fill="url(#${id}f)"/>
+<line class="road" x1="0" x2="800" y1="324" y2="324" stroke="#fff" stroke-opacity=".16" stroke-width="2"/>
+<ellipse class="shadow" cx="400" cy="302" rx="340" ry="9" fill="#000" opacity=".55"/>
+<ellipse class="glow" cx="400" cy="296" rx="320" ry="13" fill="#39f5c8" filter="url(#${id}bl)" opacity="0"/>
+<g class="fog" opacity="0"><ellipse class="fogc" cx="250" cy="290" rx="190" ry="26" fill="#fff" opacity=".22" filter="url(#${id}bl)"/><ellipse class="fogc" cx="560" cy="286" rx="210" ry="30" fill="#fff" opacity=".2" filter="url(#${id}bl)"/></g>
+<rect x="188" y="258" width="424" height="7" rx="2" fill="#2b2332"/>
+<g class="pist"></g>
+<g class="body">
+ <path d="${BODY}" fill="url(#${id}p)" stroke="rgba(0,0,0,.55)" stroke-width="1.5"/>
+ <g clip-path="url(#${id}cl)">
+  <rect class="tuft" x="44" y="197" width="712" height="40" fill="url(#${id}t1)"/>
+  <rect class="cloud" x="44" y="197" width="712" height="40" fill="#fff" opacity="0"/>
+  <circle cx="190" cy="${yL}" r="47" fill="#07040a"/><circle cx="610" cy="${yL}" r="47" fill="#07040a"/>
+  <g class="flames"></g><g class="subs"></g>
+ </g>
+ <path d="M120 168H680L716 186H84Z" fill="rgba(0,0,0,.18)" stroke="url(#${id}b)" stroke-width="1.4"/>
+ <path d="${BODY}" fill="url(#${id}g)"/>
+ <line x1="46" y1="195" x2="754" y2="195" stroke="url(#${id}b)" stroke-width="2.6"/>
+ <rect x="258" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="342" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="432" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/><rect x="516" y="199" width="26" height="5" rx="2" fill="url(#${id}b)"/>
+ <g class="ball" opacity="0"><line x1="400" y1="20" x2="400" y2="108" stroke="#999" stroke-width="1.5"/><circle cx="400" cy="124" r="18" fill="url(#${id}c)"/><g class="spin" style="animation-play-state:running"><path d="M382 124H418M400 106V142M388 112Q400 124 388 136M412 112Q400 124 412 136" stroke="#333" stroke-width=".8" fill="none"/></g></g>
+ <text class="eng" x="400" y="184" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-size="21" fill="#f0d792" stroke="rgba(0,0,0,.35)" stroke-width=".4"></text>
+</g>
+${wheel(190)}${wheel(610)}
+</svg>`;
+    const q=s=>host.querySelector(s);
+    const st={F:{p:0,v:0},R:{p:0,v:0},level:0,ph:Math.random()*6};
+    const api={host,st,
+      color(c){const s=$$('stop',q('linearGradient'));s[0].setAttribute('stop-color',shade(c,.28));s[1].setAttribute('stop-color',c);s[2].setAttribute('stop-color',shade(c,-.45))},
+      level(l){st.level=l},
+      plush(k){const t=q('.tuft'),c=q('.cloud');
+        t.setAttribute('fill',`url(#${id}${k==='velvet'?'t1':'t2'})`);
+        t.setAttribute('filter',k==='fluff'?`url(#${id}fz)`:'none');
+        t.setAttribute('opacity',k==='cloud'?.6:1);c.setAttribute('opacity',k==='cloud'?.35:0)},
+      extras(set){
+        q('.glow').setAttribute('opacity',set.has('neon')?.85:0);
+        q('.fog').setAttribute('opacity',set.has('fog')?1:0);
+        q('.ball').setAttribute('opacity',set.has('ball')?1:0);
+        q('.flames').innerHTML=set.has('flame')?[70,150].map(x=>`<path transform="translate(${x} 0)" d="M0 236C6 218 14 224 18 206C28 218 26 226 34 214C40 226 50 220 52 236Z" fill="#ff8a1f" stroke="#c4271b" stroke-width="1.5"/>`).join('')+[560,640].map(x=>`<path transform="translate(${x} 0)" d="M0 236C6 218 14 224 18 206C28 218 26 226 34 214C40 226 50 220 52 236Z" fill="#ff8a1f" stroke="#c4271b" stroke-width="1.5"/>`).join(''):'';
+        q('.subs').innerHTML=set.has('sub')?[300,500].map(x=>`<circle cx="${x}" cy="219" r="14" fill="#0a0a0d" stroke="#bbb" stroke-width="1.5"/><circle cx="${x}" cy="219" r="6" fill="#303038"/>`).join(''):''},
+      name(t){q('.eng').textContent=t},
+      rolling(on){host.classList.toggle('rolling',on)},
+      hop(){const I=2.4+st.level*2.1;st.F.v+=I;setTimeout(()=>{st.R.v+=I},210);setTimeout(()=>{st.F.v+=I*1.3;st.R.v+=I*1.3},520)},
+      visible:false
+    };
+    const rods=[250,550].map(()=>{const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.innerHTML='<line stroke="url(#'+id+'c)" stroke-width="6" stroke-linecap="round"/><rect width="14" height="32" rx="2" fill="url(#'+id+'c)" stroke="#3a3a40" stroke-width=".8"/>';q('.pist').appendChild(g);return g});
+    api.draw=function(){
+      const f=st.F.p,r=st.R.p,yc=(f+r)/2,a=Math.atan((f-r)/420),deg=a*57.2958;
+      q('.body').setAttribute('transform',`translate(0 ${-yc.toFixed(2)}) rotate(${deg.toFixed(3)} 400 236)`);
+      [250,550].forEach((xp,i)=>{const dx=xp-400,x=400+dx*Math.cos(a),top=236+dx*Math.sin(a)-yc,g=rods[i],l=g.firstChild,c=g.lastChild;
+        l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1',top.toFixed(1));l.setAttribute('y2',258);
+        c.setAttribute('x',x-7);c.setAttribute('y',226)});
+      const sh=q('.shadow');sh.setAttribute('rx',(340-Math.max(yc,0)*.7).toFixed(1));sh.setAttribute('opacity',(.55-Math.max(yc,0)*.004).toFixed(2));
+    };
+    api.step=function(t){
+      for(const e of [st.F,st.R]){
+        const target=st.level*9+(st.level>0?Math.sin(t/800+st.ph+(e===st.R?1:0))*(.6+st.level*.5):0);
+        e.v+=(target-e.p)*.09; e.v*=.88; e.p+=e.v;
+        if(e.p<-4){e.p=-4;e.v=Math.abs(e.v)*.3}
       }
-      // Tusch am Ende
-      [523,659,784].forEach((f,k)=>{
-        const o=ac.createOscillator(), g=ac.createGain(); o.type='square'; o.frequency.value=f;
-        const st=t+n*.32+k*.08; g.gain.setValueAtTime(.12,st); g.gain.exponentialRampToValueAtTime(.0001,st+.5);
-        o.connect(g).connect(ac.destination); o.start(st); o.stop(st+.5);
-      });
+      api.draw();
+    };
+    live.add(api);
+    if('IntersectionObserver' in window) new IntersectionObserver(es=>{api.visible=es[0].isIntersecting}).observe(host); else api.visible=true;
+    api.draw();
+    return api;
+  }
+  (function loop(t){live.forEach(c=>{if(c.visible&&!reduce)c.step(t)});requestAnimationFrame(loop)})(0);
+
+  /* ---------- Ton und Blütenblätter ---------- */
+  let ac;
+  function pump(level){
+    try{
+      ac=ac||new (window.AudioContext||window.webkitAudioContext)(); if(ac.state==='suspended')ac.resume();
+      const t=ac.currentTime, n=Math.floor(ac.sampleRate*.5), buf=ac.createBuffer(1,n,ac.sampleRate), d=buf.getChannelData(0);
+      for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);
+      const hits=level>0?3:1;
+      for(let k=0;k<hits;k++){const s=t+(k===0?0:k===1?.21:.52);
+        const src=ac.createBufferSource();src.buffer=buf;const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(260,s);lp.frequency.exponentialRampToValueAtTime(1400,s+.28);
+        const g=ac.createGain();g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(.22,s+.05);g.gain.exponentialRampToValueAtTime(.0001,s+.4);
+        src.connect(lp).connect(g).connect(ac.destination);src.start(s);
+        const o=ac.createOscillator(),og=ac.createGain();o.type='sine';o.frequency.setValueAtTime(95,s+.3);o.frequency.exponentialRampToValueAtTime(38,s+.55);
+        og.gain.setValueAtTime(.0001,s+.3);og.gain.exponentialRampToValueAtTime(.5,s+.33);og.gain.exponentialRampToValueAtTime(.0001,s+.6);o.connect(og).connect(ac.destination);o.start(s+.3);o.stop(s+.65);}
     }catch(e){}
   }
-  const cv = document.createElement('canvas');
-  cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99';
-  cv.setAttribute('aria-hidden','true'); document.body.appendChild(cv);
-  function confetti(){
-    if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-    const c = cv.getContext('2d'); cv.width=innerWidth; cv.height=innerHeight;
-    const cols=['#ff5fa2','#ffd24a','#7ef0c8','#b04fd1','#2d9cdb'];
-    const ps = Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*16-4,r:Math.random()*6+3,a:Math.random()*6,c:cols[Math.random()*5|0]}));
-    let f=0;
-    (function step(){
-      c.clearRect(0,0,cv.width,cv.height);
-      ps.forEach(p=>{p.vy+=.3;p.x+=p.vx;p.y+=p.vy;p.a+=.2;c.fillStyle=p.c;c.save();c.translate(p.x,p.y);c.rotate(p.a);c.fillRect(-p.r,-p.r/2,p.r*2,p.r);c.restore();});
-      if(++f<150) requestAnimationFrame(step); else c.clearRect(0,0,cv.width,cv.height);
-    })();
+  const cv=document.createElement('canvas');cv.setAttribute('aria-hidden','true');cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90';document.body.appendChild(cv);
+  function petals(){
+    if(reduce)return; const c=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+    const cols=['#d93f7b','#f08fb3','#b0215f','#f6c6d6'];
+    const ps=Array.from({length:46},()=>({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.5,s:5+Math.random()*7,vy:1+Math.random()*1.6,ph:Math.random()*6,sw:.5+Math.random(),c:cols[Math.random()*4|0],a:Math.random()*6}));
+    let f=0;(function step(){c.clearRect(0,0,cv.width,cv.height);
+      ps.forEach(p=>{p.y+=p.vy;p.ph+=.03;p.a+=.03*p.sw;const x=p.x+Math.sin(p.ph)*36;c.save();c.translate(x,p.y);c.rotate(p.a);c.scale(1,.55+Math.abs(Math.sin(p.ph))*.45);c.fillStyle=p.c;c.globalAlpha=.85;c.beginPath();c.ellipse(0,0,p.s,p.s*.6,0,0,6.3);c.fill();c.restore()});
+      if(++f<330)requestAnimationFrame(step);else c.clearRect(0,0,cv.width,cv.height)})();
   }
 
-  // Hüpfen
-  const stage = $('#coffinWrap');
-  $('#hopBtn').onclick = ()=>{
-    stage.classList.remove('hop'); void stage.offsetWidth; stage.classList.add('hop');
-    setTimeout(()=>stage.classList.remove('hop'), 2800);
-    boing(3); confetti();
-  };
-  $('#randBtn').onclick = ()=>{
-    $('#model').value = Math.floor(Math.random()*models.length);
-    $('#plush').selectedIndex = Math.floor(Math.random()*4);
-    $('#hyd').value = Math.floor(Math.random()*6);
-    color = colors[Math.floor(Math.random()*colors.length)][1];
-    ec.querySelectorAll('input').forEach(i=>i.checked = Math.random()<.4);
-    render(); $('#hopBtn').click();
-  };
+  /* ---------- Hero-Sarg ---------- */
+  const hero=makeCoffin($('#heroCoffin'),'Animierter Lowrider-Sarg mit Hydraulik');
+  hero.color('#7a1236');hero.plush('velvet');hero.level(4);hero.extras(new Set(['neon']));hero.name('Hasta la vista');hero.rolling(true);
+  $('#heroHop').onclick=()=>{hero.hop();pump(4);petals()};
+  setInterval(()=>{if(hero.visible&&!reduce)hero.hop()},5200);
+  setTimeout(()=>hero.visible&&hero.hop(),900);
 
-  render();
+  /* ---------- Konfigurator ---------- */
+  const cfg=makeCoffin($('#cfgCoffin'),'Konfigurierter Lowrider-Sarg');
+  const S={model:1,color:MODELS[1].c,plush:'velvet',hyd:4,extras:new Set(['neon']),name:''};
+  $('#fModel').innerHTML=MODELS.slice(0,5).map((m,i)=>`<label class="opt"><input type="radio" name="model" value="${i}"${i===S.model?' checked':''}><span>${m.n}<small>${eur(m.p)}</small></span></label>`).join('');
+  $('#fColor').innerHTML=COLORS.map((c,i)=>`<label class="sw" title="${c[0]}"><input type="radio" name="color" value="${i}" aria-label="${c[0]}"${c[1]===S.color?' checked':''}><span style="--c:${c[1]}"></span></label>`).join('');
+  $('#fPlush').innerHTML=PLUSH.map(p=>`<label class="opt"><input type="radio" name="plush" value="${p[0]}"${p[0]===S.plush?' checked':''}><span>${p[1]}<small>${p[2]?'+'+eur(p[2]):'inkl.'}</small></span></label>`).join('');
+  $('#fExtras').innerHTML=EXTRAS.map(x=>`<label class="opt"><input type="checkbox" name="ex" value="${x[0]}"${S.extras.has(x[0])?' checked':''}><span>${x[1]}<small>+${eur(x[2])}</small></span></label>`).join('');
+  // Manometer
+  let g='<path class="arc" d="M10 62A50 50 0 0 1 110 62"/>';
+  for(let i=0;i<=5;i++){const a=(-180+i*36)*Math.PI/180,x1=60+Math.cos(a)*50,y1=62+Math.sin(a)*50,x2=60+Math.cos(a)*42,y2=62+Math.sin(a)*42,tx=60+Math.cos(a)*33,ty=62+Math.sin(a)*33+2;g+=`<line class="tick" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/><text x="${tx}" y="${ty}" text-anchor="middle">${i}</text>`}
+  g+='<line class="needle" id="needle" x1="60" y1="62" x2="60" y2="22"/><circle cx="60" cy="62" r="4" fill="var(--fg)"/><text x="60" y="71" text-anchor="middle">BAR</text>';
+  $('#gauge').innerHTML=g;
+
+  let shown=0,tw;
+  function tween(to){cancelAnimationFrame(tw);const from=shown,t0=performance.now();(function s(t){const k=Math.min((t-t0)/450,1),e=1-Math.pow(1-k,3);shown=Math.round(from+(to-from)*e);$('#total').textContent=eur(shown);if(k<1)tw=requestAnimationFrame(s)})(t0)}
+  let lastKeys=new Set();
+  function update(){
+    const m=MODELS[S.model],pl=PLUSH.find(p=>p[0]===S.plush),h=HYD[S.hyd],ex=EXTRAS.filter(x=>S.extras.has(x[0]));
+    const colorName=(COLORS.find(c=>c[1]===S.color)||['Modellfarbe'])[0];
+    cfg.color(S.color);cfg.plush(S.plush);cfg.level(S.hyd);cfg.extras(S.extras);cfg.name(S.name);
+    $('#hydName').textContent=`Stufe ${S.hyd} · ${h[0]}`;$('#hydCm').textContent=`Federweg ${h[1]} cm`;
+    $('#colorName').textContent='Lack: '+colorName;
+    $('#needle').style.transform=`rotate(${-90+S.hyd*36}deg)`;
+    const lines=[[m.n,m.p],[pl[1],pl[2]],['Hydraulik · '+h[0],h[2]],...ex.map(x=>[x[1],x[2]])];
+    const keys=new Set(lines.map(l=>l[0]));
+    $('#sumList').innerHTML=lines.map(l=>`<li class="${lastKeys.has(l[0])?'':'new'}"><span>${l[0]}</span><span>${l[1]?eur(l[1]):'inklusive'}</span></li>`).join('');
+    lastKeys=keys;
+    const total=lines.reduce((a,l)=>a+l[1],0); tween(total);
+    const weight=Math.round(parseInt(m.m[2])+S.hyd*5+ex.length*3+(S.plush==='cloud'?10:0));
+    $('#stats').innerHTML=`<dt>Modell</dt><dd>${m.n}</dd><dt>Federweg</dt><dd>${h[1]} cm</dd><dt>Gewicht</dt><dd>${weight} kg</dd><dt>Ausstattung</dt><dd>${ex.length} von 8</dd>`;
+    $('#cfgCap').textContent=`${m.n} · Hydraulik Stufe ${S.hyd}`;
+    cfg.rolling(false);
+  }
+  $('#cfg').addEventListener('input',e=>{
+    const t=e.target;
+    if(t.name==='model'){S.model=+t.value;S.color=MODELS[S.model].c;const ci=COLORS.findIndex(c=>c[1]===S.color);$$('#fColor input').forEach((i,k)=>i.checked=k===ci)}
+    else if(t.name==='color'){S.color=COLORS[+t.value][1]}
+    else if(t.name==='plush'){S.plush=t.value}
+    else if(t.id==='hyd'){S.hyd=+t.value}
+    else if(t.name==='ex'){t.checked?S.extras.add(t.value):S.extras.delete(t.value)}
+    else if(t.id==='engr'){S.name=t.value}
+    update();
+    if(t.id==='hyd'||t.name==='model')cfg.hop();
+  });
+  $('#hopBtn').onclick=()=>{cfg.hop();pump(S.hyd);petals()};
+  $('#randBtn').onclick=()=>{
+    S.model=Math.floor(Math.random()*5);S.color=COLORS[Math.floor(Math.random()*COLORS.length)][1];S.plush=PLUSH[Math.floor(Math.random()*4)][0];S.hyd=Math.floor(Math.random()*6);
+    S.extras=new Set(EXTRAS.filter(()=>Math.random()<.4).map(x=>x[0]));
+    $$('#fModel input').forEach((i,k)=>i.checked=k===S.model);$$('#fColor input').forEach((i,k)=>i.checked=COLORS[k][1]===S.color);
+    $$('#fPlush input').forEach(i=>i.checked=i.value===S.plush);$('#hyd').value=S.hyd;$$('#fExtras input').forEach(i=>i.checked=S.extras.has(i.value));
+    update();cfg.hop();pump(S.hyd);
+  };
+  cfg.rolling(false);
+  update();
 })();
 </script>
+
 </body>
 </html>
