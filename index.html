@@ -527,12 +527,51 @@
     $('#stats').innerHTML = `> ${m.name}<br>> ` + specs.join(' · ');
   }
 
+  // Sound + Konfetti
+  let ac;
+  function boing(n){
+    try{
+      ac = ac || new (window.AudioContext||window.webkitAudioContext)();
+      const t = ac.currentTime;
+      for(let i=0;i<n;i++){
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type='sawtooth'; o.frequency.setValueAtTime(90,t+i*.32);
+        o.frequency.exponentialRampToValueAtTime(420,t+i*.32+.12);
+        o.frequency.exponentialRampToValueAtTime(70,t+i*.32+.28);
+        g.gain.setValueAtTime(.0001,t+i*.32); g.gain.exponentialRampToValueAtTime(.25,t+i*.32+.03);
+        g.gain.exponentialRampToValueAtTime(.0001,t+i*.32+.3);
+        o.connect(g).connect(ac.destination); o.start(t+i*.32); o.stop(t+i*.32+.32);
+      }
+      // Tusch am Ende
+      [523,659,784].forEach((f,k)=>{
+        const o=ac.createOscillator(), g=ac.createGain(); o.type='square'; o.frequency.value=f;
+        const st=t+n*.32+k*.08; g.gain.setValueAtTime(.12,st); g.gain.exponentialRampToValueAtTime(.0001,st+.5);
+        o.connect(g).connect(ac.destination); o.start(st); o.stop(st+.5);
+      });
+    }catch(e){}
+  }
+  const cv = document.createElement('canvas');
+  cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99';
+  cv.setAttribute('aria-hidden','true'); document.body.appendChild(cv);
+  function confetti(){
+    if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    const c = cv.getContext('2d'); cv.width=innerWidth; cv.height=innerHeight;
+    const cols=['#ff5fa2','#ffd24a','#7ef0c8','#b04fd1','#2d9cdb'];
+    const ps = Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*16-4,r:Math.random()*6+3,a:Math.random()*6,c:cols[Math.random()*5|0]}));
+    let f=0;
+    (function step(){
+      c.clearRect(0,0,cv.width,cv.height);
+      ps.forEach(p=>{p.vy+=.3;p.x+=p.vx;p.y+=p.vy;p.a+=.2;c.fillStyle=p.c;c.save();c.translate(p.x,p.y);c.rotate(p.a);c.fillRect(-p.r,-p.r/2,p.r*2,p.r);c.restore();});
+      if(++f<150) requestAnimationFrame(step); else c.clearRect(0,0,cv.width,cv.height);
+    })();
+  }
+
   // Hüpfen
   const stage = $('#coffinWrap');
   $('#hopBtn').onclick = ()=>{
-    const body = $('#coffinBody');
     stage.classList.remove('hop'); void stage.offsetWidth; stage.classList.add('hop');
     setTimeout(()=>stage.classList.remove('hop'), 2800);
+    boing(3); confetti();
   };
   $('#randBtn').onclick = ()=>{
     $('#model').value = Math.floor(Math.random()*models.length);
